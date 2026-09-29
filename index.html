@@ -1111,7 +1111,12 @@ async function openBotWithOrder(order) {
     try { await navigator.clipboard.writeText(buildFullOrderText(order)); } catch(e) {}
   }
   const botUrl = `https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent(order.id)}`;
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+if (isMobile) {
+  window.location.href = botUrl;
+} else {
   window.open(botUrl, '_blank', 'noopener');
+}
   toast('Відкриваємо Telegram-бот...');
 }
 
