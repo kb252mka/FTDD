@@ -20,8 +20,8 @@
 :root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666}
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:130px}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5;padding-top:130px}
 body.no-scroll{overflow:hidden}
 .gothic{font-family:'Cinzel Decorative',serif;font-weight:900;letter-spacing:.02em}
 .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em}
@@ -30,10 +30,12 @@ body.no-scroll{overflow:hidden}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .marquee-track{display:flex;animation:marquee 40s linear infinite;white-space:nowrap;width:max-content}
 
-/* ===== HEADER ===== */
+/* ===== HEADER (FIXED) ===== */
 .ftd-header{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  right:0;
   z-index:40;
   background:#050505;
   border-bottom:1px solid var(--border);
@@ -345,6 +347,7 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
 
 @media (max-width:767px){
+  body{padding-top:132px;}
   .ftd-logo{height:24px!important}
   .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
@@ -400,20 +403,20 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 </head>
 <body>
 
-<!-- MARQUEE -->
-<div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
-  <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
-    <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
-    <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
-    <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
-    <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
-  </div>
-</div>
-
 <!-- HEADER -->
-<header class="ftd-header">
+<header class="ftd-header" id="ftdHeader">
+
+  <!-- MARQUEE -->
+  <div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
+    <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
+      <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
+      <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+      <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
+      <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
+      <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+      <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
+    </div>
+  </div>
 
   <div class="ftd-top-row">
     <button id="themeBtn" class="header-icon" aria-label="Тема">
@@ -893,7 +896,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v31', CUR:'ftd_cur_v21', THEME:'ftd_theme_v21', LANG:'ftd_lang_v21', WISH:'ftd_wish_v21', COOKIE:'ftd_cookie_v21', SIZE:'ftd_size_v21', ORDERS:'ftd_orders_v21' };
+const KEYS = { CART:'ftd_cart_v32', CUR:'ftd_cur_v22', THEME:'ftd_theme_v22', LANG:'ftd_lang_v22', WISH:'ftd_wish_v22', COOKIE:'ftd_cookie_v22', SIZE:'ftd_size_v22', ORDERS:'ftd_orders_v22' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -1003,6 +1006,13 @@ const getAlbum = id => ALBUMS.find(a => a.id === id);
 const formatPrice = uah => { const c = CURRENCIES[currentCurrency]; return c.symbol + (uah * c.rate).toFixed(currentCurrency === 'UAH' ? 0 : 2); };
 const cartCount = () => cart.reduce((s,i) => s + i.qty, 0);
 const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.productId); return p ? s + p.price * i.qty : s; }, 0);
+
+function updateHeaderHeight(){
+  const h = document.getElementById('ftdHeader');
+  if(!h) return;
+  document.body.style.paddingTop = h.offsetHeight + 'px';
+  document.documentElement.style.scrollPaddingTop = (h.offsetHeight + 10) + 'px';
+}
 
 function loadState() {
   try {
@@ -1524,6 +1534,9 @@ window.addEventListener('scroll', () => {
   const btn = $('backToTop'); if (btn) btn.classList.toggle('show', window.scrollY > 600);
 }, { passive: true });
 
+window.addEventListener('resize', updateHeaderHeight);
+window.addEventListener('orientationchange', () => setTimeout(updateHeaderHeight, 100));
+
 function init() {
   loadState();
   applyTheme();
@@ -1544,7 +1557,14 @@ function init() {
   initNewsletter();
   applyI18n();
 
-  $('hamburgerBtn')?.addEventListener('click', () => $('mobileMenu').classList.toggle('open'));
+  updateHeaderHeight();
+  setTimeout(updateHeaderHeight, 300);
+  setTimeout(updateHeaderHeight, 1000);
+
+  $('hamburgerBtn')?.addEventListener('click', () => {
+    $('mobileMenu').classList.toggle('open');
+    setTimeout(updateHeaderHeight, 350);
+  });
   $('themeBtn')?.addEventListener('click', toggleTheme);
   $('themeBtnM')?.addEventListener('click', toggleTheme);
   $('langBtn')?.addEventListener('click', toggleLang);
@@ -1631,6 +1651,7 @@ function init() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();
+window.addEventListener('load', updateHeaderHeight);
 </script>
 </body>
 </html>
