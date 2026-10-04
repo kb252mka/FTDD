@@ -10,6 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@300;400;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+    emailjs.init("4UJAV3RG5YDFllqVB");
+  })();
+</script>
 <style>
 :root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666}
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
@@ -51,8 +57,7 @@ body.no-scroll{overflow:hidden}
 .btn-brut{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:#f5f5f5;color:#050505;border:2px solid #f5f5f5;cursor:pointer;transition:all .15s;text-decoration:none}
 .btn-brut:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .btn-brut:active:not(:disabled){transform:scale(.97)}
-.btn-brut:disabled{opacity:.3;cursor:not-allowed}
-.btn-brut.loading{pointer-events:none;opacity:.7}
+.btn-brut:disabled{opacity:.5;cursor:wait}
 .btn-ghost{background:transparent;color:var(--text);border:2px solid var(--border)}
 .btn-ghost:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .tg-btn{background:#229ED9;border-color:#229ED9;color:#fff}
@@ -410,7 +415,8 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <h2 class="gothic text-3xl md:text-5xl mb-3">БУДЬ НА ЗВ'ЯЗКУ.</h2>
     <p class="text-[0.65rem] md:text-xs tracking-[0.25em] uppercase mb-8 md:mb-10" style="color:var(--muted)">Нові релізи, концерти та мерч — першим дізнаєшся ти.</p>
     <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2" novalidate>
-      <input type="email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
+      <input type="email" name="user_email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
+      <input type="hidden" name="subject" value="Новий підписник на сайті FIRST TO DIE"/>
       <button type="submit" class="btn-brut whitespace-nowrap px-6">ПІДПИСАТИСЬ <span class="arrow-slide">→</span></button>
     </form>
     <p id="newsletterMsg" class="text-[0.65rem] tracking-widest uppercase mt-4 hidden"></p>
@@ -440,12 +446,12 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Сторіс · Reels</p>
         <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">FOLLOW →</p>
       </a>
-      <a href="mailto:booking@firsttodie.com" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
+      <a href="mailto:firstdie212@gmail.com" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
         <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Gmail</p>
-        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Booking · Співпраця</p>
+        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">firstdie212@gmail.com</p>
         <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">НАПИСАТИ →</p>
       </a>
     </div>
@@ -668,7 +674,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v26', CUR:'ftd_cur_v16', THEME:'ftd_theme_v16', LANG:'ftd_lang_v16', WISH:'ftd_wish_v16', COOKIE:'ftd_cookie_v16', SIZE:'ftd_size_v16', ORDERS:'ftd_orders_v16' };
+const KEYS = { CART:'ftd_cart_v27', CUR:'ftd_cur_v17', THEME:'ftd_theme_v17', LANG:'ftd_lang_v17', WISH:'ftd_wish_v17', COOKIE:'ftd_cookie_v17', SIZE:'ftd_size_v17', ORDERS:'ftd_orders_v17' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -1232,6 +1238,7 @@ function dismissCookie(acc) {
   $('cookieBanner').classList.remove('show');
 }
 
+/* ============ NEWSLETTER (EmailJS) ============ */
 function initNewsletter() {
   const form = $('newsletterForm');
   if (!form) return;
@@ -1240,6 +1247,7 @@ function initNewsletter() {
     const input = form.querySelector('input[type="email"]');
     const msg = $('newsletterMsg');
     const val = input.value.trim();
+
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) {
       msg.textContent = '⚠ Введіть коректний email';
       msg.style.color = '#e63946';
@@ -1248,11 +1256,30 @@ function initNewsletter() {
       return;
     }
     input.classList.remove('error');
-    msg.textContent = '✓ Дякуємо! Ти в списку.';
-    msg.style.color = '#c9f31a';
-    msg.classList.remove('hidden');
-    form.reset();
-    toast('Підписку оформлено');
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'НАДСИЛАЄМО...';
+
+    emailjs.sendForm('service_v6gr99s', 'template_1ldkjk7', form)
+      .then(() => {
+        msg.textContent = '✓ Дякуємо! Ти в списку.';
+        msg.style.color = '#c9f31a';
+        msg.classList.remove('hidden');
+        form.reset();
+        toast('Підписку оформлено');
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        msg.textContent = '⚠ Помилка. Спробуйте пізніше.';
+        msg.style.color = '#e63946';
+        msg.classList.remove('hidden');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      });
   });
 }
 
