@@ -21,7 +21,7 @@
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5}
 body.no-scroll{overflow:hidden}
 .gothic{font-family:'Cinzel Decorative',serif;font-weight:900;letter-spacing:.02em}
 .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em}
@@ -115,7 +115,6 @@ body.light-mode .ftd-center img{filter:brightness(0);}
 .ftd-icon-btn:active{transform:scale(.9);}
 .ftd-icon-btn svg{pointer-events:none;}
 
-/* Desktop nav — hidden on mobile */
 .ftd-nav-desk{
   display:none;
   align-items:center;
@@ -142,7 +141,6 @@ body.light-mode .ftd-center img{filter:brightness(0);}
   border-color:var(--border);
 }
 
-/* Mobile nav row */
 .ftd-nav-mob{
   display:flex;
   align-items:center;
@@ -176,7 +174,6 @@ body.light-mode .ftd-center img{filter:brightness(0);}
   background:rgba(193,18,31,.1);
 }
 
-/* ==== DESKTOP ==== */
 @media (min-width:900px){
   .ftd-top-row{display:flex;}
   .ftd-burger{display:none;}
@@ -255,7 +252,7 @@ body.light-mode .hero-logo{filter:brightness(0);}
 }
 @media (prefers-reduced-motion:reduce){.hero-logo-wrap,.hero-logo{animation:none!important}}
 
-/* ===== RECHTA STYLE ===== */
+/* ===== RECHTA ===== */
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.2}}
 .pulse-dot{animation:pulse-dot 1.2s ease-in-out infinite}
 .product-card{position:relative;background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,box-shadow .3s}
@@ -418,7 +415,6 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 <!-- HEADER -->
 <header class="ftd-header">
 
-  <!-- Top icons row (desktop only) -->
   <div class="ftd-top-row">
     <button id="themeBtn" class="header-icon" aria-label="Тема">
       <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -443,7 +439,6 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
     </button>
   </div>
 
-  <!-- Main row: left | logo | right -->
   <div class="ftd-main">
 
     <div class="ftd-side left">
@@ -476,7 +471,6 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 
   </div>
 
-  <!-- Mobile nav row -->
   <nav class="ftd-nav-mob">
     <a href="#catalog" data-i18n="nav_store">Store</a>
     <a href="#music" data-i18n="nav_music">Music</a>
@@ -484,7 +478,6 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
     <a href="#contact" data-i18n="nav_contact">Contact Us</a>
   </nav>
 
-  <!-- Mobile menu -->
   <div id="mobileMenu" class="mobile-menu border-t" style="background:var(--bg);border-color:var(--border)">
     <div style="padding:20px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -900,7 +893,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v30', CUR:'ftd_cur_v20', THEME:'ftd_theme_v20', LANG:'ftd_lang_v20', WISH:'ftd_wish_v20', COOKIE:'ftd_cookie_v20', SIZE:'ftd_size_v20', ORDERS:'ftd_orders_v20' };
+const KEYS = { CART:'ftd_cart_v31', CUR:'ftd_cur_v21', THEME:'ftd_theme_v21', LANG:'ftd_lang_v21', WISH:'ftd_wish_v21', COOKIE:'ftd_cookie_v21', SIZE:'ftd_size_v21', ORDERS:'ftd_orders_v21' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
