@@ -20,8 +20,8 @@
 :root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666}
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:130px}
-body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5;padding-top:130px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;scroll-padding-top:130px}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5;position:relative;overflow-x:clip}
 body.no-scroll{overflow:hidden}
 .gothic{font-family:'Cinzel Decorative',serif;font-weight:900;letter-spacing:.02em}
 .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em}
@@ -30,15 +30,16 @@ body.no-scroll{overflow:hidden}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .marquee-track{display:flex;animation:marquee 40s linear infinite;white-space:nowrap;width:max-content}
 
-/* ===== HEADER (FIXED) ===== */
+/* ===== HEADER (JS-driven sticky) ===== */
 .ftd-header{
-  position:fixed;
+  position:absolute;
   top:0;
   left:0;
-  right:0;
-  z-index:40;
+  width:100%;
+  z-index:999;
   background:#050505;
   border-bottom:1px solid var(--border);
+  will-change:top;
 }
 body.light-mode .ftd-header{background:#fff;}
 
@@ -347,7 +348,6 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
 
 @media (max-width:767px){
-  body{padding-top:132px;}
   .ftd-logo{height:24px!important}
   .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
@@ -497,6 +497,9 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
   </div>
 </header>
 
+<!-- Spacer для компенсації хедера -->
+<div id="hdrSpacer" style="height:130px;display:block"></div>
+
 <!-- HERO -->
 <section class="relative border-b overflow-hidden grid-bg" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-20 relative">
@@ -509,7 +512,7 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
     </div>
     <div class="max-w-2xl mb-8 md:mb-10">
       <p class="text-sm md:text-base leading-relaxed mb-4" style="color:var(--muted)">Київський грайндкор. <span style="color:var(--text)">Без компромісів.</span> Без ілюзій.</p>
-      <p class="text-xs md:text-sm leading-relaxed" style="color:var(--muted)">Дебютний альбом <span class="text-[#c1121f]">"ПЕРШОЗДОХЛІ ПИЗДУЮТЬ"</span> — вже на всіх стрімінгових платформах.</p>
+      <p class="text-xs md:text-sm leading-relaxed" style="color:var(--muted)">Новий сингл <a href="https://open.spotify.com/album/5RqLVW4KZEcKMLMtIXFuvc" target="_blank" rel="noopener" class="text-[#c1121f] hover:underline">"МАВПА"</a> — вже на всіх стрімінгових платформах.</p>
     </div>
     <div class="flex flex-wrap gap-3">
       <a href="#catalog" class="btn-brut"><span data-i18n="hero_shop">SHOP MERCH</span> <span class="arrow-slide">→</span></a>
@@ -896,15 +899,13 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v32', CUR:'ftd_cur_v22', THEME:'ftd_theme_v22', LANG:'ftd_lang_v22', WISH:'ftd_wish_v22', COOKIE:'ftd_cookie_v22', SIZE:'ftd_size_v22', ORDERS:'ftd_orders_v22' };
+const KEYS = { CART:'ftd_cart_v33', CUR:'ftd_cur_v23', THEME:'ftd_theme_v23', LANG:'ftd_lang_v23', WISH:'ftd_wish_v23', COOKIE:'ftd_cookie_v23', SIZE:'ftd_size_v23', ORDERS:'ftd_orders_v23' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
   p1b:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
   p2:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
   p2b:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
-  p3:'https://i.postimg.cc/4xFW2LBw/photo-2026-09-23-13-29-38.jpg',
-  p3b:'https://i.postimg.cc/4xFW2LBw/photo-2026-09-23-13-29-38.jpg',
   p4:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p4b:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p5:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
@@ -916,10 +917,9 @@ const REAL = {
 const PRODUCTS = [
   { id:'p1', title:'ЛОНГСЛІВ «ACID YELLOW»', price:850, status:'new', sizes:['M','L','XL','XXL'], stock:8, desc:'Артикул: FTD-LS-01. Темний лонгслів із кислотно-жовтим принтом. Спереду — лого First To Die, триптих облич та напис «Я ЗА***РЮ ТЕБЕ НАЧЕ СКАЖЕНОГО ПСА». На рукавах — смолоскипи. 100% щільна бавовна. Еластичні манжети. Oversize / Relaxed Fit.', img1:REAL.p1, img2:REAL.p1b },
   { id:'p2', title:'ФУТБОЛКА «KYIV METALLIC»', price:850, status:'new', sizes:['S','M','L','XL'], stock:5, desc:'Артикул: KMH-TS-WHT. Біла футболка з монохромним принтом київської металкор-сцени. Спереду — хрест із потертою фактурою та рогатий цап (бафомет). Зверху — лого First To Die, знизу — «KYIV METALLIC HARDCORE». 100% бавовна. Regular Fit.', img1:REAL.p2, img2:REAL.p2b },
-  { id:'p3', title:'ФУТБОЛКА «ПЕРШОЗДОХЛІ» (ХРЕБЕТ)', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-01. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. Спереду — велике spiky/slamming лого First To Die. Ззаду — вертикальний графічний хребет із текстами «ПЕРШОЗДОХЛИ» та «КИЇВ • 2026». 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p3, img2:REAL.p3b },
   { id:'p4', title:'ФУТБОЛКА «МОНАШКА»', price:950, status:'new', sizes:['S','M','L','XL','XXL'], stock:7, desc:'Артикул: FTD-CTU-TS. Чорна футболка у колаборації First To Die × CAPTHEUNI. Спереду — хорор-арт кривавої монахині в терновому вінку, «KYIV METALLIC HARDCORE» та лого First To Die, знизу — «CAPTHEUNI». Ззаду — окультна октаграма та ритуальний текст. Преміальна бавовна 210 gsm. Streetwear / Relaxed Fit.', img1:REAL.p4, img2:REAL.p4b },
   { id:'p5', title:'ЛОНГСЛІВ «МОНАШКА»', price:1500, status:'new', sizes:['M','L','XL','XXL'], stock:4, desc:'Артикул: FTD-CTU-LS. Лонгслів-версія колаборації з CAPTHEUNI. Спереду — повноколірний принт монахині в терновому вінку. Лівий рукав — «FIRST TO DIE × CAPTHEUNI». Правий рукав — серія круглих окультних печаток. 100% щільний трикотаж. Oversize / Heavyweight Fit.', img1:REAL.p5, img2:REAL.p5b },
-  { id:'p6', title:'ФУТБОЛКА «FTD CLASSIC»', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-02. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b }
+  { id:'p6', title:'ФУТБОЛКА «ПЕРШОЗДОХЛІ» (ХРЕБЕТ)', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-01. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. Спереду — велике spiky/slamming лого First To Die. Ззаду — вертикальний графічний хребет із текстами «ПЕРШОЗДОХЛИ» та «КИЇВ • 2026». 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b }
 ];
 
 const ALBUMS = [
@@ -1007,12 +1007,42 @@ const formatPrice = uah => { const c = CURRENCIES[currentCurrency]; return c.sym
 const cartCount = () => cart.reduce((s,i) => s + i.qty, 0);
 const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.productId); return p ? s + p.price * i.qty : s; }, 0);
 
-function updateHeaderHeight(){
-  const h = document.getElementById('ftdHeader');
-  if(!h) return;
-  document.body.style.paddingTop = h.offsetHeight + 'px';
-  document.documentElement.style.scrollPaddingTop = (h.offsetHeight + 10) + 'px';
-}
+/* ===== STICKY HEADER (JS-driven) ===== */
+(function(){
+  const header = document.getElementById('ftdHeader');
+  const spacer = document.getElementById('hdrSpacer');
+  if (!header) return;
+
+  function updateSpacer(){
+    if (!spacer) return;
+    spacer.style.height = header.offsetHeight + 'px';
+  }
+
+  function updateTop(){
+    const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    header.style.top = Math.max(0, y) + 'px';
+  }
+
+  let ticking = false;
+  function onScroll(){
+    if (!ticking){
+      window.requestAnimationFrame(function(){ updateTop(); ticking = false; });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', updateSpacer);
+  window.addEventListener('orientationchange', function(){ setTimeout(updateSpacer, 200); });
+
+  updateSpacer();
+  updateTop();
+  window.addEventListener('load', function(){ updateSpacer(); updateTop(); });
+  setTimeout(function(){ updateSpacer(); updateTop(); }, 300);
+  setTimeout(function(){ updateSpacer(); updateTop(); }, 1000);
+
+  window.__updateHeaderSpacer = updateSpacer;
+})();
 
 function loadState() {
   try {
@@ -1534,9 +1564,6 @@ window.addEventListener('scroll', () => {
   const btn = $('backToTop'); if (btn) btn.classList.toggle('show', window.scrollY > 600);
 }, { passive: true });
 
-window.addEventListener('resize', updateHeaderHeight);
-window.addEventListener('orientationchange', () => setTimeout(updateHeaderHeight, 100));
-
 function init() {
   loadState();
   applyTheme();
@@ -1557,13 +1584,11 @@ function init() {
   initNewsletter();
   applyI18n();
 
-  updateHeaderHeight();
-  setTimeout(updateHeaderHeight, 300);
-  setTimeout(updateHeaderHeight, 1000);
+  if (window.__updateHeaderSpacer) window.__updateHeaderSpacer();
 
   $('hamburgerBtn')?.addEventListener('click', () => {
     $('mobileMenu').classList.toggle('open');
-    setTimeout(updateHeaderHeight, 350);
+    setTimeout(() => { if (window.__updateHeaderSpacer) window.__updateHeaderSpacer(); }, 350);
   });
   $('themeBtn')?.addEventListener('click', toggleTheme);
   $('themeBtnM')?.addEventListener('click', toggleTheme);
@@ -1651,7 +1676,7 @@ function init() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();
-window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('load', () => { if (window.__updateHeaderSpacer) window.__updateHeaderSpacer(); });
 </script>
 </body>
 </html>
