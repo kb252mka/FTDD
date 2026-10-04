@@ -30,7 +30,7 @@ body.no-scroll{overflow:hidden}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .marquee-track{display:flex;animation:marquee 40s linear infinite;white-space:nowrap;width:max-content}
 
-/* ===== HEADER (JS-driven sticky) ===== */
+/* ===== HEADER (GPU transform sticky) ===== */
 .ftd-header{
   position:absolute;
   top:0;
@@ -39,7 +39,11 @@ body.no-scroll{overflow:hidden}
   z-index:999;
   background:#050505;
   border-bottom:1px solid var(--border);
-  will-change:top;
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  pointer-events:auto;
 }
 body.light-mode .ftd-header{background:#fff;}
 
@@ -899,7 +903,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v33', CUR:'ftd_cur_v23', THEME:'ftd_theme_v23', LANG:'ftd_lang_v23', WISH:'ftd_wish_v23', COOKIE:'ftd_cookie_v23', SIZE:'ftd_size_v23', ORDERS:'ftd_orders_v23' };
+const KEYS = { CART:'ftd_cart_v34', CUR:'ftd_cur_v24', THEME:'ftd_theme_v24', LANG:'ftd_lang_v24', WISH:'ftd_wish_v24', COOKIE:'ftd_cookie_v24', SIZE:'ftd_size_v24', ORDERS:'ftd_orders_v24' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -1007,11 +1011,13 @@ const formatPrice = uah => { const c = CURRENCIES[currentCurrency]; return c.sym
 const cartCount = () => cart.reduce((s,i) => s + i.qty, 0);
 const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.productId); return p ? s + p.price * i.qty : s; }, 0);
 
-/* ===== STICKY HEADER (JS-driven) ===== */
+/* ===== STICKY HEADER (GPU transform) ===== */
 (function(){
   const header = document.getElementById('ftdHeader');
   const spacer = document.getElementById('hdrSpacer');
   if (!header) return;
+
+  let lastY = -1;
 
   function updateSpacer(){
     if (!spacer) return;
@@ -1020,7 +1026,11 @@ const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.product
 
   function updateTop(){
     const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    header.style.top = Math.max(0, y) + 'px';
+    const t = Math.max(0, y);
+    if (t === lastY) return;
+    lastY = t;
+    header.style.transform = 'translate3d(0,' + t + 'px,0)';
+    header.style.webkitTransform = 'translate3d(0,' + t + 'px,0)';
   }
 
   let ticking = false;
@@ -1032,8 +1042,8 @@ const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.product
   }
 
   window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', updateSpacer);
-  window.addEventListener('orientationchange', function(){ setTimeout(updateSpacer, 200); });
+  window.addEventListener('resize', function(){ updateSpacer(); updateTop(); });
+  window.addEventListener('orientationchange', function(){ setTimeout(function(){ updateSpacer(); updateTop(); }, 200); });
 
   updateSpacer();
   updateTop();
@@ -1041,7 +1051,7 @@ const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.product
   setTimeout(function(){ updateSpacer(); updateTop(); }, 300);
   setTimeout(function(){ updateSpacer(); updateTop(); }, 1000);
 
-  window.__updateHeaderSpacer = updateSpacer;
+  window.__updateHeaderSpacer = function(){ updateSpacer(); };
 })();
 
 function loadState() {
