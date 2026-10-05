@@ -10,18 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@300;400;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script type="text/javascript">
-  (function() {
-    emailjs.init("4UJAV3RG5YDFllqVB");
-  })();
-</script>
 <style>
 :root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666}
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:130px}
-body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;-webkit-tap-highlight-color:transparent;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);font-size:14px;line-height:1.5}
 body.no-scroll{overflow:hidden}
 .gothic{font-family:'Cinzel Decorative',serif;font-weight:900;letter-spacing:.02em}
 .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em}
@@ -29,231 +23,21 @@ body.no-scroll{overflow:hidden}
 .grid-bg{background-image:linear-gradient(rgba(128,128,128,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,128,.05) 1px,transparent 1px);background-size:40px 40px}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .marquee-track{display:flex;animation:marquee 40s linear infinite;white-space:nowrap;width:max-content}
-
-/* ===== HEADER (CSS sticky) ===== */
-.ftd-header{
-  position:sticky;
-  top:0;
-  width:100%;
-  z-index:999;
-  background:#050505;
-  border-bottom:1px solid var(--border);
-}
-body.light-mode .ftd-header{background:#fff;}
-
-.ftd-top-row{
-  display:none;
-  justify-content:flex-end;
-  align-items:center;
-  gap:2px;
-  padding:6px 16px 0;
-}
-.ftd-top-row .header-icon{
-  width:36px;height:36px;padding:6px;
-  background:transparent;border:none;cursor:pointer;
-  color:var(--muted);
-  display:inline-flex;align-items:center;justify-content:center;
-  transition:color .2s;
-}
-.ftd-top-row .header-icon:hover{color:var(--text);}
-
-.ftd-main{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:8px 12px;
-  position:relative;
-  min-height:56px;
-}
-
-.ftd-side{
-  display:flex;
-  align-items:center;
-  gap:2px;
-  flex:0 0 auto;
-  z-index:2;
-}
-
-.ftd-center{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  z-index:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:auto;
-}
-.ftd-center img{
-  display:block;
-  height:26px;
-  width:auto;
-  filter:brightness(0) invert(1);
-}
-body.light-mode .ftd-center img{filter:brightness(0);}
-
-.ftd-burger{
-  width:42px;height:42px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:transparent;border:none;
-  color:var(--muted);cursor:pointer;
-  padding:8px;
-}
-.ftd-burger:hover,.ftd-burger:active{color:var(--text);}
-
-.ftd-icon-btn{
-  width:42px;height:42px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:transparent;border:none;
-  color:var(--muted);cursor:pointer;
-  padding:8px;
-  position:relative;
-  transition:color .2s,transform .15s;
-}
-.ftd-icon-btn:hover,.ftd-icon-btn:active{color:var(--text);}
-.ftd-icon-btn:active{transform:scale(.9);}
-.ftd-icon-btn svg{pointer-events:none;}
-
-.ftd-nav-desk{
-  display:none;
-  align-items:center;
-  gap:0;
-}
-.ftd-nav-desk a{
-  display:inline-flex;
-  align-items:center;
-  padding:10px 14px;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-decoration:none;
-  white-space:nowrap;
-  min-height:44px;
-  transition:color .2s,background .2s;
-  border:1px solid transparent;
-}
-.ftd-nav-desk a:hover{
-  color:var(--text);
-  background:rgba(193,18,31,.08);
-  border-color:var(--border);
-}
-
-.ftd-nav-mob{
-  display:flex;
-  align-items:center;
-  justify-content:space-around;
-  border-top:1px solid var(--border);
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  padding:0 4px;
-}
-.ftd-nav-mob::-webkit-scrollbar{display:none;}
-.ftd-nav-mob a{
-  flex:1 1 auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:12px 6px;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-decoration:none;
-  white-space:nowrap;
-  min-height:44px;
-  text-align:center;
-  transition:color .2s,background .2s;
-}
-.ftd-nav-mob a:active{
-  color:var(--text);
-  background:rgba(193,18,31,.1);
-}
-
-@media (min-width:900px){
-  .ftd-top-row{display:flex;}
-  .ftd-burger{display:none;}
-  .ftd-nav-mob{display:none;}
-  .ftd-nav-desk{display:flex;}
-  .ftd-main{
-    padding:4px 32px 12px;
-    min-height:auto;
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-  }
-  .ftd-center{
-    position:static;
-    transform:none;
-    justify-self:center;
-  }
-  .ftd-center img{height:38px;}
-  .ftd-side.left{justify-content:flex-start;}
-  .ftd-side.right{justify-content:flex-end;}
-  .ftd-icon-btn{width:36px;height:36px;padding:6px;}
-  .ftd-icon-desk{display:inline-flex;}
-}
-@media (max-width:899px){
-  .ftd-icon-desk{display:none;}
-}
-
-/* ===== HERO LOGO ===== */
-.hero-logo-wrap{
-  display:block;
-  margin:0 auto 1.5rem;
-  width:100%;
-  padding:0 20px;
-  animation:breathe 8s ease-in-out infinite;
-}
-.hero-logo{
-  width:100%;
-  max-width:420px;
-  height:auto;
-  margin:0 auto;
-  display:block;
-  filter:brightness(0) invert(1);
-  user-select:none;
-  -webkit-user-drag:none;
-  pointer-events:none;
-  animation:logoFadeIn 1.4s cubic-bezier(.2,.9,.3,1) both;
-}
-body.light-mode .hero-logo{filter:brightness(0);}
-
-@media (min-width:768px){
-  .hero-logo-wrap{max-width:520px;padding:0 16px;}
-  .hero-logo{max-width:480px;}
-}
-@media (min-width:1280px){
-  .hero-logo-wrap{max-width:640px;margin-bottom:2rem;}
-  .hero-logo{max-width:560px;}
-}
-
-@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.006)}}
-@keyframes logoFadeIn{
-  0%{opacity:0;transform:translateY(24px) scale(.96);filter:brightness(0) invert(1) blur(12px)}
-  60%{opacity:1;filter:brightness(0) invert(1) blur(0)}
-  100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(0) invert(1)}
-}
-.hero-logo-wrap:hover .hero-logo{
-  filter:brightness(0) invert(1) drop-shadow(0 0 20px rgba(193,18,31,.5));
-  animation:logoHoverGlitch .45s ease-in-out;
-}
-@keyframes logoHoverGlitch{
-  0%{transform:translate(0)}
-  15%{transform:translate(-2px,1px)}
-  30%{transform:translate(2px,-1px)}
-  45%{transform:translate(-1px,-2px)}
-  60%{transform:translate(1px,2px)}
-  100%{transform:translate(0)}
-}
-@media (prefers-reduced-motion:reduce){.hero-logo-wrap,.hero-logo{animation:none!important}}
-
-/* ===== RECHTA ===== */
+.header-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:8px;flex-shrink:0;background:transparent;border:none;cursor:pointer;transition:color .2s,transform .15s;color:var(--muted)}
+.header-icon:hover{color:var(--text)}
+.header-icon:active{transform:scale(.9)}
+.header-icon svg{pointer-events:none}
+@media (min-width:768px){.header-icon{width:36px;height:36px;padding:6px}}
+.nav-link{display:inline-flex;align-items:center;padding:.85rem 1.1rem;min-height:44px;border:1px solid transparent;transition:color .2s,border-color .2s,background .2s;position:relative;white-space:nowrap}
+.nav-link:hover{color:var(--text);border-color:var(--border);background:rgba(193,18,31,.08)}
+.nav-link:active{background:rgba(193,18,31,.18)}
+.nav-link::after{content:'';position:absolute;left:1.1rem;right:1.1rem;bottom:.5rem;height:1px;background:var(--blood);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-link:hover::after{transform:scaleX(1)}
+.mobile-nav-link{display:flex;align-items:center;padding:1rem 1.25rem;min-height:52px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);transition:all .2s}
+.mobile-nav-link:hover,.mobile-nav-link:active{border-color:var(--blood);background:rgba(193,18,31,.1);padding-left:1.5rem}
+.mobile-menu-btn{display:flex;align-items:center;justify-content:center;padding:12px 10px;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.mobile-menu-btn:hover,.mobile-menu-btn:active{border-color:var(--blood);background:rgba(193,18,31,.1)}
+.mobile-menu-select{width:100%;min-height:44px;padding:10px 36px 10px 12px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.2}}
 .pulse-dot{animation:pulse-dot 1.2s ease-in-out infinite}
 .product-card{position:relative;background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,box-shadow .3s}
@@ -267,11 +51,14 @@ body.light-mode .hero-logo{filter:brightness(0);}
 .btn-brut{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:#f5f5f5;color:#050505;border:2px solid #f5f5f5;cursor:pointer;transition:all .15s;text-decoration:none}
 .btn-brut:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .btn-brut:active:not(:disabled){transform:scale(.97)}
-.btn-brut:disabled{opacity:.5;cursor:wait}
+.btn-brut:disabled{opacity:.3;cursor:not-allowed}
+.btn-brut.loading{pointer-events:none;opacity:.7}
 .btn-ghost{background:transparent;color:var(--text);border:2px solid var(--border)}
 .btn-ghost:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .tg-btn{background:#229ED9;border-color:#229ED9;color:#fff}
 .tg-btn:hover:not(:disabled){background:#1a8bc4;border-color:#1a8bc4}
+.mono-btn{background:#000;border-color:#c9f31a;color:#c9f31a}
+.mono-btn:hover:not(:disabled){background:#c9f31a;color:#000;border-color:#c9f31a}
 .badge-tag{display:inline-block;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .6rem;border:1px solid #fff;background:#050505;color:#fff}
 .badge-new{background:var(--acid);border-color:var(--acid);color:#050505}
 .cart-drawer{transition:transform .4s cubic-bezier(.4,0,.2,1)}
@@ -304,7 +91,7 @@ body.light-mode .hero-logo{filter:brightness(0);}
 .album-row{transition:all .2s;border-left:2px solid transparent;border-bottom:1px solid var(--border);cursor:pointer;text-align:left;background:transparent;width:100%;color:inherit}
 .album-row:hover{background:rgba(128,128,128,.05)}
 .album-row.active{background:rgba(193,18,31,.1);border-left-color:var(--blood)}
-.tour-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.25rem;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:background .2s,border-color .2s;border-left:2px solid transparent}
+.tour-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.25rem;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:background .2s,border-color .2s;border-left:2px solid transparent;cursor:pointer}
 .tour-row:last-child{border-bottom:none}
 .tour-row:hover{background:rgba(193,18,31,.08);border-left-color:var(--blood)}
 .tour-row:hover .tour-cta{background:var(--blood);color:#fff;border-color:var(--blood)}
@@ -322,6 +109,8 @@ a:hover .arrow-slide{transform:translateX(4px)}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
 .wish-btn.active{background:var(--blood)!important;border-color:var(--blood)!important}
 .clip-angle{clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
 :focus-visible{outline:2px solid var(--blood);outline-offset:3px;border-radius:2px}
@@ -336,16 +125,25 @@ a:hover .arrow-slide{transform:translateX(4px)}
 body.light-mode .ftd-logo{filter:brightness(0)}
 body.light-mode .btn-brut{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
 body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood)}
-
+.hero-logo-wrap{display:none;position:relative}
+.hero-logo{width:100%;max-width:480px;height:auto;display:block;filter:brightness(0) invert(1);user-select:none;-webkit-user-drag:none;pointer-events:none}
+body.light-mode .hero-logo{filter:brightness(0)}
+@media (min-width:768px){
+  .hero-logo-wrap{display:block;margin:0 auto 1.5rem;max-width:520px;padding:0 1rem;animation:breathe 8s ease-in-out infinite}
+  .hero-logo{max-width:100%;animation:logoFadeIn 1.4s cubic-bezier(.2,.9,.3,1) both}
+}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.006)}}
+@keyframes logoFadeIn{0%{opacity:0;transform:translateY(24px) scale(.96);filter:brightness(0) invert(1) blur(12px)}60%{opacity:1;filter:brightness(0) invert(1) blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(0) invert(1)}}
+.hero-logo-wrap:hover .hero-logo{filter:brightness(0) invert(1) drop-shadow(0 0 20px rgba(193,18,31,.5));animation:logoHoverGlitch .45s ease-in-out}
+@keyframes logoHoverGlitch{0%{transform:translate(0)}15%{transform:translate(-2px,1px)}30%{transform:translate(2px,-1px)}45%{transform:translate(-1px,-2px)}60%{transform:translate(1px,2px)}100%{transform:translate(0)}}
+@media (min-width:1280px){.hero-logo-wrap{max-width:640px;margin-bottom:2rem}}
+@media (prefers-reduced-motion:reduce){.hero-logo-wrap,.hero-logo{animation:none!important}}
 .mobile-menu{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s,opacity .25s;display:none}
 .mobile-menu.open{display:block;max-height:800px;opacity:1}
-.mobile-menu-btn{display:flex;align-items:center;justify-content:center;padding:12px 10px;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.mobile-menu-btn:hover,.mobile-menu-btn:active{border-color:var(--blood);background:rgba(193,18,31,.1)}
-.mobile-menu-select{width:100%;min-height:44px;padding:10px 36px 10px 12px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
-
 @media (max-width:767px){
+  header .h-16{height:60px!important}
+  .header-icon{width:38px;height:38px;padding:7px}
   .ftd-logo{height:24px!important}
   .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
@@ -366,7 +164,7 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
   .modal-content{max-height:94vh;border-radius:16px 16px 0 0;max-width:100%!important;padding-bottom:env(safe-area-inset-bottom)}
   .modal-content > div:first-child{padding:1rem 1rem .75rem!important}
   .modal-content .p-6{padding:1rem!important}
-  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn,#closeTicketBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
   #productModal .grid{grid-template-columns:1fr!important}
   #productModal .modal-content > div:last-child{padding:1rem!important}
   #prodModalPrice{font-size:1.4rem!important}
@@ -401,91 +199,70 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
 </head>
 <body>
 
+<!-- MARQUEE -->
+<div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
+  <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
+    <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
+    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+    <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
+    <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
+    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+    <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
+  </div>
+</div>
+
 <!-- HEADER -->
-<header class="ftd-header" id="ftdHeader">
-
-  <!-- MARQUEE -->
-  <div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
-    <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
-      <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-      <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
-      <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
-      <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-      <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
-      <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
+<header class="sticky top-0 z-40 border-b" style="background:#050505;border-color:var(--border)">
+  <div class="max-w-[1600px] mx-auto px-3 md:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20 gap-2">
+      <div class="flex items-center flex-1 min-w-0">
+        <button id="hamburgerBtn" class="header-icon md:hidden" aria-label="Меню">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        </button>
+        <nav class="hidden md:flex items-center gap-1 text-[0.7rem] font-bold tracking-[0.2em] uppercase" style="color:var(--muted)">
+          <a href="#catalog" class="nav-link" data-i18n="nav_store">Store</a>
+          <a href="#music" class="nav-link" data-i18n="nav_music">Music</a>
+          <a href="#tour" class="nav-link" data-i18n="nav_shows">Shows</a>
+          <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact Us</a>
+        </nav>
+      </div>
+      <a href="#" id="logoLink" class="flex-shrink-0 flex items-center justify-center px-1 md:px-4">
+        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-6 md:h-10 w-auto"/>
+      </a>
+      <div class="flex items-center justify-end flex-1 min-w-0 gap-0.5 md:gap-2">
+        <button id="themeBtn" class="header-icon hidden md:inline-flex" aria-label="Тема">
+          <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><circle cx="12" cy="12" r="5"/></svg>
+        </button>
+        <button id="langBtn" class="header-icon hidden md:inline-flex text-[0.65rem] font-bold tracking-widest"><span id="langLabel">UA</span></button>
+        <button id="searchBtn" class="header-icon" aria-label="Пошук">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        </button>
+        <button id="wishlistBtn" class="header-icon relative hidden md:inline-flex" aria-label="Обране">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span id="wishCountBadge" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
+        </button>
+        <select id="currencySelect" class="hidden md:block bg-transparent text-[0.65rem] font-bold tracking-widest border px-2 py-1 focus:outline-none cursor-pointer" style="color:var(--muted);border-color:var(--border)">
+          <option value="UAH" class="bg-black">₴ UAH</option><option value="USD" class="bg-black">$ USD</option><option value="EUR" class="bg-black">€ EUR</option>
+        </select>
+        <button id="cartBtn" class="header-icon relative" aria-label="Кошик">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="cartCount" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
+        </button>
+      </div>
     </div>
   </div>
-
-  <div class="ftd-top-row">
-    <button id="themeBtn" class="header-icon" aria-label="Тема">
-      <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><circle cx="12" cy="12" r="5"/></svg>
-    </button>
-    <button id="langBtn" class="header-icon" style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em"><span id="langLabel">UA</span></button>
-    <button id="searchBtn" class="header-icon" aria-label="Пошук">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-    </button>
-    <button id="wishlistBtn" class="header-icon" aria-label="Обране" style="position:relative">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span id="wishCountBadge" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
-    </button>
-    <select id="currencySelect" class="bg-transparent text-[0.65rem] font-bold tracking-widest border px-2 py-1 focus:outline-none cursor-pointer" style="color:var(--muted);border-color:var(--border)">
-      <option value="UAH" class="bg-black">₴ UAH</option>
-      <option value="USD" class="bg-black">$ USD</option>
-      <option value="EUR" class="bg-black">€ EUR</option>
-    </select>
-    <button id="cartBtn" class="header-icon" aria-label="Кошик" style="position:relative">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span id="cartCount" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
-    </button>
-  </div>
-
-  <div class="ftd-main">
-
-    <div class="ftd-side left">
-      <button id="hamburgerBtn" class="ftd-burger" aria-label="Меню">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-      </button>
-      <nav class="ftd-nav-desk">
-        <a href="#catalog" data-i18n="nav_store">Store</a>
-        <a href="#music" data-i18n="nav_music">Music</a>
-      </nav>
-    </div>
-
-    <a href="#" id="logoLink" class="ftd-center">
-      <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE"/>
-    </a>
-
-    <div class="ftd-side right">
-      <nav class="ftd-nav-desk">
-        <a href="#tour" data-i18n="nav_shows">Shows</a>
-        <a href="#contact" data-i18n="nav_contact">Contact Us</a>
-      </nav>
-      <button id="searchBtnM" class="ftd-icon-btn" aria-label="Пошук">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-      </button>
-      <button id="cartBtnM" class="ftd-icon-btn" aria-label="Кошик">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span id="cartCountM" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none;position:absolute;top:2px;right:2px">0</span>
-      </button>
-    </div>
-
-  </div>
-
-  <nav class="ftd-nav-mob">
-    <a href="#catalog" data-i18n="nav_store">Store</a>
-    <a href="#music" data-i18n="nav_music">Music</a>
-    <a href="#tour" data-i18n="nav_shows">Shows</a>
-    <a href="#contact" data-i18n="nav_contact">Contact Us</a>
-  </nav>
-
-  <div id="mobileMenu" class="mobile-menu border-t" style="background:var(--bg);border-color:var(--border)">
-    <div style="padding:20px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+  <div id="mobileMenu" class="mobile-menu md:hidden border-t" style="background:var(--bg);border-color:var(--border)">
+    <div class="px-5 py-5 flex flex-col gap-3 text-[0.75rem] font-bold tracking-[0.2em] uppercase" style="color:var(--muted)">
+      <a href="#catalog" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+      <a href="#music" class="mobile-nav-link" data-i18n="nav_music">Music</a>
+      <a href="#tour" class="mobile-nav-link" data-i18n="nav_shows">Shows</a>
+      <a href="#contact" class="mobile-nav-link" data-i18n="nav_contact">Contact Us</a>
+      <div class="pt-4 mt-2 border-t grid grid-cols-2 gap-2" style="border-color:var(--border)">
         <button id="themeBtnM" class="mobile-menu-btn">🎨 ТЕМА</button>
         <button id="langBtnM" class="mobile-menu-btn">🌐 UA/EN</button>
-        <button id="wishlistBtnM" class="mobile-menu-btn" style="grid-column:span 2">❤ ОБРАНЕ (<span id="wishCountBadgeM">0</span>)</button>
-        <select id="currencySelectMobile" class="mobile-menu-select" style="grid-column:span 2">
+        <button id="wishlistBtnM" class="mobile-menu-btn col-span-2">❤ ОБРАНЕ (<span id="wishCountBadgeM">0</span>)</button>
+        <select id="currencySelectMobile" class="col-span-2 mobile-menu-select">
           <option value="UAH" class="bg-black">₴ UAH</option>
           <option value="USD" class="bg-black">$ USD</option>
           <option value="EUR" class="bg-black">€ EUR</option>
@@ -507,7 +284,7 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
     </div>
     <div class="max-w-2xl mb-8 md:mb-10">
       <p class="text-sm md:text-base leading-relaxed mb-4" style="color:var(--muted)">Київський грайндкор. <span style="color:var(--text)">Без компромісів.</span> Без ілюзій.</p>
-      <p class="text-xs md:text-sm leading-relaxed" style="color:var(--muted)">Новий сингл <a href="https://open.spotify.com/album/5RqLVW4KZEcKMLMtIXFuvc" target="_blank" rel="noopener" class="text-[#c1121f] hover:underline">"МАВПА"</a> — вже на всіх стрімінгових платформах.</p>
+      <p class="text-xs md:text-sm leading-relaxed" style="color:var(--muted)">Дебютний альбом <span class="text-[#c1121f]">"ПЕРШОЗДОХЛІ ПИЗДУЮТЬ"</span> — вже на всіх стрімінгових платформах.</p>
     </div>
     <div class="flex flex-wrap gap-3">
       <a href="#catalog" class="btn-brut"><span data-i18n="hero_shop">SHOP MERCH</span> <span class="arrow-slide">→</span></a>
@@ -635,8 +412,7 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
     <h2 class="gothic text-3xl md:text-5xl mb-3">БУДЬ НА ЗВ'ЯЗКУ.</h2>
     <p class="text-[0.65rem] md:text-xs tracking-[0.25em] uppercase mb-8 md:mb-10" style="color:var(--muted)">Нові релізи, концерти та мерч — першим дізнаєшся ти.</p>
     <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2" novalidate>
-      <input type="email" name="user_email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
-      <input type="hidden" name="subject" value="Новий підписник на сайті FIRST TO DIE"/>
+      <input type="email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
       <button type="submit" class="btn-brut whitespace-nowrap px-6">ПІДПИСАТИСЬ <span class="arrow-slide">→</span></button>
     </form>
     <p id="newsletterMsg" class="text-[0.65rem] tracking-widest uppercase mt-4 hidden"></p>
@@ -666,12 +442,12 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
         <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Сторіс · Reels</p>
         <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">FOLLOW →</p>
       </a>
-      <a href="mailto:firstdie212@gmail.com" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
+      <a href="mailto:booking@firsttodie.com" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
         <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Gmail</p>
-        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">firstdie212@gmail.com</p>
+        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Booking · Співпраця</p>
         <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">НАПИСАТИ →</p>
       </a>
     </div>
@@ -731,6 +507,14 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
         <span id="orderItemsTotal" class="display text-lg text-[#c1121f]">₴0</span>
       </div>
     </div>
+
+    <!-- MONO PAY BLOCK -->
+    <div id="monoPayBlock" class="border p-6 mb-6 hidden" style="background:var(--panel);border-color:var(--border)">
+      <p class="text-[0.55rem] tracking-[0.3em] uppercase mb-4 text-center" style="color:var(--muted)">// Онлайн-оплата</p>
+      <button id="monoPayBtn" class="btn-brut mono-btn w-full py-4">💳 ОПЛАТИТИ КАРТКОЮ MONOBANK</button>
+      <p class="text-[0.6rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Безпечна оплата через Monobank Acquiring</p>
+    </div>
+
     <div class="text-center space-y-3">
       <button id="sendToTelegram" class="btn-brut tg-btn w-full py-4" data-i18n="b_send_tg">✈ ВІДКРИТИ TELEGRAM-БОТА</button>
       <button id="continueShopping" class="btn-brut w-full py-3" data-i18n="b_continue">ПРОДОВЖИТИ ПОКУПКИ →</button>
@@ -849,6 +633,38 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
   </div>
 </div>
 
+<!-- TICKET MODAL -->
+<div id="ticketModal" class="modal">
+  <div class="modal-content" style="max-width:520px">
+    <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Buy tickets</p><h3 class="gothic text-lg">КВИТОК</h3></div>
+      <button id="closeTicketBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <form id="ticketForm" class="p-6 space-y-5" novalidate>
+      <div class="border p-4" style="border-color:var(--border);background:var(--bg)">
+        <p id="ticketDate" class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2"></p>
+        <p id="ticketCity" class="display text-xl mb-1"></p>
+        <p id="ticketVenue" class="text-[0.65rem] tracking-widest uppercase" style="color:var(--muted)"></p>
+      </div>
+      <div>
+        <label class="form-label">Кількість квитків *</label>
+        <div class="flex items-center gap-3">
+          <button type="button" id="ticketMinus" class="w-11 h-11 border flex items-center justify-center text-lg" style="border-color:var(--border);color:var(--text)">−</button>
+          <input type="number" name="qty" id="ticketQty" value="1" min="1" max="10" class="form-input text-center" style="width:80px"/>
+          <button type="button" id="ticketPlus" class="w-11 h-11 border flex items-center justify-center text-lg" style="border-color:var(--border);color:var(--text)">+</button>
+          <span class="text-[0.6rem] tracking-widest uppercase ml-auto" style="color:var(--muted)">Макс. 10</span>
+        </div>
+      </div>
+      <div><label class="form-label">Ім'я *</label><input name="tName" type="text" required class="form-input" placeholder="ІВАН"/></div>
+      <div><label class="form-label">Телефон *</label><input name="tPhone" type="tel" required class="form-input" placeholder="+380..."/></div>
+      <div><label class="form-label">Email</label><input name="tEmail" type="email" class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
+      <p id="ticketError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946]"></p>
+      <button type="submit" class="btn-brut tg-btn w-full py-4">ЗАБРОНЮВАТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
+      <p class="text-[0.6rem] tracking-widest uppercase text-center" style="color:var(--muted)">Квитки підтвердить бот @ftd_store_bot</p>
+    </form>
+  </div>
+</div>
+
 <!-- CHECKOUT -->
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
@@ -871,9 +687,9 @@ body.light-mode .btn-brut:hover{background:var(--blood);border-color:var(--blood
       <div><label class="form-label" data-i18n="l_payment">Спосіб оплати *</label>
         <select name="payment" required class="form-input">
           <option value="">— ОБЕРІТЬ —</option>
+          <option value="monobank">Monobank (онлайн)</option>
           <option value="cod">Накладений платіж (НП)</option>
           <option value="liqpay">LiqPay</option>
-          <option value="mono">Monobank</option>
         </select>
       </div>
       <div class="border-t pt-5" style="border-color:var(--border)">
@@ -894,15 +710,15 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v35', CUR:'ftd_cur_v25', THEME:'ftd_theme_v25', LANG:'ftd_lang_v25', WISH:'ftd_wish_v25', COOKIE:'ftd_cookie_v25', SIZE:'ftd_size_v25', ORDERS:'ftd_orders_v25' };
+const KEYS = { CART:'ftd_cart_v28', CUR:'ftd_cur_v18', THEME:'ftd_theme_v18', LANG:'ftd_lang_v18', WISH:'ftd_wish_v18', COOKIE:'ftd_cookie_v18', SIZE:'ftd_size_v18', ORDERS:'ftd_orders_v18', TICKETS:'ftd_tickets_v18' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
   p1b:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
   p2:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
   p2b:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
-  p4:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
-  p4b:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
+  p4:'https://i.postimg.cc/L5Kk7v9f/19a87adf-4d2f-48c0-9e82-aace81663485.jpg',
+  p4b:'https://i.postimg.cc/L5Kk7v9f/19a87adf-4d2f-48c0-9e82-aace81663485.jpg',
   p5:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p5b:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p6:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg',
@@ -914,7 +730,7 @@ const PRODUCTS = [
   { id:'p2', title:'ФУТБОЛКА «KYIV METALLIC»', price:850, status:'new', sizes:['S','M','L','XL'], stock:5, desc:'Артикул: KMH-TS-WHT. Біла футболка з монохромним принтом київської металкор-сцени. Спереду — хрест із потертою фактурою та рогатий цап (бафомет). Зверху — лого First To Die, знизу — «KYIV METALLIC HARDCORE». 100% бавовна. Regular Fit.', img1:REAL.p2, img2:REAL.p2b },
   { id:'p4', title:'ФУТБОЛКА «МОНАШКА»', price:950, status:'new', sizes:['S','M','L','XL','XXL'], stock:7, desc:'Артикул: FTD-CTU-TS. Чорна футболка у колаборації First To Die × CAPTHEUNI. Спереду — хорор-арт кривавої монахині в терновому вінку, «KYIV METALLIC HARDCORE» та лого First To Die, знизу — «CAPTHEUNI». Ззаду — окультна октаграма та ритуальний текст. Преміальна бавовна 210 gsm. Streetwear / Relaxed Fit.', img1:REAL.p4, img2:REAL.p4b },
   { id:'p5', title:'ЛОНГСЛІВ «МОНАШКА»', price:1500, status:'new', sizes:['M','L','XL','XXL'], stock:4, desc:'Артикул: FTD-CTU-LS. Лонгслів-версія колаборації з CAPTHEUNI. Спереду — повноколірний принт монахині в терновому вінку. Лівий рукав — «FIRST TO DIE × CAPTHEUNI». Правий рукав — серія круглих окультних печаток. 100% щільний трикотаж. Oversize / Heavyweight Fit.', img1:REAL.p5, img2:REAL.p5b },
-  { id:'p6', title:'ФУТБОЛКА «ПЕРШОЗДОХЛІ» (ХРЕБЕТ)', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-01. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. Спереду — велике spiky/slamming лого First To Die. Ззаду — вертикальний графічний хребет із текстами «ПЕРШОЗДОХЛИ» та «КИЇВ • 2026». 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b }
+  { id:'p6', title:'ФУТБОЛКА «FTD CLASSIC»', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-02. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b }
 ];
 
 const ALBUMS = [
@@ -993,6 +809,7 @@ let currentTheme = 'dark', currentLang = 'ua';
 let pendingProductId = null, selectedSize = null;
 let mySize = null;
 let sizeGuideReturnTo = null;
+let currentTicket = null;
 
 const $ = id => document.getElementById(id);
 const escapeHtml = s => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -1127,10 +944,9 @@ function renderTour() {
   list.innerHTML = '';
   const t_cta = (I18N[currentLang] || I18N.ua).tour_cta;
   TOUR.forEach(t => {
-    const row = document.createElement('a');
-    row.href = t.url;
-    if (t.url !== '#') { row.target = '_blank'; row.rel = 'noopener'; }
+    const row = document.createElement('div');
     row.className = 'tour-row';
+    row.style.cursor = 'pointer';
     row.innerHTML = `
       <span class="tour-date">${t.date}</span>
       <div class="tour-info">
@@ -1140,6 +956,7 @@ function renderTour() {
       ${t.hot ? '<span class="badge-tag badge-new text-[0.5rem]">HOT</span>' : ''}
       <span class="tour-cta">${t_cta} →</span>
     `;
+    row.addEventListener('click', () => openTicketModal(t.city, t.date, t.venue));
     list.appendChild(row);
   });
 }
@@ -1207,8 +1024,6 @@ function updateCartUI() {
   const count = cartCount();
   const badge = $('cartCount');
   if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
-  const badgeM = $('cartCountM');
-  if (badgeM) { badgeM.textContent = count; badgeM.style.display = count > 0 ? 'flex' : 'none'; }
   const btn = $('checkoutBtn');
   if (btn) btn.disabled = cart.length === 0;
 }
@@ -1293,11 +1108,26 @@ function openProductModal(id) {
   openModal('productModal');
 }
 
+/* ===== TICKETS ===== */
+function openTicketModal(city, date, venue) {
+  currentTicket = { city, date, venue };
+  $('ticketDate').textContent = '// ' + date;
+  $('ticketCity').textContent = city;
+  $('ticketVenue').textContent = venue;
+  const form = $('ticketForm');
+  form.reset();
+  form.elements['qty'].value = 1;
+  $('ticketError').classList.add('hidden');
+  ['tName','tPhone','tEmail'].forEach(n => form.elements[n].classList.remove('error'));
+  openModal('ticketModal');
+}
+
 function openCheckout() {
   if (!cart.length) { toast('Кошик порожній'); return; }
   closeCart(); updateCartTotals(); openModal('checkoutModal');
 }
 
+/* ===== CHECKOUT SUBMIT ===== */
 $('checkoutForm').addEventListener('submit', e => {
   e.preventDefault();
   const form = e.target;
@@ -1318,13 +1148,13 @@ $('checkoutForm').addEventListener('submit', e => {
     const p = getProduct(i.productId);
     return { title: p.title, qty: i.qty, size: i.size, price: formatPrice(p.price * i.qty) };
   });
+  const payment = fd.get('payment') || '';
   const order = {
     id: orderId,
     name: (fd.get('firstName')||'') + ' ' + (fd.get('lastName')||''),
     email: fd.get('email')||'', phone: fd.get('phone')||'',
     address: fd.get('address')||'', city: fd.get('city')||'',
-    payment: fd.get('payment')||'',
-    items, total: formatPrice(total),
+    payment, items, total: formatPrice(total),
     date: new Date().toLocaleString('uk-UA')
   };
   window.__lastOrder = order;
@@ -1348,6 +1178,13 @@ $('checkoutForm').addEventListener('submit', e => {
       <span class="font-bold">${formatPrice(p.price * i.qty)}</span></div>`;
   }).join('');
 
+  // Show Mono button only if payment=monobank
+  if (payment === 'monobank') {
+    $('monoPayBlock').classList.remove('hidden');
+  } else {
+    $('monoPayBlock').classList.add('hidden');
+  }
+
   cart = []; saveState(); updateCartUI(); renderCart();
   closeModal('checkoutModal'); form.reset();
 
@@ -1357,6 +1194,72 @@ $('checkoutForm').addEventListener('submit', e => {
   setTimeout(() => openBotWithOrder(order), 500);
 });
 
+/* ===== TICKET SUBMIT ===== */
+$('ticketForm')?.addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  const name = (fd.get('tName') || '').trim();
+  const phone = (fd.get('tPhone') || '').trim();
+  const email = (fd.get('tEmail') || '').trim();
+  const qty = Math.min(10, Math.max(1, parseInt(fd.get('qty')) || 1));
+
+  let ok = true;
+  form.elements['tName'].classList.toggle('error', name.length < 2);
+  form.elements['tPhone'].classList.toggle('error', phone.length < 8);
+  if (name.length < 2 || phone.length < 8) ok = false;
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    form.elements['tEmail'].classList.add('error');
+    ok = false;
+  } else {
+    form.elements['tEmail'].classList.remove('error');
+  }
+
+  if (!ok) {
+    $('ticketError').textContent = '⚠ Перевірте виділені поля';
+    $('ticketError').classList.remove('hidden');
+    return;
+  }
+  $('ticketError').classList.add('hidden');
+
+  const ticketId = 'TKT-' + Math.random().toString(36).slice(2,7).toUpperCase();
+  const ticket = {
+    id: ticketId,
+    type: 'ticket',
+    city: currentTicket.city,
+    date: currentTicket.date,
+    venue: currentTicket.venue,
+    qty, name, phone, email,
+    created: new Date().toLocaleString('uk-UA')
+  };
+  window.__lastTicket = ticket;
+
+  try {
+    const list = JSON.parse(localStorage.getItem(KEYS.TICKETS) || '[]');
+    list.unshift(ticket);
+    localStorage.setItem(KEYS.TICKETS, JSON.stringify(list.slice(0,100)));
+  } catch(e) {}
+
+  closeModal('ticketModal');
+  openBotWithTicket(ticket);
+});
+
+async function openBotWithTicket(ticket) {
+  if (!ticket) { toast('Квиток не знайдено'); return; }
+  try {
+    await fetch(WORKER_URL + '/ticket', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ticket)
+    });
+  } catch(e) {}
+  const botUrl = `https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent('ticket_' + ticket.id)}`;
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+  if (isMobile) { window.location.href = botUrl; }
+  else { window.open(botUrl, '_blank', 'noopener'); }
+  toast('Відкриваємо Telegram-бот...');
+}
+
 async function openBotWithOrder(order) {
   if (!order) { toast('Замовлення не знайдено'); return; }
   try {
@@ -1365,9 +1268,7 @@ async function openBotWithOrder(order) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order)
     });
-  } catch(e) {
-    try { await navigator.clipboard.writeText(buildFullOrderText(order)); } catch(e) {}
-  }
+  } catch(e) {}
   const botUrl = `https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent(order.id)}`;
   const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
   if (isMobile) { window.location.href = botUrl; }
@@ -1375,9 +1276,39 @@ async function openBotWithOrder(order) {
   toast('Відкриваємо Telegram-бот...');
 }
 
-function buildFullOrderText(order) {
-  const items = order.items.map(i => `• ${i.qty}× ${i.title}${i.size ? ' ('+i.size+')' : ''} — ${i.price}`).join('\n');
-  return `🔥 ЗАМОВЛЕННЯ #${order.id}\n\n👤 ${order.name}\n📱 ${order.phone}\n📍 ${order.city}, ${order.address}\n\n📦 ${items}\n\n💰 ${order.total}`;
+/* ===== MONOBANK PAYMENT ===== */
+async function startMonoPay(order) {
+  if (!order) { toast('Замовлення не знайдено'); return; }
+  const btn = $('monoPayBtn');
+  btn.disabled = true;
+  const origText = btn.textContent;
+  btn.textContent = '⏳ СТВОРЮЄМО РАХУНОК...';
+  try {
+    const amount = Math.round(parseFloat(String(order.total).replace(/[^\d.]/g, '')) * 100);
+    const res = await fetch(WORKER_URL + '/mono/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount,
+        orderId: order.id,
+        description: `Замовлення ${order.id} — FIRST TO DIE`,
+        customerName: order.name,
+        customerPhone: order.phone
+      })
+    });
+    const data = await res.json();
+    if (data.ok && data.pageUrl) {
+      window.location.href = data.pageUrl;
+    } else {
+      toast('Помилка: ' + (data.error || 'спробуйте пізніше'));
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
+  } catch (e) {
+    toast('Не вдалось створити платіж');
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
 }
 
 function openSearch() {
@@ -1465,7 +1396,6 @@ function initNewsletter() {
     const input = form.querySelector('input[type="email"]');
     const msg = $('newsletterMsg');
     const val = input.value.trim();
-
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) {
       msg.textContent = '⚠ Введіть коректний email';
       msg.style.color = '#e63946';
@@ -1474,30 +1404,11 @@ function initNewsletter() {
       return;
     }
     input.classList.remove('error');
-
-    const btn = form.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = 'НАДСИЛАЄМО...';
-
-    emailjs.sendForm('service_v6gr99s', 'template_1ldkjk7', form)
-      .then(() => {
-        msg.textContent = '✓ Дякуємо! Ти в списку.';
-        msg.style.color = '#c9f31a';
-        msg.classList.remove('hidden');
-        form.reset();
-        toast('Підписку оформлено');
-      })
-      .catch((err) => {
-        console.error('EmailJS error:', err);
-        msg.textContent = '⚠ Помилка. Спробуйте пізніше.';
-        msg.style.color = '#e63946';
-        msg.classList.remove('hidden');
-      })
-      .finally(() => {
-        btn.disabled = false;
-        btn.innerHTML = originalHTML;
-      });
+    msg.textContent = '✓ Дякуємо! Ти в списку.';
+    msg.style.color = '#c9f31a';
+    msg.classList.remove('hidden');
+    form.reset();
+    toast('Підписку оформлено');
   });
 }
 
@@ -1548,9 +1459,7 @@ function init() {
   $('langBtn')?.addEventListener('click', toggleLang);
   $('langBtnM')?.addEventListener('click', toggleLang);
   $('searchBtn')?.addEventListener('click', openSearch);
-  $('searchBtnM')?.addEventListener('click', openSearch);
   $('cartBtn')?.addEventListener('click', openCart);
-  $('cartBtnM')?.addEventListener('click', openCart);
   $('wishlistBtn')?.addEventListener('click', () => {
     if (!wishlist.length) { toast('Обране порожнє'); return; }
     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
@@ -1567,6 +1476,10 @@ function init() {
   $('checkoutBtn')?.addEventListener('click', openCheckout);
   $('currencySelect')?.addEventListener('change', e => setCurrency(e.target.value));
   $('currencySelectMobile')?.addEventListener('change', e => setCurrency(e.target.value));
+
+  document.querySelectorAll('#mobileMenu a').forEach(a => {
+    a.addEventListener('click', () => $('mobileMenu').classList.remove('open'));
+  });
 
   $('closeSearchBtn')?.addEventListener('click', closeSearch);
   $('searchInput')?.addEventListener('input', e => {
@@ -1604,6 +1517,20 @@ function init() {
   });
 
   $('closeCheckoutBtn')?.addEventListener('click', () => closeModal('checkoutModal'));
+  $('closeTicketBtn')?.addEventListener('click', () => closeModal('ticketModal'));
+
+  $('ticketMinus')?.addEventListener('click', () => {
+    const q = $('ticketQty');
+    q.value = Math.max(1, (parseInt(q.value) || 1) - 1);
+  });
+  $('ticketPlus')?.addEventListener('click', () => {
+    const q = $('ticketQty');
+    q.value = Math.min(10, (parseInt(q.value) || 1) + 1);
+  });
+
+  $('monoPayBtn')?.addEventListener('click', () => {
+    if (window.__lastOrder) startMonoPay(window.__lastOrder);
+  });
 
   $('continueShopping')?.addEventListener('click', () => {
     $('orderPage').classList.remove('show');
