@@ -140,9 +140,9 @@ body.light-mode .hero-logo{filter:brightness(0)}
 .mobile-menu.open{display:block;max-height:800px;opacity:1}
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
 @media (max-width:767px){
-  header .h-16{height:72px!important}
-  .header-icon{width:42px;height:42px;padding:9px}
-  .ftd-logo{height:32px!important}
+  header .h-16{height:80px!important}
+  .header-icon{width:44px;height:44px;padding:10px}
+  .ftd-logo{height:44px!important;max-height:44px!important}
   .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
   .gothic.text-6xl{font-size:1.85rem!important;line-height:1!important}
@@ -190,7 +190,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
   .mobile-nav-link{padding:1.15rem 1.35rem;min-height:60px;font-size:.9rem;letter-spacing:.22em}
   .mobile-menu-btn{padding:14px 10px;min-height:50px;font-size:.75rem;letter-spacing:.18em}
 }
-@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:34px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}.nav-tab{padding:.7rem 1rem;font-size:.7rem}}
+@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:40px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}.nav-tab{padding:.7rem 1rem;font-size:.7rem}}
 @media (min-width:1024px) and (max-width:1279px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:16px!important}}
 @media (min-width:1280px) and (max-width:1599px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:20px!important}}
 @media (min-width:1600px){body{font-size:15px}#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:22px!important}}
@@ -217,7 +217,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <div class="flex items-center justify-between h-16 md:h-20 gap-2">
       <div class="flex items-center flex-1 min-w-0">
         <button id="hamburgerBtn" class="header-icon md:hidden" aria-label="Меню">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
         <nav class="hidden md:flex nav-tabs">
           <a href="#catalog" class="nav-tab" data-i18n="nav_store" data-nav-tab>STORE</a>
@@ -227,7 +227,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </nav>
       </div>
       <a href="#" id="logoLink" class="flex-shrink-0 flex items-center justify-center px-1 md:px-4">
-        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-7 md:h-12 w-auto"/>
+        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-9 md:h-12 w-auto"/>
       </a>
       <div class="flex items-center justify-end flex-1 min-w-0 gap-0.5 md:gap-2">
         <button id="themeBtn" class="header-icon hidden md:inline-flex" aria-label="Тема">
@@ -236,7 +236,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </button>
         <button id="langBtn" class="header-icon hidden md:inline-flex text-[0.65rem] font-bold tracking-widest"><span id="langLabel">UA</span></button>
         <button id="searchBtn" class="header-icon" aria-label="Пошук">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
         </button>
         <button id="wishlistBtn" class="header-icon relative hidden md:inline-flex" aria-label="Обране">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -246,7 +246,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <option value="UAH" class="bg-black">₴ UAH</option><option value="USD" class="bg-black">$ USD</option><option value="EUR" class="bg-black">€ EUR</option>
         </select>
         <button id="cartBtn" class="header-icon relative" aria-label="Кошик">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           <span id="cartCount" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
         </button>
       </div>
@@ -434,7 +434,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <footer class="border-t" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-14">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-8 w-auto"/>
+      <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-10 w-auto"/>
       <p class="text-[0.6rem] tracking-[0.25em] uppercase" style="color:var(--muted)">© <span id="year"></span> FIRST TO DIE · Kyiv, Ukraine</p>
     </div>
   </div>
@@ -680,7 +680,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v31', CUR:'ftd_cur_v21', THEME:'ftd_theme_v21', LANG:'ftd_lang_v21', WISH:'ftd_wish_v21', COOKIE:'ftd_cookie_v21', SIZE:'ftd_size_v21', ORDERS:'ftd_orders_v21', TICKETS:'ftd_tickets_v21' };
+const KEYS = { CART:'ftd_cart_v32', CUR:'ftd_cur_v22', THEME:'ftd_theme_v22', LANG:'ftd_lang_v22', WISH:'ftd_wish_v22', COOKIE:'ftd_cookie_v22', SIZE:'ftd_size_v22', ORDERS:'ftd_orders_v22', TICKETS:'ftd_tickets_v22' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -771,9 +771,7 @@ const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.product
 
 function loadState(){try{cart=JSON.parse(localStorage.getItem(KEYS.CART)||'[]');wishlist=JSON.parse(localStorage.getItem(KEYS.WISH)||'[]');currentCurrency=localStorage.getItem(KEYS.CUR)||'UAH';currentTheme=localStorage.getItem(KEYS.THEME)||'dark';currentLang=localStorage.getItem(KEYS.LANG)||'ua';mySize=localStorage.getItem(KEYS.SIZE)||null;}catch(e){}}
 function saveState(){try{localStorage.setItem(KEYS.CART,JSON.stringify(cart));localStorage.setItem(KEYS.WISH,JSON.stringify(wishlist));localStorage.setItem(KEYS.CUR,currentCurrency);localStorage.setItem(KEYS.THEME,currentTheme);localStorage.setItem(KEYS.LANG,currentLang);if(mySize)localStorage.setItem(KEYS.SIZE,mySize);}catch(e){}}
-
 function toast(msg){const c=$('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span style="flex:1">${escapeHtml(msg)}</span><button class="toast-close">✕</button>`;const close=()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);};el.querySelector('.toast-close').addEventListener('click',close);c.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(close,3500);}
-
 function productCard(p){const el=document.createElement('div');el.className='product-card clip-angle';el.dataset.productId=p.id;const badge=p.status==='new'?'<span class="badge-tag badge-new">NEW</span>':'';const isWish=wishlist.includes(p.id);el.innerHTML=`<div class="relative aspect-square overflow-hidden" style="background:var(--panel)"><img src="${p.img1}" alt="${escapeHtml(p.title)}" class="img-a absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><img src="${p.img2}" alt="${escapeHtml(p.title)}" class="img-b absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">${badge}</div><button class="wish-btn absolute top-3 right-3 z-20 w-8 h-8 border flex items-center justify-center transition-all ${isWish?'active':''}" style="border-color:var(--border);background:rgba(0,0,0,.6);color:#fff;font-size:14px" data-wish-id="${p.id}">${isWish?'❤':'♡'}</button><div class="absolute bottom-0 left-0 right-0 p-3 z-10 quick-add"><button class="btn-brut w-full py-3 text-[0.6rem]" data-product-id="${p.id}">ADD TO CART</button></div></div><div class="p-4"><h3 class="text-[0.7rem] font-bold tracking-wider leading-snug mb-2 uppercase">${escapeHtml(p.title)}</h3><div class="text-sm font-bold">${formatPrice(p.price)}</div></div>`;el.querySelector('.wish-btn').addEventListener('click',e=>{e.stopPropagation();toggleWishlist(p.id);});return el;}
 function renderCatalog(){const grid=$('catalogGrid');grid.innerHTML='';PRODUCTS.forEach(p=>grid.appendChild(productCard(p)));}
 function renderAlbums(){const list=$('albumList');list.innerHTML='';ALBUMS.forEach((a,idx)=>{const row=document.createElement('button');row.type='button';row.className='album-row w-full text-left px-4 py-4 flex items-center gap-3'+(a.id===activeAlbumId?' active':'');row.innerHTML=`<span class="text-[0.65rem] font-mono tracking-widest w-8" style="color:var(--muted)">${String(idx+1).padStart(2,'0')}</span><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold tracking-wider uppercase truncate">${escapeHtml(a.title)}</p><p class="text-[0.55rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}</p></div>${a.featured?'<span class="badge-tag badge-new text-[0.5rem]">NEW</span>':''}<span class="text-xs" style="color:var(--muted)">→</span>`;row.addEventListener('click',()=>setActiveAlbum(a.id));list.appendChild(row);});$('albumCount').textContent=ALBUMS.length;}
@@ -781,7 +779,6 @@ function setActiveAlbum(id){activeAlbumId=id;renderAlbums();renderAlbumPlayer();
 function renderAlbumPlayer(){const wrap=$('albumPlayer');const a=getAlbum(activeAlbumId);if(!a)return;const idx=ALBUMS.findIndex(x=>x.id===a.id);wrap.innerHTML=`<div class="px-5 py-4 border-b flex items-center justify-between gap-3" style="border-color:var(--border)"><div class="min-w-0"><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Now playing · ${String(idx+1).padStart(2,'0')}/${String(ALBUMS.length).padStart(2,'0')}</p><p class="display text-lg md:text-xl truncate mt-1">${escapeHtml(a.title)}</p><p class="text-[0.6rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}${a.runtime&&a.runtime!=='—'?' · '+a.runtime:''}</p></div><a href="${a.spotify}" target="_blank" rel="noopener" class="btn-brut text-[0.55rem] px-3 py-2 whitespace-nowrap">СЛУХАТИ <span class="arrow-slide">→</span></a></div><div class="px-5 py-4 border-b" style="border-color:var(--border)"><p class="text-xs leading-relaxed" style="color:var(--muted)">${escapeHtml(a.note)}</p></div><div><iframe src="${a.embed}" width="100%" height="${a.type==='ALBUM'?380:152}" frameborder="0" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block"></iframe></div><div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)"><button id="albumPrev" class="hover:text-[#c1121f] transition">← PREV</button><span>${idx+1} / ${ALBUMS.length}</span><button id="albumNext" class="hover:text-[#c1121f] transition">NEXT →</button></div>`;$('albumPrev').addEventListener('click',()=>shiftAlbum(-1));$('albumNext').addEventListener('click',()=>shiftAlbum(1));}
 function shiftAlbum(dir){const idx=ALBUMS.findIndex(x=>x.id===activeAlbumId);const next=(idx+dir+ALBUMS.length)%ALBUMS.length;setActiveAlbum(ALBUMS[next].id);}
 function renderTour(){const list=$('tourList');if(!list)return;list.innerHTML='';const t_cta=(I18N[currentLang]||I18N.ua).tour_cta;TOUR.forEach(t=>{const row=document.createElement('div');row.className='tour-row';row.innerHTML=`<span class="tour-date">${t.date}</span><div class="tour-info"><p class="tour-city">${escapeHtml(t.city)}</p><p class="tour-venue">${escapeHtml(t.venue)}</p></div>${t.hot?'<span class="badge-tag badge-new text-[0.5rem]">HOT</span>':''}<span class="tour-cta">${t_cta} →</span>`;row.addEventListener('click',()=>openTicketModal(t.city,t.date,t.venue));list.appendChild(row);});}
-
 function addToCart(id,size,qty=1){const p=getProduct(id);if(!p)return;if(p.sizes&&p.sizes.length&&!size){openSizeModal(id);return;}const key=id+'::'+(size||'');const existing=cart.find(i=>i.productId+'::'+(i.size||'')===key);if(existing)existing.qty+=qty;else cart.push({productId:id,size:size||null,qty});saveState();updateCartUI();renderCart();toast(`${p.title.slice(0,32)} додано`);}
 function removeFromCart(idx){cart.splice(idx,1);saveState();updateCartUI();renderCart();}
 function changeQty(idx,d){if(!cart[idx])return;cart[idx].qty+=d;if(cart[idx].qty<=0)cart.splice(idx,1);saveState();updateCartUI();renderCart();}
@@ -795,7 +792,6 @@ function openModal(id){const m=$(id);if(m){m.classList.add('open');document.body
 function closeModal(id){const m=$(id);if(!m)return;m.classList.remove('open');if(!document.querySelector('.modal.open, .search-overlay.open'))document.body.classList.remove('no-scroll');}
 function openCart(){$('cartDrawer').classList.remove('closed');$('cartDrawer').classList.add('open');$('cartOverlay').classList.remove('hidden');$('cartOverlay').classList.add('visible');document.body.classList.add('no-scroll');}
 function closeCart(){$('cartDrawer').classList.add('closed');$('cartDrawer').classList.remove('open');$('cartOverlay').classList.add('hidden');$('cartOverlay').classList.remove('visible');document.body.classList.remove('no-scroll');}
-
 function openSizeModal(id){const p=getProduct(id);pendingProductId=id;selectedSize=null;$('sizeModalImg').src=p.img1;$('sizeModalTitle').textContent=p.title;$('sizeModalPrice').textContent=formatPrice(p.price);const wrap=$('sizeOptions');wrap.innerHTML='';p.sizes.forEach(s=>{const b=document.createElement('button');b.type='button';b.className='size-option';b.textContent=s;b.addEventListener('click',()=>{selectedSize=s;wrap.querySelectorAll('.size-option').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('sizeError').classList.add('hidden');});wrap.appendChild(b);});$('sizeError').classList.add('hidden');openModal('sizeModal');}
 function confirmSizeSelection(){if(!selectedSize){$('sizeError').classList.remove('hidden');return;}mySize=selectedSize;saveState();const id=pendingProductId;closeModal('sizeModal');addToCart(id,selectedSize);}
 function openProductModal(id){const p=getProduct(id);$('prodModalTitle').textContent=p.title;$('prodModalImg').src=p.img1;$('prodModalPrice').textContent=formatPrice(p.price);$('prodModalDesc').textContent=p.desc;$('prodModalStock').textContent=p.stock<=5?`● Залишилось ${p.stock} шт`:'● В наявності';$('prodModalStock').style.color=p.stock<=5?'#c1121f':'#c9f31a';$('prodModalAdd').dataset.productId=id;openModal('productModal');}
@@ -822,7 +818,6 @@ function toggleTheme(){currentTheme=currentTheme==='light'?'dark':'light';saveSt
 function applyI18n(){const dict=I18N[currentLang]||I18N.ua;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const val=dict[key];if(val===undefined)return;if(el.hasAttribute('data-i18n-html'))el.innerHTML=val;else el.textContent=val;});document.documentElement.lang=currentLang==='en'?'en':'uk';}
 function toggleLang(){currentLang=currentLang==='ua'?'en':'ua';$('langLabel').textContent=currentLang.toUpperCase();saveState();applyI18n();renderTour();toast(currentLang==='en'?'Language: English':'Мова: Українська');}
 function setCurrency(cur){currentCurrency=cur;saveState();if($('currencySelect'))$('currencySelect').value=cur;if($('currencySelectMobile'))$('currencySelectMobile').value=cur;renderCatalog();renderCart();}
-
 function initCookie(){if(!localStorage.getItem(KEYS.COOKIE))setTimeout(()=>$('cookieBanner').classList.add('show'),1500);}
 function dismissCookie(acc){localStorage.setItem(KEYS.COOKIE,acc?'accepted':'declined');$('cookieBanner').classList.remove('show');}
 function initNewsletter(){const form=$('newsletterForm');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();const input=form.querySelector('input[type="email"]');const msg=$('newsletterMsg');const val=input.value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)){msg.textContent='⚠ Введіть коректний email';msg.style.color='#e63946';msg.classList.remove('hidden');input.classList.add('error');return;}input.classList.remove('error');msg.textContent='✓ Дякуємо! Ти в списку.';msg.style.color='#c9f31a';msg.classList.remove('hidden');form.reset();toast('Підписку оформлено');});}
@@ -845,8 +840,7 @@ $('currencySelect')?.addEventListener('change',e=>setCurrency(e.target.value));$
 document.querySelectorAll('#mobileMenu a').forEach(a=>{a.addEventListener('click',()=>$('mobileMenu').classList.remove('open'));});
 $('closeSearchBtn')?.addEventListener('click',closeSearch);
 $('searchInput')?.addEventListener('input',e=>{clearTimeout(window.__st);window.__st=setTimeout(()=>performSearch(e.target.value),150);});
-$('closeSizeBtn')?.addEventListener('click',()=>closeModal('sizeModal'));
-$('confirmSizeBtn')?.addEventListener('click',confirmSizeSelection);
+$('closeSizeBtn')?.addEventListener('click',()=>closeModal('sizeModal'));$('confirmSizeBtn')?.addEventListener('click',confirmSizeSelection);
 $('sizeGuideFromModal')?.addEventListener('click',()=>{sizeGuideReturnTo='sizeModal';closeModal('sizeModal');openModal('sizeGuideModal');});
 $('prodModalSizeGuide')?.addEventListener('click',()=>{sizeGuideReturnTo='productModal';closeModal('productModal');openModal('sizeGuideModal');});
 $('closeSizeGuideBtn')?.addEventListener('click',()=>{closeModal('sizeGuideModal');if(sizeGuideReturnTo){const back=sizeGuideReturnTo;sizeGuideReturnTo=null;setTimeout(()=>openModal(back),50);}});
