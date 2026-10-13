@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@300;400;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666}
+:root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666;--neon:#ff2d95}
 body.light-mode{--bg:#f5f5f5;--text:#0a0a0a;--border:#d4d4d4;--panel:#fff;--muted:#777}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -28,13 +28,14 @@ body.no-scroll{overflow:hidden}
 .header-icon:active{transform:scale(.9)}
 .header-icon svg{pointer-events:none}
 @media (min-width:768px){.header-icon{width:36px;height:36px;padding:6px}}
-.nav-link{display:inline-flex;align-items:center;padding:.85rem 1.1rem;min-height:44px;border:1px solid transparent;transition:color .2s,border-color .2s,background .2s;position:relative;white-space:nowrap}
-.nav-link:hover{color:var(--text);border-color:var(--border);background:rgba(193,18,31,.08)}
-.nav-link:active{background:rgba(193,18,31,.18)}
-.nav-link::after{content:'';position:absolute;left:1.1rem;right:1.1rem;bottom:.5rem;height:1px;background:var(--blood);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.nav-link:hover::after{transform:scaleX(1)}
+.nav-tabs{display:flex;align-items:center;gap:.55rem;flex-wrap:nowrap;padding:.25rem 0}
+.nav-tab{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.25rem;min-height:48px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);background:transparent;border:2px solid var(--border);transition:all .25s ease;text-decoration:none;position:relative;white-space:nowrap}
+.nav-tab:hover{color:#fff;border-color:var(--neon);background:rgba(255,45,149,.05);box-shadow:0 0 16px rgba(255,45,149,.8), inset 0 0 12px rgba(255,45,149,.2);text-shadow:0 0 10px rgba(255,45,149,1), 0 0 4px rgba(255,45,149,.8)}
+.nav-tab.active,.nav-tab:focus-visible{color:#fff;border-color:var(--neon);background:rgba(255,45,149,.08);box-shadow:0 0 20px rgba(255,45,149,.95), inset 0 0 14px rgba(255,45,149,.25);text-shadow:0 0 12px rgba(255,45,149,1), 0 0 6px rgba(255,45,149,.9)}
+body.light-mode .nav-tab{color:#444;border-color:#d4d4d4}
+body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;border-color:#e91e8c;box-shadow:0 0 10px rgba(233,30,140,.4);text-shadow:0 0 4px rgba(233,30,140,.5)}
 .mobile-nav-link{display:flex;align-items:center;padding:1rem 1.25rem;min-height:52px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);transition:all .2s}
-.mobile-nav-link:hover,.mobile-nav-link:active{border-color:var(--blood);background:rgba(193,18,31,.1);padding-left:1.5rem}
+.mobile-nav-link:hover,.mobile-nav-link:active{border-color:var(--neon);background:rgba(255,45,149,.1);padding-left:1.5rem;box-shadow:0 0 10px rgba(255,45,149,.4)}
 .mobile-menu-btn{display:flex;align-items:center;justify-content:center;padding:12px 10px;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
 .mobile-menu-btn:hover,.mobile-menu-btn:active{border-color:var(--blood);background:rgba(193,18,31,.1)}
 .mobile-menu-select{width:100%;min-height:44px;padding:10px 36px 10px 12px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
@@ -52,7 +53,6 @@ body.no-scroll{overflow:hidden}
 .btn-brut:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .btn-brut:active:not(:disabled){transform:scale(.97)}
 .btn-brut:disabled{opacity:.3;cursor:not-allowed}
-.btn-brut.loading{pointer-events:none;opacity:.7}
 .btn-ghost{background:transparent;color:var(--text);border:2px solid var(--border)}
 .btn-ghost:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .tg-btn{background:#229ED9;border-color:#229ED9;color:#fff}
@@ -91,15 +91,15 @@ body.no-scroll{overflow:hidden}
 .album-row{transition:all .2s;border-left:2px solid transparent;border-bottom:1px solid var(--border);cursor:pointer;text-align:left;background:transparent;width:100%;color:inherit}
 .album-row:hover{background:rgba(128,128,128,.05)}
 .album-row.active{background:rgba(193,18,31,.1);border-left-color:var(--blood)}
-.tour-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.25rem;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:background .2s,border-color .2s;border-left:2px solid transparent;cursor:pointer}
+.tour-row{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:background .2s,border-color .2s;border-left:2px solid transparent;cursor:pointer}
 .tour-row:last-child{border-bottom:none}
 .tour-row:hover{background:rgba(193,18,31,.08);border-left-color:var(--blood)}
 .tour-row:hover .tour-cta{background:var(--blood);color:#fff;border-color:var(--blood)}
-.tour-date{font-family:'Archivo Black',sans-serif;font-size:1rem;letter-spacing:-.01em;min-width:56px;color:var(--text)}
+.tour-date{font-family:'Archivo Black',sans-serif;font-size:1.05rem;letter-spacing:-.01em;min-width:130px;color:var(--text)}
 .tour-info{flex:1;min-width:0}
-.tour-city{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;line-height:1.2;margin-bottom:.15rem}
-.tour-venue{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.tour-cta{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.4rem .8rem;border:1px solid var(--border);color:var(--text);transition:all .2s;white-space:nowrap}
+.tour-city{font-family:'Archivo Black',sans-serif;font-size:1rem;line-height:1.2;margin-bottom:.2rem}
+.tour-venue{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.tour-cta{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.45rem .9rem;border:1px solid var(--border);color:var(--text);transition:all .2s;white-space:nowrap}
 #subscribe img{transition:transform .8s,filter .5s;filter:contrast(1.05) saturate(1.05)}
 #subscribe img:hover{transform:scale(1.02);filter:contrast(1.1) saturate(1.15)}
 #newsletterForm input{border:2px solid var(--border);background:transparent;color:var(--text)}
@@ -109,8 +109,6 @@ a:hover .arrow-slide{transform:translateX(4px)}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border)}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
 .wish-btn.active{background:var(--blood)!important;border-color:var(--blood)!important}
 .clip-angle{clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
 :focus-visible{outline:2px solid var(--blood);outline-offset:3px;border-radius:2px}
@@ -142,9 +140,9 @@ body.light-mode .hero-logo{filter:brightness(0)}
 .mobile-menu.open{display:block;max-height:800px;opacity:1}
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
 @media (max-width:767px){
-  header .h-16{height:60px!important}
-  .header-icon{width:38px;height:38px;padding:7px}
-  .ftd-logo{height:24px!important}
+  header .h-16{height:72px!important}
+  .header-icon{width:42px;height:42px;padding:9px}
+  .ftd-logo{height:32px!important}
   .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
   .gothic.text-6xl{font-size:1.85rem!important;line-height:1!important}
@@ -184,13 +182,15 @@ body.light-mode .hero-logo{filter:brightness(0)}
   .order-page .py-16,.order-page .py-24{padding-top:1.75rem!important;padding-bottom:1.75rem!important}
   footer .py-12,footer .py-16{padding-top:2rem!important;padding-bottom:2rem!important}
   .size-guide-table th,.size-guide-table td{padding:.5rem .4rem!important;font-size:.6rem!important}
-  .tour-row{padding:.75rem .9rem;gap:.75rem}
-  .tour-date{font-size:.85rem;min-width:48px}
-  .tour-city{font-size:.65rem}
-  .tour-venue{font-size:.55rem}
-  .tour-cta{font-size:.55rem;padding:.35rem .6rem}
+  .tour-row{padding:.85rem 1rem;gap:.75rem;flex-wrap:wrap}
+  .tour-date{font-size:.9rem;min-width:110px}
+  .tour-city{font-size:.9rem}
+  .tour-venue{font-size:.6rem}
+  .tour-cta{font-size:.6rem;padding:.4rem .7rem}
+  .mobile-nav-link{padding:1.15rem 1.35rem;min-height:60px;font-size:.9rem;letter-spacing:.22em}
+  .mobile-menu-btn{padding:14px 10px;min-height:50px;font-size:.75rem;letter-spacing:.18em}
 }
-@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:32px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}}
+@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:34px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}.nav-tab{padding:.7rem 1rem;font-size:.7rem}}
 @media (min-width:1024px) and (max-width:1279px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:16px!important}}
 @media (min-width:1280px) and (max-width:1599px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:20px!important}}
 @media (min-width:1600px){body{font-size:15px}#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:22px!important}}
@@ -203,31 +203,31 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
   <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
     <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+    <span class="mx-6">▲ НОВИЙ КЛІП «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
     <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
     <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
-    <span class="mx-6">▲ НОВИЙ СИНГЛ «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
+    <span class="mx-6">▲ НОВИЙ КЛІП «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
     <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header class="sticky top-0 z-40 border-b" style="background:#050505;border-color:var(--border)">
-  <div class="max-w-[1600px] mx-auto px-3 md:px-8">
+  <div class="max-w-[1600px] mx-auto px-3 md:px-6">
     <div class="flex items-center justify-between h-16 md:h-20 gap-2">
       <div class="flex items-center flex-1 min-w-0">
         <button id="hamburgerBtn" class="header-icon md:hidden" aria-label="Меню">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
-        <nav class="hidden md:flex items-center gap-1 text-[0.7rem] font-bold tracking-[0.2em] uppercase" style="color:var(--muted)">
-          <a href="#catalog" class="nav-link" data-i18n="nav_store">Store</a>
-          <a href="#music" class="nav-link" data-i18n="nav_music">Music</a>
-          <a href="#tour" class="nav-link" data-i18n="nav_shows">Shows</a>
-          <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact Us</a>
+        <nav class="hidden md:flex nav-tabs">
+          <a href="#catalog" class="nav-tab" data-i18n="nav_store" data-nav-tab>STORE</a>
+          <a href="#music" class="nav-tab" data-i18n="nav_music" data-nav-tab>MUSIC</a>
+          <a href="#tour" class="nav-tab" data-i18n="nav_shows" data-nav-tab>SHOWS</a>
+          <a href="#contact" class="nav-tab" data-i18n="nav_contact" data-nav-tab>CONTACT US</a>
         </nav>
       </div>
       <a href="#" id="logoLink" class="flex-shrink-0 flex items-center justify-center px-1 md:px-4">
-        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-6 md:h-10 w-auto"/>
+        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-7 md:h-12 w-auto"/>
       </a>
       <div class="flex items-center justify-end flex-1 min-w-0 gap-0.5 md:gap-2">
         <button id="themeBtn" class="header-icon hidden md:inline-flex" aria-label="Тема">
@@ -254,10 +254,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
   </div>
   <div id="mobileMenu" class="mobile-menu md:hidden border-t" style="background:var(--bg);border-color:var(--border)">
     <div class="px-5 py-5 flex flex-col gap-3 text-[0.75rem] font-bold tracking-[0.2em] uppercase" style="color:var(--muted)">
-      <a href="#catalog" class="mobile-nav-link" data-i18n="nav_store">Store</a>
-      <a href="#music" class="mobile-nav-link" data-i18n="nav_music">Music</a>
-      <a href="#tour" class="mobile-nav-link" data-i18n="nav_shows">Shows</a>
-      <a href="#contact" class="mobile-nav-link" data-i18n="nav_contact">Contact Us</a>
+      <a href="#catalog" class="mobile-nav-link" data-i18n="nav_store">STORE</a>
+      <a href="#music" class="mobile-nav-link" data-i18n="nav_music">MUSIC</a>
+      <a href="#tour" class="mobile-nav-link" data-i18n="nav_shows">SHOWS</a>
+      <a href="#contact" class="mobile-nav-link" data-i18n="nav_contact">CONTACT US</a>
       <div class="pt-4 mt-2 border-t grid grid-cols-2 gap-2" style="border-color:var(--border)">
         <button id="themeBtnM" class="mobile-menu-btn">🎨 ТЕМА</button>
         <button id="langBtnM" class="mobile-menu-btn">🌐 UA/EN</button>
@@ -272,9 +272,9 @@ body.light-mode .hero-logo{filter:brightness(0)}
   </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO with VIDEO -->
 <section class="relative border-b overflow-hidden grid-bg" style="border-color:var(--border)">
-  <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-20 relative">
+  <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-16 relative">
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-6 md:mb-8" style="color:var(--muted)">
       <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-[#c1121f] rounded-full pulse-dot"></span> KYIV · UA</span>
       <span>EST. 2023</span><span>GRINDCORE / HARDCORE</span><span class="text-[#c1121f]">#FTD</span>
@@ -282,15 +282,20 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <div class="hero-logo-wrap">
       <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="hero-logo" draggable="false"/>
     </div>
-    <div class="max-w-2xl mb-8 md:mb-10">
-      <p class="text-sm md:text-base leading-relaxed mb-4" style="color:var(--muted)">Київський грайндкор. <span style="color:var(--text)">Без компромісів.</span> Без ілюзій.</p>
-      <p class="text-xs md:text-sm leading-relaxed" style="color:var(--muted)">Дебютний альбом <span class="text-[#c1121f]">"ПЕРШОЗДОХЛІ ПИЗДУЮТЬ"</span> — вже на всіх стрімінгових платформах.</p>
+    <div class="max-w-2xl mb-6 md:mb-8">
+      <p class="text-sm md:text-base leading-relaxed" style="color:var(--muted)">Новий кліп <span style="color:var(--acid)">«МАВПА»</span> вже в мережі. Дивись нижче ↓</p>
     </div>
-    <div class="flex flex-wrap gap-3">
-      <a href="#catalog" class="btn-brut"><span data-i18n="hero_shop">SHOP MERCH</span> <span class="arrow-slide">→</span></a>
-      <a href="#music" class="btn-brut btn-ghost" data-i18n="hero_listen">LISTEN</a>
-      <a href="#tour" class="btn-brut btn-ghost" data-i18n="hero_tour">TOUR DATES</a>
-      <a href="https://open.spotify.com/artist/1cbGtPIT84DzV99EOCYtJC" target="_blank" rel="noopener" class="btn-brut btn-ghost">▶ SPOTIFY</a>
+    <div class="relative border overflow-hidden max-w-[1200px]" style="border-color:var(--border);background:#000;aspect-ratio:16/9">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/B4-a9k2IzTA?rel=0&modestbranding=1"
+        title="FIRST TO DIE — МАВПА (Official Music Video)"
+        frameborder="0"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute;inset:0;width:100%;height:100%;border:0">
+      </iframe>
     </div>
   </div>
 </section>
@@ -301,7 +306,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
       <div>
         <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 01 — On the road</p>
-        <h2 class="gothic text-4xl md:text-6xl leading-[0.95]">
+        <h2 class="display text-4xl md:text-6xl leading-[0.95]">
           FALL TOUR<br/>
           <span class="text-[#c1121f]">2026</span>
         </h2>
@@ -311,13 +316,9 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
       <div class="lg:col-span-5">
         <div class="relative border overflow-hidden group" style="border-color:var(--border);background:var(--panel)">
-          <img id="tourPoster" src="https://i.postimg.cc/HLfD9x2L/Gemini-Generated-Image-pqlj6lpqlj6lpqlj.jpg" alt="FIRST TO DIE — FALL 2026 TOUR" class="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" onerror="this.src='https://placehold.co/800x1000/0a0a0a/c1121f?text=FALL+TOUR+2026'"/>
+          <img id="tourPoster" src="https://i.postimg.cc/xT7Z2HwH/FTD-NEW.jpg" alt="FIRST TO DIE — FALL 2026 TOUR" class="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" onerror="this.src='https://placehold.co/800x1000/0a0a0a/c1121f?text=FALL+TOUR+2026'"/>
           <div class="absolute top-4 left-4 flex gap-2">
             <span class="badge-tag badge-new">FALL 2026</span>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/60 to-transparent">
-            <p class="text-white text-[0.6rem] tracking-[0.3em] uppercase mb-1">// Official Tour Poster</p>
-            <p class="text-white text-[0.75rem] font-bold tracking-widest uppercase">FIRST TO DIE × 9 CITIES</p>
           </div>
         </div>
       </div>
@@ -325,7 +326,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <div class="border" style="border-color:var(--border);background:var(--panel)">
           <div class="flex items-center justify-between px-5 py-4 border-b" style="border-color:var(--border)">
             <p class="display text-lg md:text-xl tracking-wide" data-i18n="tour_title">НАЙБЛИЖЧІ КОНЦЕРТИ</p>
-            <p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">09 · 10 — 25 · 10</p>
+            <p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">ЖОВТЕНЬ 2026</p>
           </div>
           <div id="tourList"></div>
           <div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)">
@@ -338,36 +339,11 @@ body.light-mode .hero-logo{filter:brightness(0)}
   </div>
 </section>
 
-<!-- WATCH -->
-<section class="border-b" style="border-color:var(--border)">
-  <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-16">
-    <div class="flex items-center justify-between mb-6 md:mb-8">
-      <div>
-        <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 02 — Visual</p>
-        <h2 class="gothic text-2xl md:text-4xl" data-i18n="h_watch">WATCH</h2>
-      </div>
-      <a href="https://youtu.be/B4-a9k2IzTA" target="_blank" rel="noopener" class="text-[0.65rem] font-bold tracking-[0.2em] uppercase hover:text-[#c1121f]" style="color:var(--muted)">YOUTUBE <span class="arrow-slide">→</span></a>
-    </div>
-    <div class="relative border overflow-hidden" style="border-color:var(--border);background:#000;aspect-ratio:16/9">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/B4-a9k2IzTA?rel=0&modestbranding=1"
-        title="FIRST TO DIE — Official Video"
-        frameborder="0"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        loading="lazy"
-        style="position:absolute;inset:0;width:100%;height:100%;border:0">
-      </iframe>
-    </div>
-  </div>
-</section>
-
 <!-- MUSIC -->
 <section id="music" class="border-b noise-bg" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 03 — Discography</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_music">MUSIC</h2></div>
+      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 02 — Discography</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_music">MUSIC</h2></div>
     </div>
     <div class="grid lg:grid-cols-12 gap-6">
       <aside class="lg:col-span-4 border" style="background:var(--panel);border-color:var(--border)">
@@ -390,7 +366,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <span style="color:var(--text)">Магазин</span>
     </div>
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// Shop</p><h2 class="gothic text-3xl md:text-5xl" data-i18n="h_store">STORE</h2></div>
+      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// Shop</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_store">STORE</h2></div>
       <p class="text-[0.6rem] tracking-[0.25em] uppercase" style="color:var(--muted)">Всі товари</p>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" id="catalogGrid"></div>
@@ -409,7 +385,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
              onerror="this.src='https://placehold.co/800x1000/0a0a0a/c1121f?text=FIRST+TO+DIE'"/>
       </div>
     </div>
-    <h2 class="gothic text-3xl md:text-5xl mb-3">БУДЬ НА ЗВ'ЯЗКУ.</h2>
+    <h2 class="display text-3xl md:text-5xl mb-3">БУДЬ НА ЗВ'ЯЗКУ.</h2>
     <p class="text-[0.65rem] md:text-xs tracking-[0.25em] uppercase mb-8 md:mb-10" style="color:var(--muted)">Нові релізи, концерти та мерч — першим дізнаєшся ти.</p>
     <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2" novalidate>
       <input type="email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
@@ -426,29 +402,29 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <h2 class="display text-4xl md:text-6xl" style="letter-spacing:-.02em" data-i18n="h_contact">CONTACT US</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-      <a href="https://discord.gg/JpAku8hVH" target="_blank" rel="noopener" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
+      <a href="https://discord.gg/JpAku8hVH" target="_blank" rel="noopener" class="border p-8 md:p-10 text-center hover:border-[#ff2d95] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.5c-1.6-.7-3.3-1.3-5-1.6-.2.4-.5.9-.7 1.3-1.9-.3-3.7-.3-5.5 0-.2-.4-.5-.9-.7-1.3-1.8.3-3.5.9-5 1.6C-.3 9.5-1 14.3.5 19c1.9 1.4 3.8 2.2 5.6 2.7.5-.6.9-1.3 1.2-2-.7-.3-1.3-.6-1.9-1 .2-.1.3-.3.5-.4 3.7 1.7 7.6 1.7 11.3 0 .2.1.3.3.5.4-.6.4-1.2.7-1.9 1 .3.7.7 1.4 1.2 2 1.8-.6 3.7-1.4 5.6-2.7 1.7-5.5.6-10.2-2.3-14.5zM8 15.8c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3zm8 0c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3z"/></svg>
         </div>
         <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Discord</p>
         <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Спільнота · Live-чати</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">JOIN →</p>
+        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">JOIN →</p>
       </a>
-      <a href="https://www.instagram.com/first2diecrew/" target="_blank" rel="noopener" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
+      <a href="https://www.instagram.com/first2diecrew/" target="_blank" rel="noopener" class="border p-8 md:p-10 text-center hover:border-[#ff2d95] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
         </div>
         <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Instagram</p>
         <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Сторіс · Reels</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">FOLLOW →</p>
+        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">FOLLOW →</p>
       </a>
-      <a href="mailto:booking@firsttodie.com" class="border p-8 md:p-10 text-center hover:border-[#c1121f] transition-all" style="border-color:var(--border);background:var(--panel)">
+      <a href="mailto:booking@firsttodie.com" class="border p-8 md:p-10 text-center hover:border-[#ff2d95] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
         <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Gmail</p>
         <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Booking · Співпраця</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#c1121f] font-bold">НАПИСАТИ →</p>
+        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">НАПИСАТИ →</p>
       </a>
     </div>
   </div>
@@ -484,7 +460,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c9f31a" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c9f31a] mb-3">// Замовлення прийнято</p>
-      <h2 class="gothic text-3xl md:text-5xl mb-4">ДЯКУЄМО!</h2>
+      <h2 class="display text-3xl md:text-5xl mb-4">ДЯКУЄМО!</h2>
       <p class="text-sm leading-relaxed max-w-lg mx-auto" style="color:var(--muted)">Зараз відкриється Telegram-бот — він одразу покаже твоє замовлення та спосіб оплати.</p>
     </div>
     <div class="border p-6 mb-6" style="background:var(--panel);border-color:var(--border)">
@@ -507,14 +483,11 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <span id="orderItemsTotal" class="display text-lg text-[#c1121f]">₴0</span>
       </div>
     </div>
-
-    <!-- MONO PAY BLOCK -->
     <div id="monoPayBlock" class="border p-6 mb-6 hidden" style="background:var(--panel);border-color:var(--border)">
       <p class="text-[0.55rem] tracking-[0.3em] uppercase mb-4 text-center" style="color:var(--muted)">// Онлайн-оплата</p>
       <button id="monoPayBtn" class="btn-brut mono-btn w-full py-4">💳 ОПЛАТИТИ КАРТКОЮ MONOBANK</button>
       <p class="text-[0.6rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Безпечна оплата через Monobank Acquiring</p>
     </div>
-
     <div class="text-center space-y-3">
       <button id="sendToTelegram" class="btn-brut tg-btn w-full py-4" data-i18n="b_send_tg">✈ ВІДКРИТИ TELEGRAM-БОТА</button>
       <button id="continueShopping" class="btn-brut w-full py-3" data-i18n="b_continue">ПРОДОВЖИТИ ПОКУПКИ →</button>
@@ -526,13 +499,13 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="cartOverlay" class="cart-overlay hidden fixed inset-0 bg-black/80 z-50"></div>
 <div id="cartDrawer" class="cart-drawer closed fixed top-0 right-0 h-full w-full max-w-md z-50 flex flex-col border-l" style="background:var(--bg);border-color:var(--border)">
   <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:var(--border)">
-    <div><p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">// Your</p><h3 class="gothic text-lg" data-i18n="cart_title">CART</h3></div>
+    <div><p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">// Your</p><h3 class="display text-lg" data-i18n="cart_title">CART</h3></div>
     <button id="closeCartBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-5 space-y-5"></div>
   <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center px-6 text-center hidden">
     <div class="w-20 h-20 border flex items-center justify-center mb-5" style="border-color:var(--border)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div>
-    <p class="gothic text-xl mb-2" data-i18n="cart_empty">Кошик порожній</p>
+    <p class="display text-xl mb-2" data-i18n="cart_empty">Кошик порожній</p>
     <button onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'})" class="btn-brut px-6 py-3 text-[0.65rem]" data-i18n="b_to_catalog">ДО КАТАЛОГУ →</button>
   </div>
   <div class="border-t px-6 py-6 space-y-4" style="border-color:var(--border);background:var(--panel)">
@@ -557,7 +530,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="productModal" class="modal">
   <div class="modal-content" style="max-width:900px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Product</p><h3 id="prodModalTitle" class="gothic text-lg truncate max-w-xs"></h3></div>
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Product</p><h3 id="prodModalTitle" class="display text-lg truncate max-w-xs"></h3></div>
       <button id="closeProductBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="grid md:grid-cols-2 gap-0">
@@ -577,7 +550,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="sizeModal" class="modal">
   <div class="modal-content" style="max-width:480px">
     <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:var(--border)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Select size</p><h3 class="gothic text-lg" data-i18n="m_size">РОЗМІР</h3></div>
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Select size</p><h3 class="display text-lg" data-i18n="m_size">РОЗМІР</h3></div>
       <button id="closeSizeBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="p-6">
@@ -600,7 +573,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="sizeGuideModal" class="modal">
   <div class="modal-content" style="max-width:700px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Size Guide</p><h3 class="gothic text-lg">ТАБЛИЦЯ РОЗМІРІВ</h3></div>
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Size Guide</p><h3 class="display text-lg">ТАБЛИЦЯ РОЗМІРІВ</h3></div>
       <button id="closeSizeGuideBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="p-6">
@@ -637,7 +610,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="ticketModal" class="modal">
   <div class="modal-content" style="max-width:520px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Buy tickets</p><h3 class="gothic text-lg">КВИТОК</h3></div>
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Buy tickets</p><h3 class="display text-lg">КВИТОК</h3></div>
       <button id="closeTicketBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <form id="ticketForm" class="p-6 space-y-5" novalidate>
@@ -660,7 +633,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div><label class="form-label">Email</label><input name="tEmail" type="email" class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
       <p id="ticketError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946]"></p>
       <button type="submit" class="btn-brut tg-btn w-full py-4">ЗАБРОНЮВАТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
-      <p class="text-[0.6rem] tracking-widest uppercase text-center" style="color:var(--muted)">Квитки підтвердить бот @ftd_store_bot</p>
     </form>
   </div>
 </div>
@@ -669,7 +641,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Checkout</p><h3 class="gothic text-lg" data-i18n="m_order">ORDER</h3></div>
+      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Checkout</p><h3 class="display text-lg" data-i18n="m_order">ORDER</h3></div>
       <button id="closeCheckoutBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <form id="checkoutForm" class="p-6 space-y-5" novalidate>
@@ -689,7 +661,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <option value="">— ОБЕРІТЬ —</option>
           <option value="monobank">Monobank (онлайн)</option>
           <option value="cod">Накладений платіж (НП)</option>
-          <option value="liqpay">LiqPay</option>
         </select>
       </div>
       <div class="border-t pt-5" style="border-color:var(--border)">
@@ -698,7 +669,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
       </div>
       <p id="checkoutError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946]"></p>
       <button type="submit" class="btn-brut tg-btn w-full py-4" id="placeOrderBtn" data-i18n="b_place_order">ОФОРМИТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
-      <p class="text-[0.6rem] tracking-widest uppercase text-center" style="color:var(--muted)">Після оформлення відкриється бот @ftd_store_bot</p>
     </form>
   </div>
 </div>
@@ -710,7 +680,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v28', CUR:'ftd_cur_v18', THEME:'ftd_theme_v18', LANG:'ftd_lang_v18', WISH:'ftd_wish_v18', COOKIE:'ftd_cookie_v18', SIZE:'ftd_size_v18', ORDERS:'ftd_orders_v18', TICKETS:'ftd_tickets_v18' };
+const KEYS = { CART:'ftd_cart_v31', CUR:'ftd_cur_v21', THEME:'ftd_theme_v21', LANG:'ftd_lang_v21', WISH:'ftd_wish_v21', COOKIE:'ftd_cookie_v21', SIZE:'ftd_size_v21', ORDERS:'ftd_orders_v21', TICKETS:'ftd_tickets_v21' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -722,94 +692,74 @@ const REAL = {
   p5:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p5b:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p6:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg',
-  p6b:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg'
+  p6b:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg',
+  p7:'https://placehold.co/800x800/0a0a0a/c1121f?text=SNAPBACK',
+  p7b:'https://placehold.co/800x800/0a0a0a/c1121f?text=SNAPBACK'
 };
 
 const PRODUCTS = [
-  { id:'p1', title:'ЛОНГСЛІВ «ACID YELLOW»', price:850, status:'new', sizes:['M','L','XL','XXL'], stock:8, desc:'Артикул: FTD-LS-01. Темний лонгслів із кислотно-жовтим принтом. Спереду — лого First To Die, триптих облич та напис «Я ЗА***РЮ ТЕБЕ НАЧЕ СКАЖЕНОГО ПСА». На рукавах — смолоскипи. 100% щільна бавовна. Еластичні манжети. Oversize / Relaxed Fit.', img1:REAL.p1, img2:REAL.p1b },
-  { id:'p2', title:'ФУТБОЛКА «KYIV METALLIC»', price:850, status:'new', sizes:['S','M','L','XL'], stock:5, desc:'Артикул: KMH-TS-WHT. Біла футболка з монохромним принтом київської металкор-сцени. Спереду — хрест із потертою фактурою та рогатий цап (бафомет). Зверху — лого First To Die, знизу — «KYIV METALLIC HARDCORE». 100% бавовна. Regular Fit.', img1:REAL.p2, img2:REAL.p2b },
-  { id:'p4', title:'ФУТБОЛКА «МОНАШКА»', price:950, status:'new', sizes:['S','M','L','XL','XXL'], stock:7, desc:'Артикул: FTD-CTU-TS. Чорна футболка у колаборації First To Die × CAPTHEUNI. Спереду — хорор-арт кривавої монахині в терновому вінку, «KYIV METALLIC HARDCORE» та лого First To Die, знизу — «CAPTHEUNI». Ззаду — окультна октаграма та ритуальний текст. Преміальна бавовна 210 gsm. Streetwear / Relaxed Fit.', img1:REAL.p4, img2:REAL.p4b },
-  { id:'p5', title:'ЛОНГСЛІВ «МОНАШКА»', price:1500, status:'new', sizes:['M','L','XL','XXL'], stock:4, desc:'Артикул: FTD-CTU-LS. Лонгслів-версія колаборації з CAPTHEUNI. Спереду — повноколірний принт монахині в терновому вінку. Лівий рукав — «FIRST TO DIE × CAPTHEUNI». Правий рукав — серія круглих окультних печаток. 100% щільний трикотаж. Oversize / Heavyweight Fit.', img1:REAL.p5, img2:REAL.p5b },
-  { id:'p6', title:'ФУТБОЛКА «FTD CLASSIC»', price:850, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-02. Чорна бавовняна футболка з масивним графічним принтом у стилі андеграундного металкору. 100% преміум бавовна. Шовкотрафаретний друк. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b }
+  { id:'p1', title:'ACID MOUTH — ЛОНГСЛІВ', price:1800, status:'new', sizes:['M','L','XL','XXL'], stock:8, desc:'Артикул: FTD-LS-01. Чорний лонгслів із кислотно-жовтим принтом. Спереду — лого First To Die, триптих облич. На рукавах — смолоскипи. 100% щільна бавовна. Oversize / Relaxed Fit.', img1:REAL.p1, img2:REAL.p1b },
+  { id:'p2', title:'BACKBONE — БІЛА ФУТБОЛКА', price:1000, status:'new', sizes:['S','M','L','XL'], stock:5, desc:'Артикул: KMH-TS-WHT. Біла футболка з монохромним принтом. Спереду — хрест та рогатий цап (бафомет), «KYIV METALLIC HARDCORE». 100% бавовна. Regular Fit.', img1:REAL.p2, img2:REAL.p2b },
+  { id:'p6', title:'WHITE GOAT — ЧОРНА ФУТБОЛКА З ХРЕБТОМ', price:1000, status:'new', sizes:['S','M','L','XL','XXL'], stock:10, desc:'Артикул: FTD-TS-02. Чорна бавовняна футболка. Спереду — лого First To Die. Ззаду — вертикальний хребет. 100% преміум бавовна. Unisex, Medium Fit.', img1:REAL.p6, img2:REAL.p6b },
+  { id:'p4', title:'FTD × CAPTHEUNI — T-SHIRT', price:1200, status:'new', sizes:['S','M','L','XL','XXL'], stock:7, desc:'Артикул: FTD-CTU-TS. Чорна футболка у колаборації First To Die × CAPTHEUNI. Спереду — хорор-арт монахині в терновому вінку. Ззаду — окультна октаграма. Преміальна бавовна 210 gsm.', img1:REAL.p4, img2:REAL.p4b },
+  { id:'p5', title:'FTD × CAPTHEUNI — LONG', price:2000, status:'new', sizes:['M','L','XL','XXL'], stock:4, desc:'Артикул: FTD-CTU-LS. Лонгслів-версія колаборації з CAPTHEUNI. Спереду — принт монахині. Лівий рукав — «FIRST TO DIE × CAPTHEUNI». Правий — круглі печатки. 100% щільний трикотаж. Oversize / Heavyweight Fit.', img1:REAL.p5, img2:REAL.p5b },
+  { id:'p7', title:'FTD SNAPBACK', price:800, status:'new', sizes:['ONE SIZE'], stock:15, desc:'Артикул: FTD-CAP-01. Кепка-снепбек з лого First To Die. Регульована застібка. 100% бавовна. One size fit all.', img1:REAL.p7, img2:REAL.p7b }
 ];
 
 const ALBUMS = [
   { id:'a0', title:'МАВПА', type:'SINGLE', year:2025, runtime:'—', note:'Новий сингл. Вже в мережі.', spotify:'https://open.spotify.com/album/5RqLVW4KZEcKMLMtIXFuvc', embed:'https://open.spotify.com/embed/album/5RqLVW4KZEcKMLMtIXFuvc?utm_source=generator&theme=0', featured:true },
-  { id:'a1', title:'ПЕРШОЗДОХЛІ ПИЗДУЮТЬ', type:'ALBUM', year:2025, runtime:'16 min', note:'Дебютний повноформатний альбом. Записаний у підвалі на Подолі. 16 хвилин чистого грайндкору без компромісів. SURVIVOR SONGS EP — СКОРО.', spotify:'https://open.spotify.com/album/2s2Wum16eimse98P176j2H', embed:'https://open.spotify.com/embed/album/2s2Wum16eimse98P176j2H?utm_source=generator&theme=0', featured:false },
-  { id:'a2', title:'МІШЕНЬ', type:'SINGLE', year:2024, runtime:'3 min', note:'Сингл feat. Voracity. Записаний як колаборація з харківським репером. Про те, як система робить з людей мішені.', spotify:'https://open.spotify.com/album/1Op7Uj0xEVqcmUi7rUBp4s', embed:'https://open.spotify.com/embed/album/1Op7Uj0xEVqcmUi7rUBp4s?utm_source=generator&theme=0', featured:false },
-  { id:'a3', title:'ЯМА', type:'SINGLE', year:2024, runtime:'3 min', note:'Сингл. Про відчуття коли ти падаєш на саме дно і бачиш світло тільки знизу. Важкий, повільний, гнітючий.', spotify:'https://open.spotify.com/album/5n1HAGA89FMaP4cxQinx4o', embed:'https://open.spotify.com/embed/album/5n1HAGA89FMaP4cxQinx4o?utm_source=generator&theme=0', featured:false },
-  { id:'a4', title:'ДУЛО', type:'SINGLE', year:2023, runtime:'2 min', note:'Перший сингл гурту. Два тижні після заснування гурту в Києві. Сирий, швидкий, злий — якими ми і були на початку.', spotify:'https://open.spotify.com/album/6Ym4vdgZ7Aji7DrThQCmLk', embed:'https://open.spotify.com/embed/album/6Ym4vdgZ7Aji7DrThQCmLk?utm_source=generator&theme=0', featured:false }
+  { id:'a1', title:'ПЕРШОЗДОХЛІ ПИЗДУЮТЬ', type:'ALBUM', year:2025, runtime:'16 min', note:'Дебютний повноформатний альбом. SURVIVOR SONGS EP — СКОРО.', spotify:'https://open.spotify.com/album/2s2Wum16eimse98P176j2H', embed:'https://open.spotify.com/embed/album/2s2Wum16eimse98P176j2H?utm_source=generator&theme=0', featured:false },
+  { id:'a2', title:'МІШЕНЬ', type:'SINGLE', year:2024, runtime:'3 min', note:'Сингл feat. Voracity.', spotify:'https://open.spotify.com/album/1Op7Uj0xEVqcmUi7rUBp4s', embed:'https://open.spotify.com/embed/album/1Op7Uj0xEVqcmUi7rUBp4s?utm_source=generator&theme=0', featured:false },
+  { id:'a3', title:'ЯМА', type:'SINGLE', year:2024, runtime:'3 min', note:'Сингл.', spotify:'https://open.spotify.com/album/5n1HAGA89FMaP4cxQinx4o', embed:'https://open.spotify.com/embed/album/5n1HAGA89FMaP4cxQinx4o?utm_source=generator&theme=0', featured:false },
+  { id:'a4', title:'ДУЛО', type:'SINGLE', year:2023, runtime:'2 min', note:'Перший сингл.', spotify:'https://open.spotify.com/album/6Ym4vdgZ7Aji7DrThQCmLk', embed:'https://open.spotify.com/embed/album/6Ym4vdgZ7Aji7DrThQCmLk?utm_source=generator&theme=0', featured:false }
 ];
 
 let activeAlbumId = ALBUMS[0].id;
 
 const TOUR = [
-  { date:'09.10', city:'ЛЬВІВ',            venue:'LEM STATION', url:'#' },
-  { date:'10.10', city:'ІВАНО-ФРАНКІВСЬК', venue:'PROMENADE',   url:'#' },
-  { date:'11.10', city:'ТЕРНОПІЛЬ',        venue:'PALATS KINO', url:'#' },
-  { date:'16.10', city:'КИЇВ',             venue:"OTEL'",       url:'#', hot:true },
-  { date:'17.10', city:'ЧЕРНІГІВ',         venue:'PRECEDENT',   url:'#' },
-  { date:'18.10', city:'ВІННИЦЯ',          venue:'КВАРТИРА',    url:'#' },
-  { date:'23.10', city:'ХАРКІВ',           venue:'ARTZAVOD',    url:'#' },
-  { date:'24.10', city:'ПОЛТАВА',          venue:'PIVNA',       url:'#' },
-  { date:'25.10', city:'ОДЕСА',            venue:'BERNARD',     url:'#' }
+  { date:'09 жовтня', city:'Львів',            venue:'!Fest Republic', url:'#' },
+  { date:'10 жовтня', city:'Івано-Франківськ', venue:'Vagabundo',      url:'#' },
+  { date:'11 жовтня', city:'Тернопіль',        venue:'На Пошті',       url:'#' },
+  { date:'16 жовтня', city:'Київ',             venue:"Otel'",          url:'#', hot:true },
+  { date:'17 жовтня', city:'Чернігів',         venue:'Soul Pub',       url:'#' },
+  { date:'18 жовтня', city:'Вінниця',          venue:'Docker Pub',     url:'#' },
+  { date:'23 жовтня', city:'Харків',           venue:'Druk',           url:'#' },
+  { date:'24 жовтня', city:'Одеса',            venue:'More Music',     url:'#' },
+  { date:'25 жовтня', city:'Житомир',          venue:'In4Room',        url:'#' }
 ];
 
 const I18N = {
-  ua: {
-    nav_store:'Store', nav_music:'Music', nav_shows:'Shows', nav_contact:'Contact Us',
-    hero_shop:'SHOP MERCH', hero_listen:'LISTEN', hero_tour:'TOUR DATES',
-    h_watch:'WATCH', h_store:'STORE', h_contact:'CONTACT US', h_music:'MUSIC',
-    cart_title:'CART', cart_subtotal:'Subtotal', cart_checkout:'CHECKOUT',
-    cart_empty:'Кошик порожній',
-    m_size:'РОЗМІР', m_add:'ДОДАТИ В КОШИК', m_size_guide:'SIZE GUIDE / ТАБЛИЦЯ', m_order:'ORDER',
-    l_first_name:"Ім'я *", l_last_name:'Прізвище *', l_email:'Email *',
-    l_phone:'Телефон *', l_address:'Відділення НП / Адреса *',
-    l_city:'Місто *', l_zip:'Індекс *', l_payment:'Спосіб оплати *',
-    b_place_order:'ОФОРМИТИ ТА ВІДКРИТИ TELEGRAM ✈',
-    b_continue:'ПРОДОВЖИТИ ПОКУПКИ →',
-    b_send_tg:'✈ ВІДКРИТИ TELEGRAM-БОТА',
-    b_to_catalog:'ДО КАТАЛОГУ →', b_all_dates:'ВСІ ДАТИ',
-    tour_title:'НАЙБЛИЖЧІ КОНЦЕРТИ', tour_cta:'КВИТОК',
-    search_empty:'Нічого не знайдено'
-  },
-  en: {
-    nav_store:'Store', nav_music:'Music', nav_shows:'Shows', nav_contact:'Contact Us',
-    hero_shop:'SHOP MERCH', hero_listen:'LISTEN', hero_tour:'TOUR DATES',
-    h_watch:'WATCH', h_store:'STORE', h_contact:'CONTACT US', h_music:'MUSIC',
-    cart_title:'CART', cart_subtotal:'Subtotal', cart_checkout:'CHECKOUT',
-    cart_empty:'Your cart is empty',
+  ua: { nav_store:'STORE', nav_music:'MUSIC', nav_shows:'SHOWS', nav_contact:'CONTACT US',
+    h_store:'STORE', h_contact:'CONTACT US', h_music:'MUSIC',
+    cart_title:'CART', cart_subtotal:'Subtotal', cart_checkout:'CHECKOUT', cart_empty:'Кошик порожній',
+    m_size:'РОЗМІР', m_add:'ДОДАТИ В КОШИК', m_size_guide:'SIZE GUIDE', m_order:'ORDER',
+    l_first_name:"Ім'я *", l_last_name:'Прізвище *', l_email:'Email *', l_phone:'Телефон *',
+    l_address:'Відділення НП / Адреса *', l_city:'Місто *', l_zip:'Індекс *', l_payment:'Спосіб оплати *',
+    b_place_order:'ОФОРМИТИ ТА ВІДКРИТИ TELEGRAM ✈', b_continue:'ПРОДОВЖИТИ ПОКУПКИ →',
+    b_send_tg:'✈ ВІДКРИТИ TELEGRAM-БОТА', b_to_catalog:'ДО КАТАЛОГУ →', b_all_dates:'ВСІ ДАТИ',
+    tour_title:'НАЙБЛИЖЧІ КОНЦЕРТИ', tour_cta:'КВИТОК', search_empty:'Нічого не знайдено' },
+  en: { nav_store:'STORE', nav_music:'MUSIC', nav_shows:'SHOWS', nav_contact:'CONTACT US',
+    h_store:'STORE', h_contact:'CONTACT US', h_music:'MUSIC',
+    cart_title:'CART', cart_subtotal:'Subtotal', cart_checkout:'CHECKOUT', cart_empty:'Your cart is empty',
     m_size:'SIZE', m_add:'ADD TO CART', m_size_guide:'SIZE GUIDE', m_order:'ORDER',
-    l_first_name:'First name *', l_last_name:'Last name *', l_email:'Email *',
-    l_phone:'Phone *', l_address:'Nova Poshta / Address *',
-    l_city:'City *', l_zip:'ZIP *', l_payment:'Payment method *',
-    b_place_order:'PLACE ORDER & OPEN TELEGRAM ✈',
-    b_continue:'CONTINUE SHOPPING →',
-    b_send_tg:'✈ OPEN TELEGRAM BOT',
-    b_to_catalog:'TO CATALOG →', b_all_dates:'ALL DATES',
-    tour_title:'UPCOMING SHOWS', tour_cta:'TICKETS',
-    search_empty:'Nothing found'
-  }
+    l_first_name:'First name *', l_last_name:'Last name *', l_email:'Email *', l_phone:'Phone *',
+    l_address:'Nova Poshta / Address *', l_city:'City *', l_zip:'ZIP *', l_payment:'Payment method *',
+    b_place_order:'PLACE ORDER & OPEN TELEGRAM ✈', b_continue:'CONTINUE SHOPPING →',
+    b_send_tg:'✈ OPEN TELEGRAM BOT', b_to_catalog:'TO CATALOG →', b_all_dates:'ALL DATES',
+    tour_title:'UPCOMING SHOWS', tour_cta:'TICKETS', search_empty:'Nothing found' }
 };
 
 const VALIDATORS = {
-  firstName: v => v.trim().length >= 2,
-  lastName: v => v.trim().length >= 2,
-  email: v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v),
-  phone: v => v.trim().length >= 8,
-  address: v => v.trim().length >= 3,
-  city: v => v.trim().length >= 2,
-  zip: v => /^\d{4,6}$/.test(v.trim()),
-  payment: v => v !== ''
+  firstName: v => v.trim().length >= 2, lastName: v => v.trim().length >= 2,
+  email: v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), phone: v => v.trim().length >= 8,
+  address: v => v.trim().length >= 3, city: v => v.trim().length >= 2,
+  zip: v => /^\d{4,6}$/.test(v.trim()), payment: v => v !== ''
 };
 
 let cart = [], wishlist = [];
-let currentCurrency = 'UAH';
-let currentTheme = 'dark', currentLang = 'ua';
-let pendingProductId = null, selectedSize = null;
-let mySize = null;
-let sizeGuideReturnTo = null;
-let currentTicket = null;
+let currentCurrency = 'UAH', currentTheme = 'dark', currentLang = 'ua';
+let pendingProductId = null, selectedSize = null, mySize = null;
+let sizeGuideReturnTo = null, currentTicket = null;
 
 const $ = id => document.getElementById(id);
 const escapeHtml = s => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -819,743 +769,101 @@ const formatPrice = uah => { const c = CURRENCIES[currentCurrency]; return c.sym
 const cartCount = () => cart.reduce((s,i) => s + i.qty, 0);
 const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.productId); return p ? s + p.price * i.qty : s; }, 0);
 
-function loadState() {
-  try {
-    cart = JSON.parse(localStorage.getItem(KEYS.CART) || '[]');
-    wishlist = JSON.parse(localStorage.getItem(KEYS.WISH) || '[]');
-    currentCurrency = localStorage.getItem(KEYS.CUR) || 'UAH';
-    currentTheme = localStorage.getItem(KEYS.THEME) || 'dark';
-    currentLang = localStorage.getItem(KEYS.LANG) || 'ua';
-    mySize = localStorage.getItem(KEYS.SIZE) || null;
-  } catch(e) {}
-}
-function saveState() {
-  try {
-    localStorage.setItem(KEYS.CART, JSON.stringify(cart));
-    localStorage.setItem(KEYS.WISH, JSON.stringify(wishlist));
-    localStorage.setItem(KEYS.CUR, currentCurrency);
-    localStorage.setItem(KEYS.THEME, currentTheme);
-    localStorage.setItem(KEYS.LANG, currentLang);
-    if (mySize) localStorage.setItem(KEYS.SIZE, mySize);
-  } catch(e) {}
-}
+function loadState(){try{cart=JSON.parse(localStorage.getItem(KEYS.CART)||'[]');wishlist=JSON.parse(localStorage.getItem(KEYS.WISH)||'[]');currentCurrency=localStorage.getItem(KEYS.CUR)||'UAH';currentTheme=localStorage.getItem(KEYS.THEME)||'dark';currentLang=localStorage.getItem(KEYS.LANG)||'ua';mySize=localStorage.getItem(KEYS.SIZE)||null;}catch(e){}}
+function saveState(){try{localStorage.setItem(KEYS.CART,JSON.stringify(cart));localStorage.setItem(KEYS.WISH,JSON.stringify(wishlist));localStorage.setItem(KEYS.CUR,currentCurrency);localStorage.setItem(KEYS.THEME,currentTheme);localStorage.setItem(KEYS.LANG,currentLang);if(mySize)localStorage.setItem(KEYS.SIZE,mySize);}catch(e){}}
 
-function toast(msg) {
-  const c = $('toastContainer');
-  const el = document.createElement('div');
-  el.className = 'toast';
-  el.innerHTML = `<span style="flex:1">${escapeHtml(msg)}</span><button class="toast-close">✕</button>`;
-  const close = () => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); };
-  el.querySelector('.toast-close').addEventListener('click', close);
-  c.appendChild(el);
-  requestAnimationFrame(() => el.classList.add('show'));
-  setTimeout(close, 3500);
-}
+function toast(msg){const c=$('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span style="flex:1">${escapeHtml(msg)}</span><button class="toast-close">✕</button>`;const close=()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);};el.querySelector('.toast-close').addEventListener('click',close);c.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(close,3500);}
 
-function productCard(p) {
-  const el = document.createElement('div');
-  el.className = 'product-card clip-angle';
-  el.dataset.productId = p.id;
-  const badge = p.status === 'new' ? '<span class="badge-tag badge-new">NEW</span>' : '';
-  const isWish = wishlist.includes(p.id);
-  el.innerHTML = `
-    <div class="relative aspect-square overflow-hidden" style="background:var(--panel)">
-      <img src="${p.img1}" alt="${escapeHtml(p.title)}" class="img-a absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/>
-      <img src="${p.img2}" alt="${escapeHtml(p.title)}" class="img-b absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/>
-      <div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">${badge}</div>
-      <button class="wish-btn absolute top-3 right-3 z-20 w-8 h-8 border flex items-center justify-center transition-all ${isWish?'active':''}" style="border-color:var(--border);background:rgba(0,0,0,.6);color:#fff;font-size:14px" data-wish-id="${p.id}">${isWish?'❤':'♡'}</button>
-      <div class="absolute bottom-0 left-0 right-0 p-3 z-10 quick-add">
-        <button class="btn-brut w-full py-3 text-[0.6rem]" data-product-id="${p.id}">ADD TO CART</button>
-      </div>
-    </div>
-    <div class="p-4">
-      <h3 class="text-[0.7rem] font-bold tracking-wider leading-snug mb-2 uppercase">${escapeHtml(p.title)}</h3>
-      <div class="text-sm font-bold">${formatPrice(p.price)}</div>
-    </div>
-  `;
-  el.querySelector('.wish-btn').addEventListener('click', e => { e.stopPropagation(); toggleWishlist(p.id); });
-  return el;
-}
+function productCard(p){const el=document.createElement('div');el.className='product-card clip-angle';el.dataset.productId=p.id;const badge=p.status==='new'?'<span class="badge-tag badge-new">NEW</span>':'';const isWish=wishlist.includes(p.id);el.innerHTML=`<div class="relative aspect-square overflow-hidden" style="background:var(--panel)"><img src="${p.img1}" alt="${escapeHtml(p.title)}" class="img-a absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><img src="${p.img2}" alt="${escapeHtml(p.title)}" class="img-b absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">${badge}</div><button class="wish-btn absolute top-3 right-3 z-20 w-8 h-8 border flex items-center justify-center transition-all ${isWish?'active':''}" style="border-color:var(--border);background:rgba(0,0,0,.6);color:#fff;font-size:14px" data-wish-id="${p.id}">${isWish?'❤':'♡'}</button><div class="absolute bottom-0 left-0 right-0 p-3 z-10 quick-add"><button class="btn-brut w-full py-3 text-[0.6rem]" data-product-id="${p.id}">ADD TO CART</button></div></div><div class="p-4"><h3 class="text-[0.7rem] font-bold tracking-wider leading-snug mb-2 uppercase">${escapeHtml(p.title)}</h3><div class="text-sm font-bold">${formatPrice(p.price)}</div></div>`;el.querySelector('.wish-btn').addEventListener('click',e=>{e.stopPropagation();toggleWishlist(p.id);});return el;}
+function renderCatalog(){const grid=$('catalogGrid');grid.innerHTML='';PRODUCTS.forEach(p=>grid.appendChild(productCard(p)));}
+function renderAlbums(){const list=$('albumList');list.innerHTML='';ALBUMS.forEach((a,idx)=>{const row=document.createElement('button');row.type='button';row.className='album-row w-full text-left px-4 py-4 flex items-center gap-3'+(a.id===activeAlbumId?' active':'');row.innerHTML=`<span class="text-[0.65rem] font-mono tracking-widest w-8" style="color:var(--muted)">${String(idx+1).padStart(2,'0')}</span><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold tracking-wider uppercase truncate">${escapeHtml(a.title)}</p><p class="text-[0.55rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}</p></div>${a.featured?'<span class="badge-tag badge-new text-[0.5rem]">NEW</span>':''}<span class="text-xs" style="color:var(--muted)">→</span>`;row.addEventListener('click',()=>setActiveAlbum(a.id));list.appendChild(row);});$('albumCount').textContent=ALBUMS.length;}
+function setActiveAlbum(id){activeAlbumId=id;renderAlbums();renderAlbumPlayer();}
+function renderAlbumPlayer(){const wrap=$('albumPlayer');const a=getAlbum(activeAlbumId);if(!a)return;const idx=ALBUMS.findIndex(x=>x.id===a.id);wrap.innerHTML=`<div class="px-5 py-4 border-b flex items-center justify-between gap-3" style="border-color:var(--border)"><div class="min-w-0"><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Now playing · ${String(idx+1).padStart(2,'0')}/${String(ALBUMS.length).padStart(2,'0')}</p><p class="display text-lg md:text-xl truncate mt-1">${escapeHtml(a.title)}</p><p class="text-[0.6rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}${a.runtime&&a.runtime!=='—'?' · '+a.runtime:''}</p></div><a href="${a.spotify}" target="_blank" rel="noopener" class="btn-brut text-[0.55rem] px-3 py-2 whitespace-nowrap">СЛУХАТИ <span class="arrow-slide">→</span></a></div><div class="px-5 py-4 border-b" style="border-color:var(--border)"><p class="text-xs leading-relaxed" style="color:var(--muted)">${escapeHtml(a.note)}</p></div><div><iframe src="${a.embed}" width="100%" height="${a.type==='ALBUM'?380:152}" frameborder="0" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block"></iframe></div><div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)"><button id="albumPrev" class="hover:text-[#c1121f] transition">← PREV</button><span>${idx+1} / ${ALBUMS.length}</span><button id="albumNext" class="hover:text-[#c1121f] transition">NEXT →</button></div>`;$('albumPrev').addEventListener('click',()=>shiftAlbum(-1));$('albumNext').addEventListener('click',()=>shiftAlbum(1));}
+function shiftAlbum(dir){const idx=ALBUMS.findIndex(x=>x.id===activeAlbumId);const next=(idx+dir+ALBUMS.length)%ALBUMS.length;setActiveAlbum(ALBUMS[next].id);}
+function renderTour(){const list=$('tourList');if(!list)return;list.innerHTML='';const t_cta=(I18N[currentLang]||I18N.ua).tour_cta;TOUR.forEach(t=>{const row=document.createElement('div');row.className='tour-row';row.innerHTML=`<span class="tour-date">${t.date}</span><div class="tour-info"><p class="tour-city">${escapeHtml(t.city)}</p><p class="tour-venue">${escapeHtml(t.venue)}</p></div>${t.hot?'<span class="badge-tag badge-new text-[0.5rem]">HOT</span>':''}<span class="tour-cta">${t_cta} →</span>`;row.addEventListener('click',()=>openTicketModal(t.city,t.date,t.venue));list.appendChild(row);});}
 
-function renderCatalog() {
-  const grid = $('catalogGrid');
-  grid.innerHTML = '';
-  PRODUCTS.forEach(p => grid.appendChild(productCard(p)));
-}
+function addToCart(id,size,qty=1){const p=getProduct(id);if(!p)return;if(p.sizes&&p.sizes.length&&!size){openSizeModal(id);return;}const key=id+'::'+(size||'');const existing=cart.find(i=>i.productId+'::'+(i.size||'')===key);if(existing)existing.qty+=qty;else cart.push({productId:id,size:size||null,qty});saveState();updateCartUI();renderCart();toast(`${p.title.slice(0,32)} додано`);}
+function removeFromCart(idx){cart.splice(idx,1);saveState();updateCartUI();renderCart();}
+function changeQty(idx,d){if(!cart[idx])return;cart[idx].qty+=d;if(cart[idx].qty<=0)cart.splice(idx,1);saveState();updateCartUI();renderCart();}
+function renderCart(){const c=$('cartItems');const empty=$('cartEmpty');c.innerHTML='';if(!cart.length){c.classList.add('hidden');empty.classList.remove('hidden');}else{c.classList.remove('hidden');empty.classList.add('hidden');cart.forEach((item,idx)=>{const p=getProduct(item.productId);if(!p)return;const el=document.createElement('div');el.className='flex gap-3';el.innerHTML=`<div class="w-20 h-20 border flex-shrink-0 overflow-hidden" style="border-color:var(--border);background:var(--panel)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.65rem] font-bold tracking-wider uppercase leading-snug mb-1">${escapeHtml(p.title)}</p>${item.size?`<p class="text-[0.55rem] uppercase mb-1" style="color:var(--muted)">Розмір: ${item.size}</p>`:''}<div class="flex items-center justify-between mt-2"><div class="flex items-center border" style="border-color:var(--border)"><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-dec="${idx}">−</button><span class="w-8 text-center text-[0.7rem] font-mono">${item.qty}</span><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-inc="${idx}">+</button></div><span class="text-[0.7rem] font-bold">${formatPrice(p.price*item.qty)}</span></div></div><button class="self-start p-2 hover:text-[#c1121f]" style="color:var(--muted)" data-rm="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;el.querySelector('[data-dec]').addEventListener('click',()=>changeQty(idx,-1));el.querySelector('[data-inc]').addEventListener('click',()=>changeQty(idx,1));el.querySelector('[data-rm]').addEventListener('click',()=>removeFromCart(idx));c.appendChild(el);});}updateCartTotals();}
+function updateCartTotals(){const total=cartTotalUAH();if($('cartSubtotal'))$('cartSubtotal').textContent=formatPrice(total);if($('checkoutSubtotal'))$('checkoutSubtotal').textContent=formatPrice(total);if($('checkoutTotal'))$('checkoutTotal').textContent=formatPrice(total);}
+function updateCartUI(){const count=cartCount();const badge=$('cartCount');if(badge){badge.textContent=count;badge.style.display=count>0?'flex':'none';}const btn=$('checkoutBtn');if(btn)btn.disabled=cart.length===0;}
+function updateWishUI(){const b=$('wishCountBadge');if(b){b.textContent=wishlist.length;b.style.display=wishlist.length>0?'flex':'none';}const bM=$('wishCountBadgeM');if(bM)bM.textContent=wishlist.length;}
+function toggleWishlist(id){const i=wishlist.indexOf(id);if(i>=0){wishlist.splice(i,1);toast('Видалено з обраного');}else{wishlist.push(id);toast('Додано в обране ♥');}saveState();updateWishUI();document.querySelectorAll(`.wish-btn[data-wish-id="${id}"]`).forEach(b=>{const active=wishlist.includes(id);b.classList.toggle('active',active);b.textContent=active?'❤':'♡';});}
 
-function renderAlbums() {
-  const list = $('albumList');
-  list.innerHTML = '';
-  ALBUMS.forEach((a, idx) => {
-    const row = document.createElement('button');
-    row.type = 'button';
-    row.className = 'album-row w-full text-left px-4 py-4 flex items-center gap-3' + (a.id === activeAlbumId ? ' active' : '');
-    row.innerHTML = `<span class="text-[0.65rem] font-mono tracking-widest w-8" style="color:var(--muted)">${String(idx+1).padStart(2,'0')}</span>
-      <div class="flex-1 min-w-0">
-        <p class="text-[0.7rem] font-bold tracking-wider uppercase truncate">${escapeHtml(a.title)}</p>
-        <p class="text-[0.55rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}</p>
-      </div>
-      ${a.featured?'<span class="badge-tag badge-new text-[0.5rem]">NEW</span>':''}
-      <span class="text-xs" style="color:var(--muted)">→</span>`;
-    row.addEventListener('click', () => setActiveAlbum(a.id));
-    list.appendChild(row);
-  });
-  $('albumCount').textContent = ALBUMS.length;
-}
+function openModal(id){const m=$(id);if(m){m.classList.add('open');document.body.classList.add('no-scroll');}}
+function closeModal(id){const m=$(id);if(!m)return;m.classList.remove('open');if(!document.querySelector('.modal.open, .search-overlay.open'))document.body.classList.remove('no-scroll');}
+function openCart(){$('cartDrawer').classList.remove('closed');$('cartDrawer').classList.add('open');$('cartOverlay').classList.remove('hidden');$('cartOverlay').classList.add('visible');document.body.classList.add('no-scroll');}
+function closeCart(){$('cartDrawer').classList.add('closed');$('cartDrawer').classList.remove('open');$('cartOverlay').classList.add('hidden');$('cartOverlay').classList.remove('visible');document.body.classList.remove('no-scroll');}
 
-function setActiveAlbum(id) { activeAlbumId = id; renderAlbums(); renderAlbumPlayer(); }
+function openSizeModal(id){const p=getProduct(id);pendingProductId=id;selectedSize=null;$('sizeModalImg').src=p.img1;$('sizeModalTitle').textContent=p.title;$('sizeModalPrice').textContent=formatPrice(p.price);const wrap=$('sizeOptions');wrap.innerHTML='';p.sizes.forEach(s=>{const b=document.createElement('button');b.type='button';b.className='size-option';b.textContent=s;b.addEventListener('click',()=>{selectedSize=s;wrap.querySelectorAll('.size-option').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('sizeError').classList.add('hidden');});wrap.appendChild(b);});$('sizeError').classList.add('hidden');openModal('sizeModal');}
+function confirmSizeSelection(){if(!selectedSize){$('sizeError').classList.remove('hidden');return;}mySize=selectedSize;saveState();const id=pendingProductId;closeModal('sizeModal');addToCart(id,selectedSize);}
+function openProductModal(id){const p=getProduct(id);$('prodModalTitle').textContent=p.title;$('prodModalImg').src=p.img1;$('prodModalPrice').textContent=formatPrice(p.price);$('prodModalDesc').textContent=p.desc;$('prodModalStock').textContent=p.stock<=5?`● Залишилось ${p.stock} шт`:'● В наявності';$('prodModalStock').style.color=p.stock<=5?'#c1121f':'#c9f31a';$('prodModalAdd').dataset.productId=id;openModal('productModal');}
+function openTicketModal(city,date,venue){currentTicket={city,date,venue};$('ticketDate').textContent='// '+date;$('ticketCity').textContent=city;$('ticketVenue').textContent=venue;const form=$('ticketForm');form.reset();form.elements['qty'].value=1;$('ticketError').classList.add('hidden');['tName','tPhone','tEmail'].forEach(n=>form.elements[n].classList.remove('error'));openModal('ticketModal');}
+function openCheckout(){if(!cart.length){toast('Кошик порожній');return;}closeCart();updateCartTotals();openModal('checkoutModal');}
 
-function renderAlbumPlayer() {
-  const wrap = $('albumPlayer');
-  const a = getAlbum(activeAlbumId);
-  if (!a) return;
-  const idx = ALBUMS.findIndex(x => x.id === a.id);
-  wrap.innerHTML = `
-    <div class="px-5 py-4 border-b flex items-center justify-between gap-3" style="border-color:var(--border)">
-      <div class="min-w-0">
-        <p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Now playing · ${String(idx+1).padStart(2,'0')}/${String(ALBUMS.length).padStart(2,'0')}</p>
-        <p class="gothic text-lg md:text-xl truncate mt-1">${escapeHtml(a.title)}</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}${a.runtime && a.runtime !== '—' ? ' · ' + a.runtime : ''}</p>
-      </div>
-      <a href="${a.spotify}" target="_blank" rel="noopener" class="btn-brut text-[0.55rem] px-3 py-2 whitespace-nowrap">СЛУХАТИ <span class="arrow-slide">→</span></a>
-    </div>
-    <div class="px-5 py-4 border-b" style="border-color:var(--border)">
-      <p class="text-xs leading-relaxed" style="color:var(--muted)">${escapeHtml(a.note)}</p>
-    </div>
-    <div><iframe src="${a.embed}" width="100%" height="${a.type === 'ALBUM' ? 380 : 152}" frameborder="0" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block"></iframe></div>
-    <div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)">
-      <button id="albumPrev" class="hover:text-[#c1121f] transition">← PREV</button>
-      <span>${idx + 1} / ${ALBUMS.length}</span>
-      <button id="albumNext" class="hover:text-[#c1121f] transition">NEXT →</button>
-    </div>`;
-  $('albumPrev').addEventListener('click', () => shiftAlbum(-1));
-  $('albumNext').addEventListener('click', () => shiftAlbum(1));
-}
+$('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);let ok=true;['firstName','lastName','email','phone','address','city','zip','payment'].forEach(n=>{const f=form.elements[n];const valid=VALIDATORS[n](f.value);f.classList.toggle('error',!valid);if(!valid)ok=false;});if(!ok){$('checkoutError').textContent='⚠ Заповніть всі поля';$('checkoutError').classList.remove('hidden');return;}$('checkoutError').classList.add('hidden');const orderId='FTD-'+Math.random().toString(36).slice(2,7).toUpperCase();const total=cartTotalUAH();const items=cart.map(i=>{const p=getProduct(i.productId);return{title:p.title,qty:i.qty,size:i.size,price:formatPrice(p.price*i.qty)};});const payment=fd.get('payment')||'';const order={id:orderId,name:(fd.get('firstName')||'')+' '+(fd.get('lastName')||''),email:fd.get('email')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',city:fd.get('city')||'',payment,items,total:formatPrice(total),date:new Date().toLocaleString('uk-UA')};window.__lastOrder=order;try{const list=JSON.parse(localStorage.getItem(KEYS.ORDERS)||'[]');list.unshift(order);localStorage.setItem(KEYS.ORDERS,JSON.stringify(list.slice(0,100)));}catch(e){}
+$('orderId').textContent=order.id;$('orderDate').textContent=new Date().toLocaleDateString('uk-UA');$('orderTotal').textContent=order.total;$('orderName').textContent=order.name;$('orderPhone').textContent=order.phone;$('orderItemsTotal').textContent=order.total;$('orderItems').innerHTML=cart.map(i=>{const p=getProduct(i.productId);return`<div class="flex items-center justify-between text-xs gap-3"><div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p><p class="text-[0.6rem]" style="color:var(--muted)">${i.size?'Розмір: '+i.size+' · ':''}${i.qty} шт</p></div><span class="font-bold">${formatPrice(p.price*i.qty)}</span></div>`;}).join('');
+if(payment==='monobank'){$('monoPayBlock').classList.remove('hidden');}else{$('monoPayBlock').classList.add('hidden');}
+cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();$('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
 
-function shiftAlbum(dir) {
-  const idx = ALBUMS.findIndex(x => x.id === activeAlbumId);
-  const next = (idx + dir + ALBUMS.length) % ALBUMS.length;
-  setActiveAlbum(ALBUMS[next].id);
-}
+$('ticketForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);const name=(fd.get('tName')||'').trim();const phone=(fd.get('tPhone')||'').trim();const email=(fd.get('tEmail')||'').trim();const qty=Math.min(10,Math.max(1,parseInt(fd.get('qty'))||1));let ok=true;form.elements['tName'].classList.toggle('error',name.length<2);form.elements['tPhone'].classList.toggle('error',phone.length<8);if(name.length<2||phone.length<8)ok=false;if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){form.elements['tEmail'].classList.add('error');ok=false;}else{form.elements['tEmail'].classList.remove('error');}if(!ok){$('ticketError').textContent='⚠ Перевірте виділені поля';$('ticketError').classList.remove('hidden');return;}$('ticketError').classList.add('hidden');const ticketId='TKT-'+Math.random().toString(36).slice(2,7).toUpperCase();const ticket={id:ticketId,type:'ticket',city:currentTicket.city,date:currentTicket.date,venue:currentTicket.venue,qty,name,phone,email,created:new Date().toLocaleString('uk-UA')};window.__lastTicket=ticket;try{const list=JSON.parse(localStorage.getItem(KEYS.TICKETS)||'[]');list.unshift(ticket);localStorage.setItem(KEYS.TICKETS,JSON.stringify(list.slice(0,100)));}catch(e){}closeModal('ticketModal');openBotWithTicket(ticket);});
 
-function renderTour() {
-  const list = $('tourList');
-  if (!list) return;
-  list.innerHTML = '';
-  const t_cta = (I18N[currentLang] || I18N.ua).tour_cta;
-  TOUR.forEach(t => {
-    const row = document.createElement('div');
-    row.className = 'tour-row';
-    row.style.cursor = 'pointer';
-    row.innerHTML = `
-      <span class="tour-date">${t.date}</span>
-      <div class="tour-info">
-        <p class="tour-city">${escapeHtml(t.city)}</p>
-        <p class="tour-venue">${escapeHtml(t.venue)}</p>
-      </div>
-      ${t.hot ? '<span class="badge-tag badge-new text-[0.5rem]">HOT</span>' : ''}
-      <span class="tour-cta">${t_cta} →</span>
-    `;
-    row.addEventListener('click', () => openTicketModal(t.city, t.date, t.venue));
-    list.appendChild(row);
-  });
-}
+async function openBotWithTicket(ticket){if(!ticket){toast('Квиток не знайдено');return;}try{await fetch(WORKER_URL+'/ticket',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ticket)});}catch(e){}const botUrl=`https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent('ticket_'+ticket.id)}`;const isMobile=/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);if(isMobile){window.location.href=botUrl;}else{window.open(botUrl,'_blank','noopener');}toast('Відкриваємо Telegram-бот...');}
+async function openBotWithOrder(order){if(!order){toast('Замовлення не знайдено');return;}try{await fetch(WORKER_URL+'/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});}catch(e){}const botUrl=`https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent(order.id)}`;const isMobile=/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);if(isMobile){window.location.href=botUrl;}else{window.open(botUrl,'_blank','noopener');}toast('Відкриваємо Telegram-бот...');}
+async function startMonoPay(order){if(!order){toast('Замовлення не знайдено');return;}const btn=$('monoPayBtn');btn.disabled=true;const origText=btn.textContent;btn.textContent='⏳ СТВОРЮЄМО РАХУНОК...';try{const amount=Math.round(parseFloat(String(order.total).replace(/[^\d.]/g,''))*100);const res=await fetch(WORKER_URL+'/mono/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount,orderId:order.id,description:`Замовлення ${order.id} — FIRST TO DIE`,customerName:order.name,customerPhone:order.phone})});const data=await res.json();if(data.ok&&data.pageUrl){window.location.href=data.pageUrl;}else{toast('Помилка: '+(data.error||'спробуйте пізніше'));btn.disabled=false;btn.textContent=origText;}}catch(e){toast('Не вдалось створити платіж');btn.disabled=false;btn.textContent=origText;}}
 
-function addToCart(id, size, qty = 1) {
-  const p = getProduct(id);
-  if (!p) return;
-  if (p.sizes && p.sizes.length && !size) { openSizeModal(id); return; }
-  const key = id + '::' + (size || '');
-  const existing = cart.find(i => i.productId + '::' + (i.size || '') === key);
-  if (existing) existing.qty += qty;
-  else cart.push({ productId: id, size: size || null, qty });
-  saveState(); updateCartUI(); renderCart();
-  toast(`${p.title.slice(0,32)} додано`);
-}
-function removeFromCart(idx) { cart.splice(idx, 1); saveState(); updateCartUI(); renderCart(); }
-function changeQty(idx, d) {
-  if (!cart[idx]) return;
-  cart[idx].qty += d;
-  if (cart[idx].qty <= 0) cart.splice(idx, 1);
-  saveState(); updateCartUI(); renderCart();
-}
-function renderCart() {
-  const c = $('cartItems'); const empty = $('cartEmpty');
-  c.innerHTML = '';
-  if (!cart.length) { c.classList.add('hidden'); empty.classList.remove('hidden'); }
-  else {
-    c.classList.remove('hidden'); empty.classList.add('hidden');
-    cart.forEach((item, idx) => {
-      const p = getProduct(item.productId);
-      if (!p) return;
-      const el = document.createElement('div');
-      el.className = 'flex gap-3';
-      el.innerHTML = `<div class="w-20 h-20 border flex-shrink-0 overflow-hidden" style="border-color:var(--border);background:var(--panel)"><img src="${p.img1}" class="w-full h-full object-cover"/></div>
-        <div class="flex-1 min-w-0">
-          <p class="text-[0.65rem] font-bold tracking-wider uppercase leading-snug mb-1">${escapeHtml(p.title)}</p>
-          ${item.size ? `<p class="text-[0.55rem] uppercase mb-1" style="color:var(--muted)">Розмір: ${item.size}</p>` : ''}
-          <div class="flex items-center justify-between mt-2">
-            <div class="flex items-center border" style="border-color:var(--border)">
-              <button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-dec="${idx}">−</button>
-              <span class="w-8 text-center text-[0.7rem] font-mono">${item.qty}</span>
-              <button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-inc="${idx}">+</button>
-            </div>
-            <span class="text-[0.7rem] font-bold">${formatPrice(p.price * item.qty)}</span>
-          </div>
-        </div>
-        <button class="self-start p-2 hover:text-[#c1121f]" style="color:var(--muted)" data-rm="${idx}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>`;
-      el.querySelector('[data-dec]').addEventListener('click', () => changeQty(idx, -1));
-      el.querySelector('[data-inc]').addEventListener('click', () => changeQty(idx, 1));
-      el.querySelector('[data-rm]').addEventListener('click', () => removeFromCart(idx));
-      c.appendChild(el);
-    });
-  }
-  updateCartTotals();
-}
-function updateCartTotals() {
-  const total = cartTotalUAH();
-  if ($('cartSubtotal')) $('cartSubtotal').textContent = formatPrice(total);
-  if ($('checkoutSubtotal')) $('checkoutSubtotal').textContent = formatPrice(total);
-  if ($('checkoutTotal')) $('checkoutTotal').textContent = formatPrice(total);
-}
-function updateCartUI() {
-  const count = cartCount();
-  const badge = $('cartCount');
-  if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
-  const btn = $('checkoutBtn');
-  if (btn) btn.disabled = cart.length === 0;
-}
-function updateWishUI() {
-  const b = $('wishCountBadge');
-  if (b) { b.textContent = wishlist.length; b.style.display = wishlist.length > 0 ? 'flex' : 'none'; }
-  const bM = $('wishCountBadgeM');
-  if (bM) bM.textContent = wishlist.length;
-}
-function toggleWishlist(id) {
-  const i = wishlist.indexOf(id);
-  if (i >= 0) { wishlist.splice(i, 1); toast('Видалено з обраного'); }
-  else { wishlist.push(id); toast('Додано в обране ♥'); }
-  saveState(); updateWishUI();
-  document.querySelectorAll(`.wish-btn[data-wish-id="${id}"]`).forEach(b => {
-    const active = wishlist.includes(id);
-    b.classList.toggle('active', active);
-    b.textContent = active ? '❤' : '♡';
-  });
-}
+function openSearch(){$('searchOverlay').classList.add('open');document.body.classList.add('no-scroll');setTimeout(()=>$('searchInput').focus(),100);}
+function closeSearch(){$('searchOverlay').classList.remove('open');$('searchInput').value='';$('searchResults').innerHTML='';if(!document.querySelector('.modal.open, .cart-drawer.open'))document.body.classList.remove('no-scroll');}
+function performSearch(q){const results=$('searchResults');if(!q.trim()){results.innerHTML='';return;}const lower=q.toLowerCase();const found=PRODUCTS.filter(p=>p.title.toLowerCase().includes(lower)||p.desc.toLowerCase().includes(lower));if(!found.length){const emptyMsg=(I18N[currentLang]||I18N.ua).search_empty;results.innerHTML='<p class="text-center text-xs uppercase py-8" style="color:var(--muted)">'+emptyMsg+'</p>';return;}results.innerHTML='';found.forEach(p=>{const el=document.createElement('div');el.className='search-result';el.innerHTML=`<div class="w-14 h-14 border flex-shrink-0 overflow-hidden" style="border-color:var(--border)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold uppercase truncate">${escapeHtml(p.title)}</p><p class="text-[0.6rem] uppercase mt-1" style="color:var(--muted)">${formatPrice(p.price)}</p></div>`;el.addEventListener('click',()=>{closeSearch();openProductModal(p.id);});results.appendChild(el);});}
 
-function openModal(id) { const m = $(id); if (m) { m.classList.add('open'); document.body.classList.add('no-scroll'); } }
-function closeModal(id) {
-  const m = $(id); if (!m) return;
-  m.classList.remove('open');
-  if (!document.querySelector('.modal.open, .search-overlay.open')) document.body.classList.remove('no-scroll');
-}
-function openCart() {
-  $('cartDrawer').classList.remove('closed');
-  $('cartDrawer').classList.add('open');
-  $('cartOverlay').classList.remove('hidden');
-  $('cartOverlay').classList.add('visible');
-  document.body.classList.add('no-scroll');
-}
-function closeCart() {
-  $('cartDrawer').classList.add('closed');
-  $('cartDrawer').classList.remove('open');
-  $('cartOverlay').classList.add('hidden');
-  $('cartOverlay').classList.remove('visible');
-  document.body.classList.remove('no-scroll');
-}
+function applyTheme(){document.body.classList.toggle('light-mode',currentTheme==='light');const moon=$('iconMoon'),sun=$('iconSun');if(moon&&sun){moon.classList.toggle('hidden',currentTheme==='light');sun.classList.toggle('hidden',currentTheme!=='light');}}
+function toggleTheme(){currentTheme=currentTheme==='light'?'dark':'light';saveState();applyTheme();}
+function applyI18n(){const dict=I18N[currentLang]||I18N.ua;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const val=dict[key];if(val===undefined)return;if(el.hasAttribute('data-i18n-html'))el.innerHTML=val;else el.textContent=val;});document.documentElement.lang=currentLang==='en'?'en':'uk';}
+function toggleLang(){currentLang=currentLang==='ua'?'en':'ua';$('langLabel').textContent=currentLang.toUpperCase();saveState();applyI18n();renderTour();toast(currentLang==='en'?'Language: English':'Мова: Українська');}
+function setCurrency(cur){currentCurrency=cur;saveState();if($('currencySelect'))$('currencySelect').value=cur;if($('currencySelectMobile'))$('currencySelectMobile').value=cur;renderCatalog();renderCart();}
 
-function openSizeModal(id) {
-  const p = getProduct(id);
-  pendingProductId = id; selectedSize = null;
-  $('sizeModalImg').src = p.img1;
-  $('sizeModalTitle').textContent = p.title;
-  $('sizeModalPrice').textContent = formatPrice(p.price);
-  const wrap = $('sizeOptions');
-  wrap.innerHTML = '';
-  p.sizes.forEach(s => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'size-option'; b.textContent = s;
-    b.addEventListener('click', () => {
-      selectedSize = s;
-      wrap.querySelectorAll('.size-option').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      $('sizeError').classList.add('hidden');
-    });
-    wrap.appendChild(b);
-  });
-  $('sizeError').classList.add('hidden');
-  openModal('sizeModal');
-}
-function confirmSizeSelection() {
-  if (!selectedSize) { $('sizeError').classList.remove('hidden'); return; }
-  mySize = selectedSize; saveState();
-  const id = pendingProductId;
-  closeModal('sizeModal');
-  addToCart(id, selectedSize);
-}
+function initCookie(){if(!localStorage.getItem(KEYS.COOKIE))setTimeout(()=>$('cookieBanner').classList.add('show'),1500);}
+function dismissCookie(acc){localStorage.setItem(KEYS.COOKIE,acc?'accepted':'declined');$('cookieBanner').classList.remove('show');}
+function initNewsletter(){const form=$('newsletterForm');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();const input=form.querySelector('input[type="email"]');const msg=$('newsletterMsg');const val=input.value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)){msg.textContent='⚠ Введіть коректний email';msg.style.color='#e63946';msg.classList.remove('hidden');input.classList.add('error');return;}input.classList.remove('error');msg.textContent='✓ Дякуємо! Ти в списку.';msg.style.color='#c9f31a';msg.classList.remove('hidden');form.reset();toast('Підписку оформлено');});}
 
-function openProductModal(id) {
-  const p = getProduct(id);
-  $('prodModalTitle').textContent = p.title;
-  $('prodModalImg').src = p.img1;
-  $('prodModalPrice').textContent = formatPrice(p.price);
-  $('prodModalDesc').textContent = p.desc;
-  $('prodModalStock').textContent = p.stock <= 5 ? `● Залишилось ${p.stock} шт` : '● В наявності';
-  $('prodModalStock').style.color = p.stock <= 5 ? '#c1121f' : '#c9f31a';
-  $('prodModalAdd').dataset.productId = id;
-  openModal('productModal');
-}
+document.addEventListener('click',e=>{const addBtn=e.target.closest('button[data-product-id]');if(addBtn){addToCart(addBtn.dataset.productId);return;}const card=e.target.closest('.product-card');if(card&&!e.target.closest('button')&&card.dataset.productId)openProductModal(card.dataset.productId);});
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));closeSearch();closeCart();const op=$('orderPage');if(op)op.classList.remove('show');document.body.classList.remove('no-scroll');}});
+window.addEventListener('scroll',()=>{const btn=$('backToTop');if(btn)btn.classList.toggle('show',window.scrollY>600);},{passive:true});
 
-/* ===== TICKETS ===== */
-function openTicketModal(city, date, venue) {
-  currentTicket = { city, date, venue };
-  $('ticketDate').textContent = '// ' + date;
-  $('ticketCity').textContent = city;
-  $('ticketVenue').textContent = venue;
-  const form = $('ticketForm');
-  form.reset();
-  form.elements['qty'].value = 1;
-  $('ticketError').classList.add('hidden');
-  ['tName','tPhone','tEmail'].forEach(n => form.elements[n].classList.remove('error'));
-  openModal('ticketModal');
-}
+function init(){loadState();applyTheme();if($('langLabel'))$('langLabel').textContent=currentLang.toUpperCase();if($('currencySelect'))$('currencySelect').value=currentCurrency;if($('currencySelectMobile'))$('currencySelectMobile').value=currentCurrency;if($('year'))$('year').textContent=new Date().getFullYear();renderCatalog();renderAlbums();renderAlbumPlayer();renderTour();renderCart();updateCartUI();updateWishUI();updateCartTotals();initCookie();initNewsletter();applyI18n();
+const navTabs=document.querySelectorAll('[data-nav-tab]');const sections=['#catalog','#music','#tour','#contact'];if(navTabs.length){const spy=()=>{const y=window.scrollY+150;let current='';sections.forEach(sel=>{const el=document.querySelector(sel);if(el&&el.offsetTop<=y)current=sel;});navTabs.forEach(t=>{t.classList.toggle('active',t.getAttribute('href')===current);});};window.addEventListener('scroll',spy,{passive:true});spy();}
+$('hamburgerBtn')?.addEventListener('click',()=>$('mobileMenu').classList.toggle('open'));
+$('themeBtn')?.addEventListener('click',toggleTheme);$('themeBtnM')?.addEventListener('click',toggleTheme);
+$('langBtn')?.addEventListener('click',toggleLang);$('langBtnM')?.addEventListener('click',toggleLang);
+$('searchBtn')?.addEventListener('click',openSearch);$('cartBtn')?.addEventListener('click',openCart);
+$('wishlistBtn')?.addEventListener('click',()=>{if(!wishlist.length){toast('Обране порожнє');return;}document.getElementById('catalog')?.scrollIntoView({behavior:'smooth'});setTimeout(()=>toast(`В обраному: ${wishlist.length} товар(ів)`),400);});
+$('wishlistBtnM')?.addEventListener('click',()=>{$('mobileMenu').classList.remove('open');if(!wishlist.length){toast('Обране порожнє');return;}document.getElementById('catalog')?.scrollIntoView({behavior:'smooth'});setTimeout(()=>toast(`В обраному: ${wishlist.length} товар(ів)`),400);});
+$('closeCartBtn')?.addEventListener('click',closeCart);$('cartOverlay')?.addEventListener('click',closeCart);
+$('checkoutBtn')?.addEventListener('click',openCheckout);
+$('currencySelect')?.addEventListener('change',e=>setCurrency(e.target.value));$('currencySelectMobile')?.addEventListener('change',e=>setCurrency(e.target.value));
+document.querySelectorAll('#mobileMenu a').forEach(a=>{a.addEventListener('click',()=>$('mobileMenu').classList.remove('open'));});
+$('closeSearchBtn')?.addEventListener('click',closeSearch);
+$('searchInput')?.addEventListener('input',e=>{clearTimeout(window.__st);window.__st=setTimeout(()=>performSearch(e.target.value),150);});
+$('closeSizeBtn')?.addEventListener('click',()=>closeModal('sizeModal'));
+$('confirmSizeBtn')?.addEventListener('click',confirmSizeSelection);
+$('sizeGuideFromModal')?.addEventListener('click',()=>{sizeGuideReturnTo='sizeModal';closeModal('sizeModal');openModal('sizeGuideModal');});
+$('prodModalSizeGuide')?.addEventListener('click',()=>{sizeGuideReturnTo='productModal';closeModal('productModal');openModal('sizeGuideModal');});
+$('closeSizeGuideBtn')?.addEventListener('click',()=>{closeModal('sizeGuideModal');if(sizeGuideReturnTo){const back=sizeGuideReturnTo;sizeGuideReturnTo=null;setTimeout(()=>openModal(back),50);}});
+$('closeProductBtn')?.addEventListener('click',()=>closeModal('productModal'));
+$('prodModalAdd')?.addEventListener('click',()=>{const id=$('prodModalAdd').dataset.productId;if(!id)return;closeModal('productModal');addToCart(id);});
+$('closeCheckoutBtn')?.addEventListener('click',()=>closeModal('checkoutModal'));$('closeTicketBtn')?.addEventListener('click',()=>closeModal('ticketModal'));
+$('ticketMinus')?.addEventListener('click',()=>{const q=$('ticketQty');q.value=Math.max(1,(parseInt(q.value)||1)-1);});
+$('ticketPlus')?.addEventListener('click',()=>{const q=$('ticketQty');q.value=Math.min(10,(parseInt(q.value)||1)+1);});
+$('monoPayBtn')?.addEventListener('click',()=>{if(window.__lastOrder)startMonoPay(window.__lastOrder);});
+$('continueShopping')?.addEventListener('click',()=>{$('orderPage').classList.remove('show');document.body.classList.remove('no-scroll');document.getElementById('catalog')?.scrollIntoView({behavior:'smooth'});});
+$('sendToTelegram')?.addEventListener('click',()=>{if(window.__lastOrder)openBotWithOrder(window.__lastOrder);});
+$('copyOrderId')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('orderId').textContent);toast('Скопійовано');}catch(e){}});
+$('cookieAccept')?.addEventListener('click',()=>dismissCookie(true));$('cookieDecline')?.addEventListener('click',()=>dismissCookie(false));
+$('backToTop')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+$('logoLink')?.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
 
-function openCheckout() {
-  if (!cart.length) { toast('Кошик порожній'); return; }
-  closeCart(); updateCartTotals(); openModal('checkoutModal');
-}
-
-/* ===== CHECKOUT SUBMIT ===== */
-$('checkoutForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const form = e.target;
-  const fd = new FormData(form);
-  let ok = true;
-  ['firstName','lastName','email','phone','address','city','zip','payment'].forEach(n => {
-    const f = form.elements[n];
-    const valid = VALIDATORS[n](f.value);
-    f.classList.toggle('error', !valid);
-    if (!valid) ok = false;
-  });
-  if (!ok) { $('checkoutError').textContent = '⚠ Заповніть всі поля'; $('checkoutError').classList.remove('hidden'); return; }
-  $('checkoutError').classList.add('hidden');
-
-  const orderId = 'FTD-' + Math.random().toString(36).slice(2,7).toUpperCase();
-  const total = cartTotalUAH();
-  const items = cart.map(i => {
-    const p = getProduct(i.productId);
-    return { title: p.title, qty: i.qty, size: i.size, price: formatPrice(p.price * i.qty) };
-  });
-  const payment = fd.get('payment') || '';
-  const order = {
-    id: orderId,
-    name: (fd.get('firstName')||'') + ' ' + (fd.get('lastName')||''),
-    email: fd.get('email')||'', phone: fd.get('phone')||'',
-    address: fd.get('address')||'', city: fd.get('city')||'',
-    payment, items, total: formatPrice(total),
-    date: new Date().toLocaleString('uk-UA')
-  };
-  window.__lastOrder = order;
-  try {
-    const list = JSON.parse(localStorage.getItem(KEYS.ORDERS) || '[]');
-    list.unshift(order);
-    localStorage.setItem(KEYS.ORDERS, JSON.stringify(list.slice(0,100)));
-  } catch(e) {}
-
-  $('orderId').textContent = order.id;
-  $('orderDate').textContent = new Date().toLocaleDateString('uk-UA');
-  $('orderTotal').textContent = order.total;
-  $('orderName').textContent = order.name;
-  $('orderPhone').textContent = order.phone;
-  $('orderItemsTotal').textContent = order.total;
-  $('orderItems').innerHTML = cart.map(i => {
-    const p = getProduct(i.productId);
-    return `<div class="flex items-center justify-between text-xs gap-3">
-      <div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p>
-      <p class="text-[0.6rem]" style="color:var(--muted)">${i.size ? 'Розмір: '+i.size+' · ' : ''}${i.qty} шт</p></div>
-      <span class="font-bold">${formatPrice(p.price * i.qty)}</span></div>`;
-  }).join('');
-
-  // Show Mono button only if payment=monobank
-  if (payment === 'monobank') {
-    $('monoPayBlock').classList.remove('hidden');
-  } else {
-    $('monoPayBlock').classList.add('hidden');
-  }
-
-  cart = []; saveState(); updateCartUI(); renderCart();
-  closeModal('checkoutModal'); form.reset();
-
-  $('orderPage').classList.add('show');
-  $('orderPage').scrollTop = 0;
-  document.body.classList.remove('no-scroll');
-  setTimeout(() => openBotWithOrder(order), 500);
-});
-
-/* ===== TICKET SUBMIT ===== */
-$('ticketForm')?.addEventListener('submit', e => {
-  e.preventDefault();
-  const form = e.target;
-  const fd = new FormData(form);
-  const name = (fd.get('tName') || '').trim();
-  const phone = (fd.get('tPhone') || '').trim();
-  const email = (fd.get('tEmail') || '').trim();
-  const qty = Math.min(10, Math.max(1, parseInt(fd.get('qty')) || 1));
-
-  let ok = true;
-  form.elements['tName'].classList.toggle('error', name.length < 2);
-  form.elements['tPhone'].classList.toggle('error', phone.length < 8);
-  if (name.length < 2 || phone.length < 8) ok = false;
-  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    form.elements['tEmail'].classList.add('error');
-    ok = false;
-  } else {
-    form.elements['tEmail'].classList.remove('error');
-  }
-
-  if (!ok) {
-    $('ticketError').textContent = '⚠ Перевірте виділені поля';
-    $('ticketError').classList.remove('hidden');
-    return;
-  }
-  $('ticketError').classList.add('hidden');
-
-  const ticketId = 'TKT-' + Math.random().toString(36).slice(2,7).toUpperCase();
-  const ticket = {
-    id: ticketId,
-    type: 'ticket',
-    city: currentTicket.city,
-    date: currentTicket.date,
-    venue: currentTicket.venue,
-    qty, name, phone, email,
-    created: new Date().toLocaleString('uk-UA')
-  };
-  window.__lastTicket = ticket;
-
-  try {
-    const list = JSON.parse(localStorage.getItem(KEYS.TICKETS) || '[]');
-    list.unshift(ticket);
-    localStorage.setItem(KEYS.TICKETS, JSON.stringify(list.slice(0,100)));
-  } catch(e) {}
-
-  closeModal('ticketModal');
-  openBotWithTicket(ticket);
-});
-
-async function openBotWithTicket(ticket) {
-  if (!ticket) { toast('Квиток не знайдено'); return; }
-  try {
-    await fetch(WORKER_URL + '/ticket', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(ticket)
-    });
-  } catch(e) {}
-  const botUrl = `https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent('ticket_' + ticket.id)}`;
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-  if (isMobile) { window.location.href = botUrl; }
-  else { window.open(botUrl, '_blank', 'noopener'); }
-  toast('Відкриваємо Telegram-бот...');
-}
-
-async function openBotWithOrder(order) {
-  if (!order) { toast('Замовлення не знайдено'); return; }
-  try {
-    await fetch(WORKER_URL + '/order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(order)
-    });
-  } catch(e) {}
-  const botUrl = `https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent(order.id)}`;
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-  if (isMobile) { window.location.href = botUrl; }
-  else { window.open(botUrl, '_blank', 'noopener'); }
-  toast('Відкриваємо Telegram-бот...');
-}
-
-/* ===== MONOBANK PAYMENT ===== */
-async function startMonoPay(order) {
-  if (!order) { toast('Замовлення не знайдено'); return; }
-  const btn = $('monoPayBtn');
-  btn.disabled = true;
-  const origText = btn.textContent;
-  btn.textContent = '⏳ СТВОРЮЄМО РАХУНОК...';
-  try {
-    const amount = Math.round(parseFloat(String(order.total).replace(/[^\d.]/g, '')) * 100);
-    const res = await fetch(WORKER_URL + '/mono/create', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount,
-        orderId: order.id,
-        description: `Замовлення ${order.id} — FIRST TO DIE`,
-        customerName: order.name,
-        customerPhone: order.phone
-      })
-    });
-    const data = await res.json();
-    if (data.ok && data.pageUrl) {
-      window.location.href = data.pageUrl;
-    } else {
-      toast('Помилка: ' + (data.error || 'спробуйте пізніше'));
-      btn.disabled = false;
-      btn.textContent = origText;
-    }
-  } catch (e) {
-    toast('Не вдалось створити платіж');
-    btn.disabled = false;
-    btn.textContent = origText;
-  }
-}
-
-function openSearch() {
-  $('searchOverlay').classList.add('open');
-  document.body.classList.add('no-scroll');
-  setTimeout(() => $('searchInput').focus(), 100);
-}
-function closeSearch() {
-  $('searchOverlay').classList.remove('open');
-  $('searchInput').value = '';
-  $('searchResults').innerHTML = '';
-  if (!document.querySelector('.modal.open, .cart-drawer.open')) document.body.classList.remove('no-scroll');
-}
-function performSearch(q) {
-  const results = $('searchResults');
-  if (!q.trim()) { results.innerHTML = ''; return; }
-  const lower = q.toLowerCase();
-  const found = PRODUCTS.filter(p => p.title.toLowerCase().includes(lower) || p.desc.toLowerCase().includes(lower));
-  if (!found.length) {
-    const emptyMsg = (I18N[currentLang]||I18N.ua).search_empty;
-    results.innerHTML = '<p class="text-center text-xs uppercase py-8" style="color:var(--muted)">' + emptyMsg + '</p>';
-    return;
-  }
-  results.innerHTML = '';
-  found.forEach(p => {
-    const el = document.createElement('div');
-    el.className = 'search-result';
-    el.innerHTML = `<div class="w-14 h-14 border flex-shrink-0 overflow-hidden" style="border-color:var(--border)"><img src="${p.img1}" class="w-full h-full object-cover"/></div>
-      <div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold uppercase truncate">${escapeHtml(p.title)}</p>
-      <p class="text-[0.6rem] uppercase mt-1" style="color:var(--muted)">${formatPrice(p.price)}</p></div>`;
-    el.addEventListener('click', () => { closeSearch(); openProductModal(p.id); });
-    results.appendChild(el);
-  });
-}
-
-function applyTheme() {
-  document.body.classList.toggle('light-mode', currentTheme === 'light');
-  const moon = $('iconMoon'), sun = $('iconSun');
-  if (moon && sun) {
-    moon.classList.toggle('hidden', currentTheme === 'light');
-    sun.classList.toggle('hidden', currentTheme !== 'light');
-  }
-}
-function toggleTheme() { currentTheme = currentTheme === 'light' ? 'dark' : 'light'; saveState(); applyTheme(); }
-
-function applyI18n() {
-  const dict = I18N[currentLang] || I18N.ua;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const val = dict[key];
-    if (val === undefined) return;
-    if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
-    else el.textContent = val;
-  });
-  document.documentElement.lang = currentLang === 'en' ? 'en' : 'uk';
-}
-function toggleLang() {
-  currentLang = currentLang === 'ua' ? 'en' : 'ua';
-  $('langLabel').textContent = currentLang.toUpperCase();
-  saveState();
-  applyI18n();
-  renderTour();
-  toast(currentLang === 'en' ? 'Language: English' : 'Мова: Українська');
-}
-function setCurrency(cur) {
-  currentCurrency = cur; saveState();
-  if ($('currencySelect')) $('currencySelect').value = cur;
-  if ($('currencySelectMobile')) $('currencySelectMobile').value = cur;
-  renderCatalog(); renderCart();
-}
-
-function initCookie() {
-  if (!localStorage.getItem(KEYS.COOKIE)) setTimeout(() => $('cookieBanner').classList.add('show'), 1500);
-}
-function dismissCookie(acc) {
-  localStorage.setItem(KEYS.COOKIE, acc ? 'accepted' : 'declined');
-  $('cookieBanner').classList.remove('show');
-}
-
-function initNewsletter() {
-  const form = $('newsletterForm');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const input = form.querySelector('input[type="email"]');
-    const msg = $('newsletterMsg');
-    const val = input.value.trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) {
-      msg.textContent = '⚠ Введіть коректний email';
-      msg.style.color = '#e63946';
-      msg.classList.remove('hidden');
-      input.classList.add('error');
-      return;
-    }
-    input.classList.remove('error');
-    msg.textContent = '✓ Дякуємо! Ти в списку.';
-    msg.style.color = '#c9f31a';
-    msg.classList.remove('hidden');
-    form.reset();
-    toast('Підписку оформлено');
-  });
-}
-
-document.addEventListener('click', e => {
-  const addBtn = e.target.closest('button[data-product-id]');
-  if (addBtn) { addToCart(addBtn.dataset.productId); return; }
-  const card = e.target.closest('.product-card');
-  if (card && !e.target.closest('button') && card.dataset.productId) openProductModal(card.dataset.productId);
-});
-
-document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
-    closeSearch(); closeCart();
-    const op = $('orderPage'); if (op) op.classList.remove('show');
-    document.body.classList.remove('no-scroll');
-  }
-});
-
-window.addEventListener('scroll', () => {
-  const btn = $('backToTop'); if (btn) btn.classList.toggle('show', window.scrollY > 600);
-}, { passive: true });
-
-function init() {
-  loadState();
-  applyTheme();
-  if ($('langLabel')) $('langLabel').textContent = currentLang.toUpperCase();
-  if ($('currencySelect')) $('currencySelect').value = currentCurrency;
-  if ($('currencySelectMobile')) $('currencySelectMobile').value = currentCurrency;
-  if ($('year')) $('year').textContent = new Date().getFullYear();
-
-  renderCatalog();
-  renderAlbums();
-  renderAlbumPlayer();
-  renderTour();
-  renderCart();
-  updateCartUI();
-  updateWishUI();
-  updateCartTotals();
-  initCookie();
-  initNewsletter();
-  applyI18n();
-
-  $('hamburgerBtn')?.addEventListener('click', () => $('mobileMenu').classList.toggle('open'));
-  $('themeBtn')?.addEventListener('click', toggleTheme);
-  $('themeBtnM')?.addEventListener('click', toggleTheme);
-  $('langBtn')?.addEventListener('click', toggleLang);
-  $('langBtnM')?.addEventListener('click', toggleLang);
-  $('searchBtn')?.addEventListener('click', openSearch);
-  $('cartBtn')?.addEventListener('click', openCart);
-  $('wishlistBtn')?.addEventListener('click', () => {
-    if (!wishlist.length) { toast('Обране порожнє'); return; }
-    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => toast(`В обраному: ${wishlist.length} товар(ів)`), 400);
-  });
-  $('wishlistBtnM')?.addEventListener('click', () => {
-    $('mobileMenu').classList.remove('open');
-    if (!wishlist.length) { toast('Обране порожнє'); return; }
-    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => toast(`В обраному: ${wishlist.length} товар(ів)`), 400);
-  });
-  $('closeCartBtn')?.addEventListener('click', closeCart);
-  $('cartOverlay')?.addEventListener('click', closeCart);
-  $('checkoutBtn')?.addEventListener('click', openCheckout);
-  $('currencySelect')?.addEventListener('change', e => setCurrency(e.target.value));
-  $('currencySelectMobile')?.addEventListener('change', e => setCurrency(e.target.value));
-
-  document.querySelectorAll('#mobileMenu a').forEach(a => {
-    a.addEventListener('click', () => $('mobileMenu').classList.remove('open'));
-  });
-
-  $('closeSearchBtn')?.addEventListener('click', closeSearch);
-  $('searchInput')?.addEventListener('input', e => {
-    clearTimeout(window.__st);
-    window.__st = setTimeout(() => performSearch(e.target.value), 150);
-  });
-
-  $('closeSizeBtn')?.addEventListener('click', () => closeModal('sizeModal'));
-  $('confirmSizeBtn')?.addEventListener('click', confirmSizeSelection);
-  $('sizeGuideFromModal')?.addEventListener('click', () => {
-    sizeGuideReturnTo = 'sizeModal';
-    closeModal('sizeModal');
-    openModal('sizeGuideModal');
-  });
-  $('prodModalSizeGuide')?.addEventListener('click', () => {
-    sizeGuideReturnTo = 'productModal';
-    closeModal('productModal');
-    openModal('sizeGuideModal');
-  });
-  $('closeSizeGuideBtn')?.addEventListener('click', () => {
-    closeModal('sizeGuideModal');
-    if (sizeGuideReturnTo) {
-      const back = sizeGuideReturnTo;
-      sizeGuideReturnTo = null;
-      setTimeout(() => openModal(back), 50);
-    }
-  });
-
-  $('closeProductBtn')?.addEventListener('click', () => closeModal('productModal'));
-  $('prodModalAdd')?.addEventListener('click', () => {
-    const id = $('prodModalAdd').dataset.productId;
-    if (!id) return;
-    closeModal('productModal');
-    addToCart(id);
-  });
-
-  $('closeCheckoutBtn')?.addEventListener('click', () => closeModal('checkoutModal'));
-  $('closeTicketBtn')?.addEventListener('click', () => closeModal('ticketModal'));
-
-  $('ticketMinus')?.addEventListener('click', () => {
-    const q = $('ticketQty');
-    q.value = Math.max(1, (parseInt(q.value) || 1) - 1);
-  });
-  $('ticketPlus')?.addEventListener('click', () => {
-    const q = $('ticketQty');
-    q.value = Math.min(10, (parseInt(q.value) || 1) + 1);
-  });
-
-  $('monoPayBtn')?.addEventListener('click', () => {
-    if (window.__lastOrder) startMonoPay(window.__lastOrder);
-  });
-
-  $('continueShopping')?.addEventListener('click', () => {
-    $('orderPage').classList.remove('show');
-    document.body.classList.remove('no-scroll');
-    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-  });
-  $('sendToTelegram')?.addEventListener('click', () => {
-    if (window.__lastOrder) openBotWithOrder(window.__lastOrder);
-  });
-  $('copyOrderId')?.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText($('orderId').textContent); toast('Скопійовано'); } catch(e) {}
-  });
-
-  $('cookieAccept')?.addEventListener('click', () => dismissCookie(true));
-  $('cookieDecline')?.addEventListener('click', () => dismissCookie(false));
-  $('backToTop')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  $('logoLink')?.addEventListener('click', e => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 </script>
 </body>
 </html>
