@@ -8,7 +8,7 @@
 <link rel="icon" href="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@300;400;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Unbounded:wght@400;500;700;900&family=JetBrains+Mono:wght@300;400;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 :root{--bg:#050505;--text:#f5f5f5;--border:#1a1a1a;--blood:#c1121f;--acid:#c9f31a;--panel:#080808;--muted:#666;--neon:#ff2d95}
@@ -25,15 +25,16 @@ body{
   background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
   background-attachment: fixed;
   color:var(--text);
-  font-family:'JetBrains Mono',monospace;
+  font-family:'Unbounded',sans-serif;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   transition:background .3s,color .3s;
   -webkit-tap-highlight-color:transparent;
   padding-left:env(safe-area-inset-left);
   padding-right:env(safe-area-inset-right);
-  font-size:14px;
+  font-size:13px;
   line-height:1.5;
+  font-weight:400;
 }
 body.light-mode{
   background-image:
@@ -43,8 +44,14 @@ body.light-mode{
     radial-gradient(circle at 80% 80%, rgba(201,243,26,.03) 0%, transparent 50%);
 }
 body.no-scroll{overflow:hidden}
-.gothic{font-family:'Cinzel Decorative',serif;font-weight:900;letter-spacing:.02em}
-.display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em}
+.gothic{font-family:'Unbounded',sans-serif;font-weight:900;letter-spacing:-.02em}
+.display{font-family:'Unbounded',sans-serif;font-weight:900;letter-spacing:-.02em}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* === FORMS AND INPUTS — readability === */
+input,select,textarea{font-family:'JetBrains Mono',monospace}
+.form-input{font-family:'JetBrains Mono',monospace}
+
 .noise-bg{background-image:radial-gradient(circle at 20% 30%,rgba(193,18,31,.04) 0,transparent 40%),linear-gradient(180deg,var(--bg),var(--panel))}
 .grid-bg{background-image:linear-gradient(rgba(128,128,128,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,128,.05) 1px,transparent 1px);background-size:40px 40px}
 @keyframes marquee{to{transform:translateX(-50%)}}
@@ -55,16 +62,16 @@ body.no-scroll{overflow:hidden}
 .header-icon svg{pointer-events:none}
 @media (min-width:768px){.header-icon{width:36px;height:36px;padding:6px}}
 .nav-tabs{display:flex;align-items:center;gap:.55rem;flex-wrap:nowrap;padding:.25rem 0}
-.nav-tab{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.25rem;min-height:48px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);background:transparent;border:2px solid var(--border);transition:all .25s ease;text-decoration:none;position:relative;white-space:nowrap}
+.nav-tab{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.25rem;min-height:48px;font-family:'Unbounded',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:transparent;border:2px solid var(--border);transition:all .25s ease;text-decoration:none;position:relative;white-space:nowrap}
 .nav-tab:hover{color:#fff;border-color:var(--neon);background:rgba(255,45,149,.05);box-shadow:0 0 16px rgba(255,45,149,.8), inset 0 0 12px rgba(255,45,149,.2);text-shadow:0 0 10px rgba(255,45,149,1), 0 0 4px rgba(255,45,149,.8)}
 .nav-tab.active,.nav-tab:focus-visible{color:#fff;border-color:var(--neon);background:rgba(255,45,149,.08);box-shadow:0 0 20px rgba(255,45,149,.95), inset 0 0 14px rgba(255,45,149,.25);text-shadow:0 0 12px rgba(255,45,149,1), 0 0 6px rgba(255,45,149,.9)}
 body.light-mode .nav-tab{color:#444;border-color:#d4d4d4}
 body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;border-color:#e91e8c;box-shadow:0 0 10px rgba(233,30,140,.4);text-shadow:0 0 4px rgba(233,30,140,.5)}
-.mobile-nav-link{display:flex;align-items:center;padding:1rem 1.25rem;min-height:52px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);transition:all .2s}
+.mobile-nav-link{display:flex;align-items:center;padding:1rem 1.25rem;min-height:52px;font-family:'Unbounded',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);transition:all .2s;text-decoration:none}
 .mobile-nav-link:hover,.mobile-nav-link:active{border-color:var(--neon);background:rgba(255,45,149,.1);padding-left:1.5rem;box-shadow:0 0 10px rgba(255,45,149,.4)}
-.mobile-menu-btn{display:flex;align-items:center;justify-content:center;padding:12px 10px;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.mobile-menu-btn{display:flex;align-items:center;justify-content:center;padding:12px 10px;min-height:44px;font-family:'Unbounded',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s}
 .mobile-menu-btn:hover,.mobile-menu-btn:active{border-color:var(--blood);background:rgba(193,18,31,.1)}
-.mobile-menu-select{width:100%;min-height:44px;padding:10px 36px 10px 12px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.mobile-menu-select{width:100%;min-height:44px;padding:10px 36px 10px 12px;font-family:'Unbounded',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.2}}
 .pulse-dot{animation:pulse-dot 1.2s ease-in-out infinite}
 .product-card{position:relative;background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,box-shadow .3s}
@@ -75,7 +82,7 @@ body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;bor
 .product-card:hover .img-b{opacity:1;transform:scale(1.06)}
 .quick-add{opacity:0;transform:translateY(8px);transition:all .3s}
 .product-card:hover .quick-add{opacity:1;transform:translateY(0)}
-.btn-brut{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;min-height:44px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:#f5f5f5;color:#050505;border:2px solid #f5f5f5;cursor:pointer;transition:all .15s;text-decoration:none}
+.btn-brut{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;min-height:44px;font-family:'Unbounded',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#f5f5f5;color:#050505;border:2px solid #f5f5f5;cursor:pointer;transition:all .15s;text-decoration:none}
 .btn-brut:hover:not(:disabled){background:var(--blood);color:#fff;border-color:var(--blood)}
 .btn-brut:active:not(:disabled){transform:scale(.97)}
 .btn-brut:disabled{opacity:.3;cursor:not-allowed}
@@ -85,7 +92,7 @@ body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;bor
 .tg-btn:hover:not(:disabled){background:#1a8bc4;border-color:#1a8bc4}
 .mono-btn{background:#000;border-color:#c9f31a;color:#c9f31a}
 .mono-btn:hover:not(:disabled){background:#c9f31a;color:#000;border-color:#c9f31a}
-.badge-tag{display:inline-block;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .6rem;border:1px solid #fff;background:#050505;color:#fff}
+.badge-tag{display:inline-block;font-family:'Unbounded',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border:1px solid #fff;background:#050505;color:#fff}
 .badge-new{background:var(--acid);border-color:var(--acid);color:#050505}
 .cart-drawer{transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .cart-drawer.closed{transform:translateX(100%)}
@@ -93,24 +100,24 @@ body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;bor
 .cart-overlay{transition:opacity .4s}
 .search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:100;opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto}
 .search-overlay.open{opacity:1;pointer-events:auto}
-.search-input{background:transparent;border:none;border-bottom:2px solid #333;color:#fff;font-size:2rem;font-family:'Archivo Black',sans-serif;padding:1rem 0;width:100%;outline:none}
+.search-input{background:transparent;border:none;border-bottom:2px solid #333;color:#fff;font-size:2rem;font-family:'Unbounded',sans-serif;font-weight:700;padding:1rem 0;width:100%;outline:none}
 .search-input::placeholder{color:#333}
 .search-input:focus{border-color:var(--blood)}
 .search-result{display:flex;gap:1rem;padding:1rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;align-items:center}
 .search-result:hover{background:rgba(128,128,128,.05);border-left:2px solid var(--blood)}
 .toast-container{position:fixed;bottom:2rem;right:2rem;z-index:150;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:90vw}
-.toast{background:#0a0a0a;border:1px solid var(--blood);padding:.75rem 1rem;min-width:240px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:.75rem;pointer-events:auto;transform:translateX(120%);transition:transform .4s;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.toast{background:#0a0a0a;border:1px solid var(--blood);padding:.75rem 1rem;min-width:240px;font-family:'Unbounded',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:.75rem;pointer-events:auto;transform:translateX(120%);transition:transform .4s;box-shadow:0 10px 40px rgba(0,0,0,.6)}
 .toast.show{transform:translateX(0)}
 .toast .toast-close{background:transparent;border:none;color:#666;cursor:pointer;padding:0 0 0 .5rem;font-size:14px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:120;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto}
 .modal.open{opacity:1;pointer-events:auto}
 .modal-content{background:var(--panel);border:1px solid var(--border);max-width:600px;width:100%;max-height:92vh;overflow-y:auto;position:relative;color:var(--text);-webkit-overflow-scrolling:touch}
-.form-input{width:100%;background:transparent;border:2px solid var(--border);color:var(--text);padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;outline:none;transition:border-color .2s;min-height:44px}
+.form-input{width:100%;background:transparent;border:2px solid var(--border);color:var(--text);padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.05em;outline:none;transition:border-color .2s;min-height:44px}
 .form-input:focus{border-color:var(--blood)}
 .form-input::placeholder{color:var(--muted);text-transform:uppercase;font-size:.7rem}
 .form-input.error{border-color:#e63946;background:rgba(230,57,70,.05)}
-.form-label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;font-weight:700}
-.size-option{padding:.6rem;border:2px solid var(--border);color:var(--text);font-weight:700;cursor:pointer;transition:all .2s;background:transparent;font-family:'JetBrains Mono',monospace;font-size:.75rem;min-height:44px;min-width:44px}
+.form-label{display:block;font-family:'Unbounded',sans-serif;font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;font-weight:700}
+.size-option{padding:.6rem;border:2px solid var(--border);color:var(--text);font-weight:700;cursor:pointer;transition:all .2s;background:transparent;font-family:'Unbounded',sans-serif;font-size:.7rem;min-height:44px;min-width:44px}
 .size-option:hover{border-color:var(--blood)}
 .size-option:active{transform:scale(.95)}
 .size-option.active{background:var(--blood);border-color:var(--blood);color:#fff}
@@ -121,11 +128,11 @@ body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;bor
 .tour-row:last-child{border-bottom:none}
 .tour-row:hover{background:rgba(193,18,31,.08);border-left-color:var(--blood)}
 .tour-row:hover .tour-cta{background:var(--blood);color:#fff;border-color:var(--blood)}
-.tour-date{font-family:'Archivo Black',sans-serif;font-size:1.05rem;letter-spacing:-.01em;min-width:130px;color:var(--text)}
+.tour-date{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem;letter-spacing:-.02em;min-width:130px;color:var(--text)}
 .tour-info{flex:1;min-width:0}
-.tour-city{font-family:'Archivo Black',sans-serif;font-size:1rem;line-height:1.2;margin-bottom:.2rem}
-.tour-venue{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.tour-cta{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.45rem .9rem;border:1px solid var(--border);color:var(--text);transition:all .2s;white-space:nowrap}
+.tour-city{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem;line-height:1.2;margin-bottom:.2rem}
+.tour-venue{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tour-cta{font-family:'Unbounded',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.45rem .9rem;border:1px solid var(--border);color:var(--text);transition:all .2s;white-space:nowrap}
 #subscribe img{transition:transform .8s,filter .5s;filter:contrast(1.05) saturate(1.05)}
 #subscribe img:hover{transform:scale(1.02);filter:contrast(1.1) saturate(1.15)}
 #newsletterForm input{border:2px solid var(--border);background:transparent;color:var(--text)}
@@ -142,7 +149,7 @@ a:hover .arrow-slide{transform:translateX(4px)}
 .cookie-banner.show{transform:translateY(0)}
 #backToTop{position:fixed;bottom:6rem;right:2rem;width:48px;height:48px;background:var(--blood);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:all .3s;z-index:90;pointer-events:none}
 #backToTop.show{opacity:1;transform:translateY(0);pointer-events:auto}
-.breadcrumbs{display:flex;gap:.5rem;align-items:center;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;flex-wrap:wrap}
+.breadcrumbs{display:flex;gap:.5rem;align-items:center;font-family:'Unbounded',sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;flex-wrap:wrap}
 .order-page{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;overflow-y:auto}
 .order-page.show{display:block}
 .ftd-logo{filter:brightness(0) invert(1);object-fit:contain;user-select:none;-webkit-user-drag:none}
@@ -166,10 +173,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
 .mobile-menu.open{display:block;max-height:800px;opacity:1}
 @media (hover:none),(pointer:coarse){.quick-add{opacity:1!important;transform:none!important}.product-card .img-b{display:none}.product-card:hover .img-a{opacity:1}}
 @media (max-width:767px){
-  header .h-16{height:92px!important}
-  .header-icon{width:46px;height:46px;padding:11px}
-  .ftd-logo{height:58px!important;max-height:58px!important}
-  .marquee-track span{font-size:.55rem;letter-spacing:.22em;margin:0 1rem}
+  header .h-16{height:108px!important}
+  .header-icon{width:48px;height:48px;padding:12px}
+  .ftd-logo{height:72px!important;max-height:72px!important}
+  .marquee-track span{font-family:'Unbounded',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.1em;margin:0 1rem}
   .marquee-track{animation-duration:60s}
   .gothic.text-6xl{font-size:1.85rem!important;line-height:1!important}
   .gothic.text-5xl{font-size:1.7rem!important}
@@ -179,11 +186,11 @@ body.light-mode .hero-logo{filter:brightness(0)}
   .display.text-4xl{font-size:1.9rem!important}
   section .py-14,section .py-24{padding-top:2.25rem;padding-bottom:2.25rem}
   section .py-12,section .py-20{padding-top:1.75rem;padding-bottom:1.75rem}
-  .breadcrumbs{font-size:.55rem;gap:4px;margin-bottom:1rem}
+  .breadcrumbs{font-size:.5rem;gap:4px;margin-bottom:1rem}
   #catalogGrid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
-  .product-card h3{font-size:.68rem!important;line-height:1.25!important}
+  .product-card h3{font-size:.65rem!important;line-height:1.3!important;letter-spacing:-.02em!important}
   .product-card .p-4{padding:.55rem .65rem}
-  .product-card .quick-add .btn-brut{padding:8px 4px;font-size:.55rem;min-height:36px}
+  .product-card .quick-add .btn-brut{padding:8px 4px;font-size:.5rem;min-height:36px}
   .modal{padding:0;align-items:flex-end}
   .modal-content{max-height:94vh;border-radius:16px 16px 0 0;max-width:100%!important;padding-bottom:env(safe-area-inset-bottom)}
   .modal-content > div:first-child{padding:1rem 1rem .75rem!important}
@@ -193,41 +200,41 @@ body.light-mode .hero-logo{filter:brightness(0)}
   #productModal .modal-content > div:last-child{padding:1rem!important}
   #prodModalPrice{font-size:1.4rem!important}
   #sizeOptions{grid-template-columns:repeat(4,1fr)!important;gap:6px!important}
-  .size-option{padding:8px 4px!important;font-size:.7rem!important}
+  .size-option{padding:8px 4px!important;font-size:.65rem!important}
   .search-input{font-size:1.35rem!important;padding:.75rem 0!important}
   #cartDrawer{max-width:100%!important;padding-top:env(safe-area-inset-top)}
   #cartDrawer > div:last-child{padding-bottom:calc(1.5rem + env(safe-area-inset-bottom))!important}
   #checkoutForm .grid-cols-2{grid-template-columns:1fr!important;gap:12px!important}
   #checkoutForm .form-input{font-size:16px!important}
   .toast-container{left:1rem;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom));max-width:none}
-  .toast{min-width:0;width:100%;font-size:.65rem;padding:.6rem .75rem}
+  .toast{min-width:0;width:100%;font-size:.55rem;padding:.6rem .75rem}
   #backToTop{bottom:1rem;right:1rem;width:44px;height:44px}
   .cookie-banner{padding:.75rem}
   .cookie-banner p{font-size:.65rem}
-  .cookie-banner .btn-brut{min-height:40px;padding:8px 14px;font-size:.6rem}
+  .cookie-banner .btn-brut{min-height:40px;padding:8px 14px;font-size:.55rem}
   .order-page .py-16,.order-page .py-24{padding-top:1.75rem!important;padding-bottom:1.75rem!important}
   footer .py-12,footer .py-16{padding-top:2rem!important;padding-bottom:2rem!important}
   .size-guide-table th,.size-guide-table td{padding:.5rem .4rem!important;font-size:.6rem!important}
   .tour-row{padding:.85rem 1rem;gap:.75rem;flex-wrap:wrap}
-  .tour-date{font-size:.9rem;min-width:110px}
-  .tour-city{font-size:.9rem}
-  .tour-venue{font-size:.6rem}
-  .tour-cta{font-size:.6rem;padding:.4rem .7rem}
-  .mobile-nav-link{padding:1.15rem 1.35rem;min-height:60px;font-size:.9rem;letter-spacing:.22em}
-  .mobile-menu-btn{padding:14px 10px;min-height:50px;font-size:.75rem;letter-spacing:.18em}
+  .tour-date{font-size:.85rem;min-width:110px}
+  .tour-city{font-size:.85rem}
+  .tour-venue{font-size:.55rem}
+  .tour-cta{font-size:.55rem;padding:.4rem .7rem}
+  .mobile-nav-link{padding:1.15rem 1.35rem;min-height:60px;font-size:.8rem;letter-spacing:.08em}
+  .mobile-menu-btn{padding:14px 10px;min-height:50px;font-size:.65rem;letter-spacing:.05em}
 }
-@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:40px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}.nav-tab{padding:.7rem 1rem;font-size:.7rem}}
+@media (min-width:768px) and (max-width:1023px){.ftd-logo{height:44px!important}#catalogGrid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}.gothic.text-6xl{font-size:3.25rem!important}.nav-tab{padding:.7rem 1rem;font-size:.62rem}}
 @media (min-width:1024px) and (max-width:1279px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:16px!important}}
 @media (min-width:1280px) and (max-width:1599px){#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:20px!important}}
-@media (min-width:1600px){body{font-size:15px}#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:22px!important}}
+@media (min-width:1600px){body{font-size:14px}#catalogGrid{grid-template-columns:repeat(4,1fr)!important;gap:22px!important}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.marquee-track{animation:none!important}}
 </style>
 </head>
 <body>
 
 <!-- MARQUEE -->
-<div class="bg-[#c1121f] text-white py-1.5 border-b-2 border-[#c1121f] overflow-hidden">
-  <div class="marquee-track text-[0.65rem] font-bold tracking-[0.3em] uppercase">
+<div class="bg-[#c1121f] text-white py-2 border-b-2 border-[#c1121f] overflow-hidden">
+  <div class="marquee-track text-[0.6rem] font-bold tracking-[0.2em] uppercase">
     <span class="mx-6">КВИТКИ НА ОСІННІЙ ТУР У ПРОДАЖУ</span>
     <span class="mx-6">▲ НОВИЙ КЛІП «МАВПА» ВЖЕ В МЕРЕЖІ ▲</span>
     <span class="mx-6">FIRST TO DIE × CAPTHEUNI — ЗУСТРІЧАЙ НОВИЙ МЕРЧ</span>
@@ -243,7 +250,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
     <div class="flex items-center justify-between h-16 md:h-20 gap-2">
       <div class="flex items-center flex-1 min-w-0">
         <button id="hamburgerBtn" class="header-icon md:hidden" aria-label="Меню">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
         <nav class="hidden md:flex nav-tabs">
           <a href="#catalog" class="nav-tab" data-i18n="nav_store" data-nav-tab>STORE</a>
@@ -253,7 +260,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </nav>
       </div>
       <a href="#" id="logoLink" class="flex-shrink-0 flex items-center justify-center px-1 md:px-4">
-        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-9 md:h-12 w-auto"/>
+        <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-10 md:h-12 w-auto"/>
       </a>
       <div class="flex items-center justify-end flex-1 min-w-0 gap-0.5 md:gap-2">
         <button id="themeBtn" class="header-icon hidden md:inline-flex" aria-label="Тема">
@@ -262,7 +269,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </button>
         <button id="langBtn" class="header-icon hidden md:inline-flex text-[0.65rem] font-bold tracking-widest"><span id="langLabel">UA</span></button>
         <button id="searchBtn" class="header-icon" aria-label="Пошук">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
         </button>
         <button id="wishlistBtn" class="header-icon relative hidden md:inline-flex" aria-label="Обране">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -272,14 +279,14 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <option value="UAH" class="bg-black">₴ UAH</option><option value="USD" class="bg-black">$ USD</option><option value="EUR" class="bg-black">€ EUR</option>
         </select>
         <button id="cartBtn" class="header-icon relative" aria-label="Кошик">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           <span id="cartCount" class="absolute top-0 right-0 bg-[#c1121f] text-white text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
         </button>
       </div>
     </div>
   </div>
   <div id="mobileMenu" class="mobile-menu md:hidden border-t" style="background:var(--bg);border-color:var(--border)">
-    <div class="px-5 py-5 flex flex-col gap-3 text-[0.75rem] font-bold tracking-[0.2em] uppercase" style="color:var(--muted)">
+    <div class="px-5 py-5 flex flex-col gap-3" style="color:var(--muted)">
       <a href="#catalog" class="mobile-nav-link" data-i18n="nav_store">STORE</a>
       <a href="#music" class="mobile-nav-link" data-i18n="nav_music">MUSIC</a>
       <a href="#tour" class="mobile-nav-link" data-i18n="nav_shows">SHOWS</a>
@@ -301,7 +308,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <!-- HERO with VIDEO -->
 <section class="relative border-b overflow-hidden" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-16 relative">
-    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-6 md:mb-8" style="color:var(--muted)">
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.55rem] font-bold tracking-[0.2em] uppercase mb-6 md:mb-8" style="color:var(--muted)">
       <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-[#c1121f] rounded-full pulse-dot"></span> KYIV · UA</span>
       <span>EST. 2023</span><span>GRINDCORE / HARDCORE</span><span class="text-[#c1121f]">#FTD</span>
     </div>
@@ -331,13 +338,13 @@ body.light-mode .hero-logo{filter:brightness(0)}
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
       <div>
-        <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 01 — On the road</p>
+        <p class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c1121f] mb-2 font-bold">// 01 — On the road</p>
         <h2 class="display text-4xl md:text-6xl leading-[0.95]">
           FALL TOUR<br/>
           <span class="text-[#c1121f]">2026</span>
         </h2>
       </div>
-      <a href="https://www.instagram.com/first2diecrew/" target="_blank" rel="noopener" class="text-[0.65rem] font-bold tracking-[0.2em] uppercase hover:text-[#c1121f]" style="color:var(--muted)"><span data-i18n="b_all_dates">ВСІ ДАТИ</span> <span class="arrow-slide">→</span></a>
+      <a href="https://www.instagram.com/first2diecrew/" target="_blank" rel="noopener" class="text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:text-[#c1121f]" style="color:var(--muted)"><span data-i18n="b_all_dates">ВСІ ДАТИ</span> <span class="arrow-slide">→</span></a>
     </div>
     <div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
       <div class="lg:col-span-5">
@@ -351,11 +358,11 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div class="lg:col-span-7">
         <div class="border" style="border-color:var(--border);background:var(--panel)">
           <div class="flex items-center justify-between px-5 py-4 border-b" style="border-color:var(--border)">
-            <p class="display text-lg md:text-xl tracking-wide" data-i18n="tour_title">НАЙБЛИЖЧІ КОНЦЕРТИ</p>
-            <p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">ЖОВТЕНЬ 2026</p>
+            <p class="display text-base md:text-lg tracking-wide" data-i18n="tour_title">НАЙБЛИЖЧІ КОНЦЕРТИ</p>
+            <p class="text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">ЖОВТЕНЬ 2026</p>
           </div>
           <div id="tourList"></div>
-          <div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)">
+          <div class="px-5 py-3 border-t flex items-center justify-between text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="border-color:var(--border);color:var(--muted)">
             <span>● Квитки онлайн</span>
             <span>UA · 2026</span>
           </div>
@@ -369,13 +376,13 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <section id="music" class="border-b" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// 02 — Discography</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_music">MUSIC</h2></div>
+      <div><p class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c1121f] mb-2 font-bold">// 02 — Discography</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_music">MUSIC</h2></div>
     </div>
     <div class="grid lg:grid-cols-12 gap-6">
       <aside class="lg:col-span-4 border" style="background:var(--panel);border-color:var(--border)">
         <div class="flex items-center justify-between px-4 py-3 border-b" style="border-color:var(--border)">
-          <p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">// Releases</p>
-          <p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)"><span id="albumCount">0</span> total</p>
+          <p class="text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">// Releases</p>
+          <p class="text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)"><span id="albumCount">0</span> total</p>
         </div>
         <div id="albumList" class="max-h-[560px] overflow-y-auto"></div>
       </aside>
@@ -392,8 +399,8 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <span style="color:var(--text)">Магазин</span>
     </div>
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-      <div><p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2">// Shop</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_store">STORE</h2></div>
-      <p class="text-[0.6rem] tracking-[0.25em] uppercase" style="color:var(--muted)">Всі товари</p>
+      <div><p class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c1121f] mb-2 font-bold">// Shop</p><h2 class="display text-4xl md:text-6xl leading-[0.95]" data-i18n="h_store">STORE</h2></div>
+      <p class="text-[0.55rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">Всі товари</p>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" id="catalogGrid"></div>
   </div>
@@ -412,12 +419,12 @@ body.light-mode .hero-logo{filter:brightness(0)}
       </div>
     </div>
     <h2 class="display text-3xl md:text-5xl mb-3">БУДЬ НА ЗВ'ЯЗКУ.</h2>
-    <p class="text-[0.65rem] md:text-xs tracking-[0.25em] uppercase mb-8 md:mb-10" style="color:var(--muted)">Нові релізи, концерти та мерч — першим дізнаєшся ти.</p>
+    <p class="text-[0.6rem] md:text-xs tracking-[0.2em] uppercase mb-8 md:mb-10 font-bold" style="color:var(--muted)">Нові релізи, концерти та мерч — першим дізнаєшся ти.</p>
     <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2" novalidate>
-      <input type="email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.2em"/>
+      <input type="email" required placeholder="EMAIL" class="flex-1 form-input text-center sm:text-left" style="letter-spacing:.1em"/>
       <button type="submit" class="btn-brut whitespace-nowrap px-6">ПІДПИСАТИСЬ <span class="arrow-slide">→</span></button>
     </form>
-    <p id="newsletterMsg" class="text-[0.65rem] tracking-widest uppercase mt-4 hidden"></p>
+    <p id="newsletterMsg" class="text-[0.6rem] tracking-widest uppercase mt-4 hidden"></p>
   </div>
 </section>
 
@@ -432,25 +439,25 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.5c-1.6-.7-3.3-1.3-5-1.6-.2.4-.5.9-.7 1.3-1.9-.3-3.7-.3-5.5 0-.2-.4-.5-.9-.7-1.3-1.8.3-3.5.9-5 1.6C-.3 9.5-1 14.3.5 19c1.9 1.4 3.8 2.2 5.6 2.7.5-.6.9-1.3 1.2-2-.7-.3-1.3-.6-1.9-1 .2-.1.3-.3.5-.4 3.7 1.7 7.6 1.7 11.3 0 .2.1.3.3.5.4-.6.4-1.2.7-1.9 1 .3.7.7 1.4 1.2 2 1.8-.6 3.7-1.4 5.6-2.7 1.7-5.5.6-10.2-2.3-14.5zM8 15.8c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3zm8 0c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3z"/></svg>
         </div>
-        <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Discord</p>
-        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Спільнота · Live-чати</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">JOIN →</p>
+        <p class="text-base font-bold tracking-wide uppercase mb-2">Discord</p>
+        <p class="text-[0.6rem] tracking-[0.15em] uppercase mb-5 font-bold" style="color:var(--muted)">Спільнота · Live-чати</p>
+        <p class="text-[0.6rem] tracking-[0.2em] uppercase text-[#ff2d95] font-bold">JOIN →</p>
       </a>
       <a href="https://www.instagram.com/first2diecrew/" target="_blank" rel="noopener" class="border p-8 md:p-10 text-center hover:border-[#ff2d95] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
         </div>
-        <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Instagram</p>
-        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Сторіс · Reels</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">FOLLOW →</p>
+        <p class="text-base font-bold tracking-wide uppercase mb-2">Instagram</p>
+        <p class="text-[0.6rem] tracking-[0.15em] uppercase mb-5 font-bold" style="color:var(--muted)">Сторіс · Reels</p>
+        <p class="text-[0.6rem] tracking-[0.2em] uppercase text-[#ff2d95] font-bold">FOLLOW →</p>
       </a>
       <a href="mailto:booking@firsttodie.com" class="border p-8 md:p-10 text-center hover:border-[#ff2d95] transition-all" style="border-color:var(--border);background:var(--panel)">
         <div class="w-12 h-12 flex items-center justify-center mx-auto mb-6">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-        <p class="text-[0.7rem] font-bold tracking-[0.25em] uppercase mb-2">Gmail</p>
-        <p class="text-[0.6rem] tracking-[0.2em] uppercase mb-5" style="color:var(--muted)">Booking · Співпраця</p>
-        <p class="text-[0.6rem] tracking-[0.25em] uppercase text-[#ff2d95] font-bold">НАПИСАТИ →</p>
+        <p class="text-base font-bold tracking-wide uppercase mb-2">Gmail</p>
+        <p class="text-[0.6rem] tracking-[0.15em] uppercase mb-5 font-bold" style="color:var(--muted)">Booking · Співпраця</p>
+        <p class="text-[0.6rem] tracking-[0.2em] uppercase text-[#ff2d95] font-bold">НАПИСАТИ →</p>
       </a>
     </div>
   </div>
@@ -461,7 +468,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-14">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
       <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-10 w-auto"/>
-      <p class="text-[0.6rem] tracking-[0.25em] uppercase" style="color:var(--muted)">© <span id="year"></span> FIRST TO DIE · Kyiv, Ukraine</p>
+      <p class="text-[0.6rem] tracking-[0.15em] uppercase font-bold" style="color:var(--muted)">© <span id="year"></span> FIRST TO DIE · Kyiv, Ukraine</p>
     </div>
   </div>
 </footer>
@@ -470,8 +477,8 @@ body.light-mode .hero-logo{filter:brightness(0)}
   <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
     <p class="text-[0.7rem] tracking-wider text-center md:text-left" style="color:var(--muted)">Ми використовуємо cookies для роботи кошика та покращення сайту.</p>
     <div class="flex gap-2">
-      <button id="cookieDecline" class="btn-brut btn-ghost text-[0.6rem] px-4 py-2">ВІДХИЛИТИ</button>
-      <button id="cookieAccept" class="btn-brut text-[0.6rem] px-4 py-2">ПРИЙНЯТИ</button>
+      <button id="cookieDecline" class="btn-brut btn-ghost text-[0.55rem] px-4 py-2">ВІДХИЛИТИ</button>
+      <button id="cookieAccept" class="btn-brut text-[0.55rem] px-4 py-2">ПРИЙНЯТИ</button>
     </div>
   </div>
 </div>
@@ -485,34 +492,34 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div class="w-20 h-20 mx-auto mb-6 border-2 border-[#c9f31a] rounded-full flex items-center justify-center">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c9f31a" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c9f31a] mb-3">// Замовлення прийнято</p>
+      <p class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c9f31a] mb-3 font-bold">// Замовлення прийнято</p>
       <h2 class="display text-3xl md:text-5xl mb-4">ДЯКУЄМО!</h2>
       <p class="text-sm leading-relaxed max-w-lg mx-auto" style="color:var(--muted)">Зараз відкриється Telegram-бот — він одразу покаже твоє замовлення та спосіб оплати.</p>
     </div>
     <div class="border p-6 mb-6" style="background:var(--panel);border-color:var(--border)">
       <div class="flex items-center justify-between mb-4 pb-4 border-b" style="border-color:var(--border)">
-        <div><p class="text-[0.55rem] tracking-[0.3em] uppercase mb-1" style="color:var(--muted)">// Номер замовлення</p><p id="orderId" class="display text-xl text-[#c1121f]">FTD-XXXXX</p></div>
-        <button id="copyOrderId" class="btn-brut btn-ghost text-[0.55rem] px-3 py-2">КОПІЮВАТИ</button>
+        <div><p class="text-[0.5rem] tracking-[0.2em] uppercase mb-1 font-bold" style="color:var(--muted)">// Номер замовлення</p><p id="orderId" class="display text-xl text-[#c1121f]">FTD-XXXXX</p></div>
+        <button id="copyOrderId" class="btn-brut btn-ghost text-[0.5rem] px-3 py-2">КОПІЮВАТИ</button>
       </div>
       <div class="grid grid-cols-2 gap-4 text-xs">
-        <div><p class="text-[0.55rem] tracking-[0.3em] uppercase mb-1" style="color:var(--muted)">Дата</p><p id="orderDate">—</p></div>
-        <div><p class="text-[0.55rem] tracking-[0.3em] uppercase mb-1" style="color:var(--muted)">Сума</p><p id="orderTotal" class="font-bold">—</p></div>
-        <div><p class="text-[0.55rem] tracking-[0.3em] uppercase mb-1" style="color:var(--muted)">Ім'я</p><p id="orderName">—</p></div>
-        <div><p class="text-[0.55rem] tracking-[0.3em] uppercase mb-1" style="color:var(--muted)">Телефон</p><p id="orderPhone">—</p></div>
+        <div><p class="text-[0.5rem] tracking-[0.2em] uppercase mb-1 font-bold" style="color:var(--muted)">Дата</p><p id="orderDate">—</p></div>
+        <div><p class="text-[0.5rem] tracking-[0.2em] uppercase mb-1 font-bold" style="color:var(--muted)">Сума</p><p id="orderTotal" class="font-bold">—</p></div>
+        <div><p class="text-[0.5rem] tracking-[0.2em] uppercase mb-1 font-bold" style="color:var(--muted)">Ім'я</p><p id="orderName">—</p></div>
+        <div><p class="text-[0.5rem] tracking-[0.2em] uppercase mb-1 font-bold" style="color:var(--muted)">Телефон</p><p id="orderPhone">—</p></div>
       </div>
     </div>
     <div class="border p-6 mb-6" style="background:var(--panel);border-color:var(--border)">
-      <p class="text-[0.55rem] tracking-[0.3em] uppercase mb-4" style="color:var(--muted)">// Склад замовлення</p>
+      <p class="text-[0.5rem] tracking-[0.2em] uppercase mb-4 font-bold" style="color:var(--muted)">// Склад замовлення</p>
       <div id="orderItems" class="space-y-3"></div>
       <div class="flex items-center justify-between mt-4 pt-4 border-t" style="border-color:var(--border)">
-        <span class="text-[0.65rem] tracking-[0.25em] uppercase" style="color:var(--muted)">Разом</span>
+        <span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">Разом</span>
         <span id="orderItemsTotal" class="display text-lg text-[#c1121f]">₴0</span>
       </div>
     </div>
     <div id="monoPayBlock" class="border p-6 mb-6 hidden" style="background:var(--panel);border-color:var(--border)">
-      <p class="text-[0.55rem] tracking-[0.3em] uppercase mb-4 text-center" style="color:var(--muted)">// Онлайн-оплата</p>
+      <p class="text-[0.5rem] tracking-[0.2em] uppercase mb-4 text-center font-bold" style="color:var(--muted)">// Онлайн-оплата</p>
       <button id="monoPayBtn" class="btn-brut mono-btn w-full py-4">💳 ОПЛАТИТИ КАРТКОЮ MONOBANK</button>
-      <p class="text-[0.6rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Безпечна оплата через Monobank Acquiring</p>
+      <p class="text-[0.55rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Безпечна оплата через Monobank Acquiring</p>
     </div>
     <div class="text-center space-y-3">
       <button id="sendToTelegram" class="btn-brut tg-btn w-full py-4" data-i18n="b_send_tg">✈ ВІДКРИТИ TELEGRAM-БОТА</button>
@@ -525,17 +532,17 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="cartOverlay" class="cart-overlay hidden fixed inset-0 bg-black/80 z-50"></div>
 <div id="cartDrawer" class="cart-drawer closed fixed top-0 right-0 h-full w-full max-w-md z-50 flex flex-col border-l" style="background:var(--bg);border-color:var(--border)">
   <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:var(--border)">
-    <div><p class="text-[0.55rem] tracking-[0.3em] uppercase" style="color:var(--muted)">// Your</p><h3 class="display text-lg" data-i18n="cart_title">CART</h3></div>
+    <div><p class="text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">// Your</p><h3 class="display text-lg" data-i18n="cart_title">CART</h3></div>
     <button id="closeCartBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-5 space-y-5"></div>
   <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center px-6 text-center hidden">
     <div class="w-20 h-20 border flex items-center justify-center mb-5" style="border-color:var(--border)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div>
     <p class="display text-xl mb-2" data-i18n="cart_empty">Кошик порожній</p>
-    <button onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'})" class="btn-brut px-6 py-3 text-[0.65rem]" data-i18n="b_to_catalog">ДО КАТАЛОГУ →</button>
+    <button onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'})" class="btn-brut px-6 py-3 text-[0.6rem]" data-i18n="b_to_catalog">ДО КАТАЛОГУ →</button>
   </div>
   <div class="border-t px-6 py-6 space-y-4" style="border-color:var(--border);background:var(--panel)">
-    <div class="flex items-center justify-between"><span class="text-[0.65rem] tracking-[0.25em] uppercase" style="color:var(--muted)" data-i18n="cart_subtotal">Subtotal</span><span id="cartSubtotal" class="display text-xl">₴0</span></div>
+    <div class="flex items-center justify-between"><span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)" data-i18n="cart_subtotal">Subtotal</span><span id="cartSubtotal" class="display text-xl">₴0</span></div>
     <button id="checkoutBtn" class="btn-brut w-full py-4" disabled data-i18n="cart_checkout">CHECKOUT</button>
   </div>
 </div>
@@ -544,10 +551,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="searchOverlay" class="search-overlay" role="dialog">
   <div class="max-w-3xl mx-auto px-4 pt-24">
     <div class="flex items-center justify-between mb-8">
-      <p class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f]">// Search</p>
+      <p class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Search</p>
       <button id="closeSearchBtn" class="p-2" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <input id="searchInput" type="text" placeholder="TYPE TO SEARCH..." class="search-input" autocomplete="off"/>
+    <input id="searchInput" type="text" placeholder="ПОШУК..." class="search-input" autocomplete="off"/>
     <div id="searchResults" class="mt-4 max-h-[50vh] overflow-y-auto border-t" style="border-color:var(--border)"></div>
   </div>
 </div>
@@ -556,7 +563,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="productModal" class="modal">
   <div class="modal-content" style="max-width:900px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Product</p><h3 id="prodModalTitle" class="display text-lg truncate max-w-xs"></h3></div>
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Product</p><h3 id="prodModalTitle" class="display text-base truncate max-w-xs"></h3></div>
       <button id="closeProductBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="grid md:grid-cols-2 gap-0">
@@ -564,8 +571,8 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div class="p-6">
         <p id="prodModalPrice" class="display text-2xl text-[#c1121f] mb-4"></p>
         <p id="prodModalDesc" class="text-sm leading-relaxed mb-6" style="color:var(--muted)"></p>
-        <p id="prodModalStock" class="text-[0.65rem] tracking-widest uppercase mb-4"></p>
-        <button id="prodModalSizeGuide" class="text-[0.6rem] tracking-widest uppercase mb-6 hover:text-[#c1121f] transition" style="color:var(--muted);text-decoration:underline">📐 Таблиця розмірів</button>
+        <p id="prodModalStock" class="text-[0.6rem] tracking-widest uppercase mb-4 font-bold"></p>
+        <button id="prodModalSizeGuide" class="text-[0.55rem] tracking-widest uppercase mb-6 hover:text-[#c1121f] transition font-bold" style="color:var(--muted);text-decoration:underline">📐 Таблиця розмірів</button>
         <button id="prodModalAdd" class="btn-brut w-full py-4">ADD TO CART</button>
       </div>
     </div>
@@ -576,19 +583,19 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="sizeModal" class="modal">
   <div class="modal-content" style="max-width:480px">
     <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color:var(--border)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Select size</p><h3 class="display text-lg" data-i18n="m_size">РОЗМІР</h3></div>
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Select size</p><h3 class="display text-lg" data-i18n="m_size">РОЗМІР</h3></div>
       <button id="closeSizeBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="p-6">
       <div class="flex gap-4 mb-6">
         <div class="w-24 h-24 border overflow-hidden flex-shrink-0" style="background:var(--panel);border-color:var(--border)"><img id="sizeModalImg" src="" class="w-full h-full object-cover"/></div>
         <div class="flex-1 min-w-0">
-          <p id="sizeModalTitle" class="text-[0.75rem] font-bold tracking-wider uppercase leading-snug mb-1"></p>
+          <p id="sizeModalTitle" class="text-xs font-bold tracking-wide uppercase leading-snug mb-1"></p>
           <p id="sizeModalPrice" class="text-[#c1121f] text-sm font-bold"></p>
         </div>
       </div>
       <div id="sizeOptions" class="grid grid-cols-5 gap-2 mb-3"></div>
-      <p id="sizeError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946] mb-4">Спочатку оберіть розмір</p>
+      <p id="sizeError" class="hidden text-[0.6rem] tracking-widest uppercase text-[#e63946] mb-4 font-bold">Спочатку оберіть розмір</p>
       <button id="confirmSizeBtn" class="btn-brut w-full py-4" data-i18n="m_add">ДОДАТИ В КОШИК</button>
       <button id="sizeGuideFromModal" class="btn-brut btn-ghost w-full py-3 mt-3" data-i18n="m_size_guide">SIZE GUIDE / ТАБЛИЦЯ</button>
     </div>
@@ -599,7 +606,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="sizeGuideModal" class="modal">
   <div class="modal-content" style="max-width:700px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Size Guide</p><h3 class="display text-lg">ТАБЛИЦЯ РОЗМІРІВ</h3></div>
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Size Guide</p><h3 class="display text-lg">ТАБЛИЦЯ РОЗМІРІВ</h3></div>
       <button id="closeSizeGuideBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="p-6">
@@ -607,11 +614,11 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <table class="w-full text-xs size-guide-table">
           <thead>
             <tr class="border-b text-left" style="border-color:var(--border)">
-              <th class="py-3 text-[0.6rem] tracking-widest uppercase" style="color:var(--muted)">Розмір</th>
-              <th class="py-3 text-[0.6rem] tracking-widest uppercase" style="color:var(--muted)">Груди, см</th>
-              <th class="py-3 text-[0.6rem] tracking-widest uppercase" style="color:var(--muted)">Довжина, см</th>
-              <th class="py-3 text-[0.6rem] tracking-widest uppercase" style="color:var(--muted)">Рукав, см</th>
-              <th class="py-3 text-[0.6rem] tracking-widest uppercase" style="color:var(--muted)">UA</th>
+              <th class="py-3 text-[0.55rem] tracking-widest uppercase font-bold" style="color:var(--muted)">Розмір</th>
+              <th class="py-3 text-[0.55rem] tracking-widest uppercase font-bold" style="color:var(--muted)">Груди, см</th>
+              <th class="py-3 text-[0.55rem] tracking-widest uppercase font-bold" style="color:var(--muted)">Довжина, см</th>
+              <th class="py-3 text-[0.55rem] tracking-widest uppercase font-bold" style="color:var(--muted)">Рукав, см</th>
+              <th class="py-3 text-[0.55rem] tracking-widest uppercase font-bold" style="color:var(--muted)">UA</th>
             </tr>
           </thead>
           <tbody>
@@ -624,9 +631,9 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </table>
       </div>
       <div class="border-t pt-4 space-y-2" style="border-color:var(--border)">
-        <p class="text-[0.65rem] tracking-wider uppercase leading-relaxed" style="color:var(--muted)"><span class="text-[#c1121f]">⚠</span> Якщо між розмірами — обирай більший</p>
-        <p class="text-[0.65rem] tracking-wider uppercase leading-relaxed" style="color:var(--muted)"><span class="text-[#c1121f]">📏</span> Заміри вручну — похибка ±2 см</p>
-        <p class="text-[0.65rem] tracking-wider uppercase leading-relaxed" style="color:var(--muted)"><span class="text-[#c1121f]">👕</span> Всі вироби Unisex — універсальний крій</p>
+        <p class="text-[0.6rem] tracking-wider uppercase leading-relaxed font-bold" style="color:var(--muted)"><span class="text-[#c1121f]">⚠</span> Якщо між розмірами — обирай більший</p>
+        <p class="text-[0.6rem] tracking-wider uppercase leading-relaxed font-bold" style="color:var(--muted)"><span class="text-[#c1121f]">📏</span> Заміри вручну — похибка ±2 см</p>
+        <p class="text-[0.6rem] tracking-wider uppercase leading-relaxed font-bold" style="color:var(--muted)"><span class="text-[#c1121f]">👕</span> Всі вироби Unisex — універсальний крій</p>
       </div>
     </div>
   </div>
@@ -636,14 +643,14 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="ticketModal" class="modal">
   <div class="modal-content" style="max-width:520px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Buy tickets</p><h3 class="display text-lg">КВИТОК</h3></div>
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Buy tickets</p><h3 class="display text-lg">КВИТОК</h3></div>
       <button id="closeTicketBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <form id="ticketForm" class="p-6 space-y-5" novalidate>
       <div class="border p-4" style="border-color:var(--border);background:var(--bg)">
-        <p id="ticketDate" class="text-[0.6rem] tracking-[0.3em] uppercase text-[#c1121f] mb-2"></p>
+        <p id="ticketDate" class="text-[0.55rem] tracking-[0.2em] uppercase text-[#c1121f] mb-2 font-bold"></p>
         <p id="ticketCity" class="display text-xl mb-1"></p>
-        <p id="ticketVenue" class="text-[0.65rem] tracking-widest uppercase" style="color:var(--muted)"></p>
+        <p id="ticketVenue" class="text-[0.6rem] tracking-widest uppercase font-bold" style="color:var(--muted)"></p>
       </div>
       <div>
         <label class="form-label">Кількість квитків *</label>
@@ -651,13 +658,13 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <button type="button" id="ticketMinus" class="w-11 h-11 border flex items-center justify-center text-lg" style="border-color:var(--border);color:var(--text)">−</button>
           <input type="number" name="qty" id="ticketQty" value="1" min="1" max="10" class="form-input text-center" style="width:80px"/>
           <button type="button" id="ticketPlus" class="w-11 h-11 border flex items-center justify-center text-lg" style="border-color:var(--border);color:var(--text)">+</button>
-          <span class="text-[0.6rem] tracking-widest uppercase ml-auto" style="color:var(--muted)">Макс. 10</span>
+          <span class="text-[0.55rem] tracking-widest uppercase ml-auto font-bold" style="color:var(--muted)">Макс. 10</span>
         </div>
       </div>
       <div><label class="form-label">Ім'я *</label><input name="tName" type="text" required class="form-input" placeholder="ІВАН"/></div>
       <div><label class="form-label">Телефон *</label><input name="tPhone" type="tel" required class="form-input" placeholder="+380..."/></div>
       <div><label class="form-label">Email</label><input name="tEmail" type="email" class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
-      <p id="ticketError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946]"></p>
+      <p id="ticketError" class="hidden text-[0.6rem] tracking-widest uppercase text-[#e63946] font-bold"></p>
       <button type="submit" class="btn-brut tg-btn w-full py-4">ЗАБРОНЮВАТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
     </form>
   </div>
@@ -667,7 +674,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
-      <div><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Checkout</p><h3 class="display text-lg" data-i18n="m_order">ORDER</h3></div>
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Checkout</p><h3 class="display text-lg" data-i18n="m_order">ORDER</h3></div>
       <button id="closeCheckoutBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <form id="checkoutForm" class="p-6 space-y-5" novalidate>
@@ -690,10 +697,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </select>
       </div>
       <div class="border-t pt-5" style="border-color:var(--border)">
-        <div class="flex items-center justify-between mb-4"><span class="text-[0.65rem] tracking-[0.25em] uppercase" style="color:var(--muted)">Товари</span><span id="checkoutSubtotal" class="text-sm font-bold">₴0</span></div>
-        <div class="flex items-center justify-between border-t pt-3" style="border-color:var(--border)"><span class="text-[0.65rem] tracking-[0.25em] uppercase">Разом</span><span id="checkoutTotal" class="display text-xl text-[#c1121f]">₴0</span></div>
+        <div class="flex items-center justify-between mb-4"><span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">Товари</span><span id="checkoutSubtotal" class="text-sm font-bold">₴0</span></div>
+        <div class="flex items-center justify-between border-t pt-3" style="border-color:var(--border)"><span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold">Разом</span><span id="checkoutTotal" class="display text-xl text-[#c1121f]">₴0</span></div>
       </div>
-      <p id="checkoutError" class="hidden text-[0.65rem] tracking-widest uppercase text-[#e63946]"></p>
+      <p id="checkoutError" class="hidden text-[0.6rem] tracking-widest uppercase text-[#e63946] font-bold"></p>
       <button type="submit" class="btn-brut tg-btn w-full py-4" id="placeOrderBtn" data-i18n="b_place_order">ОФОРМИТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
     </form>
   </div>
@@ -706,7 +713,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v34', CUR:'ftd_cur_v24', THEME:'ftd_theme_v24', LANG:'ftd_lang_v24', WISH:'ftd_wish_v24', COOKIE:'ftd_cookie_v24', SIZE:'ftd_size_v24', ORDERS:'ftd_orders_v24', TICKETS:'ftd_tickets_v24' };
+const KEYS = { CART:'ftd_cart_v35', CUR:'ftd_cur_v25', THEME:'ftd_theme_v25', LANG:'ftd_lang_v25', WISH:'ftd_wish_v25', COOKIE:'ftd_cookie_v25', SIZE:'ftd_size_v25', ORDERS:'ftd_orders_v25', TICKETS:'ftd_tickets_v25' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -798,17 +805,17 @@ const cartTotalUAH = () => cart.reduce((s,i) => { const p = getProduct(i.product
 function loadState(){try{cart=JSON.parse(localStorage.getItem(KEYS.CART)||'[]');wishlist=JSON.parse(localStorage.getItem(KEYS.WISH)||'[]');currentCurrency=localStorage.getItem(KEYS.CUR)||'UAH';currentTheme=localStorage.getItem(KEYS.THEME)||'dark';currentLang=localStorage.getItem(KEYS.LANG)||'ua';mySize=localStorage.getItem(KEYS.SIZE)||null;}catch(e){}}
 function saveState(){try{localStorage.setItem(KEYS.CART,JSON.stringify(cart));localStorage.setItem(KEYS.WISH,JSON.stringify(wishlist));localStorage.setItem(KEYS.CUR,currentCurrency);localStorage.setItem(KEYS.THEME,currentTheme);localStorage.setItem(KEYS.LANG,currentLang);if(mySize)localStorage.setItem(KEYS.SIZE,mySize);}catch(e){}}
 function toast(msg){const c=$('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span style="flex:1">${escapeHtml(msg)}</span><button class="toast-close">✕</button>`;const close=()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);};el.querySelector('.toast-close').addEventListener('click',close);c.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(close,3500);}
-function productCard(p){const el=document.createElement('div');el.className='product-card clip-angle';el.dataset.productId=p.id;const badge=p.status==='new'?'<span class="badge-tag badge-new">NEW</span>':'';const isWish=wishlist.includes(p.id);el.innerHTML=`<div class="relative aspect-square overflow-hidden" style="background:var(--panel)"><img src="${p.img1}" alt="${escapeHtml(p.title)}" class="img-a absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><img src="${p.img2}" alt="${escapeHtml(p.title)}" class="img-b absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">${badge}</div><button class="wish-btn absolute top-3 right-3 z-20 w-8 h-8 border flex items-center justify-center transition-all ${isWish?'active':''}" style="border-color:var(--border);background:rgba(0,0,0,.6);color:#fff;font-size:14px" data-wish-id="${p.id}">${isWish?'❤':'♡'}</button><div class="absolute bottom-0 left-0 right-0 p-3 z-10 quick-add"><button class="btn-brut w-full py-3 text-[0.6rem]" data-product-id="${p.id}">ADD TO CART</button></div></div><div class="p-4"><h3 class="text-[0.7rem] font-bold tracking-wider leading-snug mb-2 uppercase">${escapeHtml(p.title)}</h3><div class="text-sm font-bold">${formatPrice(p.price)}</div></div>`;el.querySelector('.wish-btn').addEventListener('click',e=>{e.stopPropagation();toggleWishlist(p.id);});return el;}
+function productCard(p){const el=document.createElement('div');el.className='product-card clip-angle';el.dataset.productId=p.id;const badge=p.status==='new'?'<span class="badge-tag badge-new">NEW</span>':'';const isWish=wishlist.includes(p.id);el.innerHTML=`<div class="relative aspect-square overflow-hidden" style="background:var(--panel)"><img src="${p.img1}" alt="${escapeHtml(p.title)}" class="img-a absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><img src="${p.img2}" alt="${escapeHtml(p.title)}" class="img-b absolute inset-0 w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/800x800/0a0a0a/c1121f?text=FTD'"/><div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">${badge}</div><button class="wish-btn absolute top-3 right-3 z-20 w-8 h-8 border flex items-center justify-center transition-all ${isWish?'active':''}" style="border-color:var(--border);background:rgba(0,0,0,.6);color:#fff;font-size:14px" data-wish-id="${p.id}">${isWish?'❤':'♡'}</button><div class="absolute bottom-0 left-0 right-0 p-3 z-10 quick-add"><button class="btn-brut w-full py-3 text-[0.55rem]" data-product-id="${p.id}">ADD TO CART</button></div></div><div class="p-4"><h3 class="text-[0.68rem] font-bold leading-snug mb-2 uppercase" style="letter-spacing:-.01em">${escapeHtml(p.title)}</h3><div class="text-sm font-bold">${formatPrice(p.price)}</div></div>`;el.querySelector('.wish-btn').addEventListener('click',e=>{e.stopPropagation();toggleWishlist(p.id);});return el;}
 function renderCatalog(){const grid=$('catalogGrid');grid.innerHTML='';PRODUCTS.forEach(p=>grid.appendChild(productCard(p)));}
-function renderAlbums(){const list=$('albumList');list.innerHTML='';ALBUMS.forEach((a,idx)=>{const row=document.createElement('button');row.type='button';row.className='album-row w-full text-left px-4 py-4 flex items-center gap-3'+(a.id===activeAlbumId?' active':'');row.innerHTML=`<span class="text-[0.65rem] font-mono tracking-widest w-8" style="color:var(--muted)">${String(idx+1).padStart(2,'0')}</span><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold tracking-wider uppercase truncate">${escapeHtml(a.title)}</p><p class="text-[0.55rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}</p></div>${a.featured?'<span class="badge-tag badge-new text-[0.5rem]">NEW</span>':''}<span class="text-xs" style="color:var(--muted)">→</span>`;row.addEventListener('click',()=>setActiveAlbum(a.id));list.appendChild(row);});$('albumCount').textContent=ALBUMS.length;}
+function renderAlbums(){const list=$('albumList');list.innerHTML='';ALBUMS.forEach((a,idx)=>{const row=document.createElement('button');row.type='button';row.className='album-row w-full text-left px-4 py-4 flex items-center gap-3'+(a.id===activeAlbumId?' active':'');row.innerHTML=`<span class="text-[0.6rem] font-bold w-8" style="color:var(--muted)">${String(idx+1).padStart(2,'0')}</span><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold uppercase truncate" style="letter-spacing:-.01em">${escapeHtml(a.title)}</p><p class="text-[0.5rem] tracking-[0.15em] uppercase mt-1 font-bold" style="color:var(--muted)">${a.type} · ${a.year}</p></div>${a.featured?'<span class="badge-tag badge-new text-[0.45rem]">NEW</span>':''}<span class="text-xs" style="color:var(--muted)">→</span>`;row.addEventListener('click',()=>setActiveAlbum(a.id));list.appendChild(row);});$('albumCount').textContent=ALBUMS.length;}
 function setActiveAlbum(id){activeAlbumId=id;renderAlbums();renderAlbumPlayer();}
-function renderAlbumPlayer(){const wrap=$('albumPlayer');const a=getAlbum(activeAlbumId);if(!a)return;const idx=ALBUMS.findIndex(x=>x.id===a.id);wrap.innerHTML=`<div class="px-5 py-4 border-b flex items-center justify-between gap-3" style="border-color:var(--border)"><div class="min-w-0"><p class="text-[0.55rem] tracking-[0.3em] uppercase text-[#c1121f]">// Now playing · ${String(idx+1).padStart(2,'0')}/${String(ALBUMS.length).padStart(2,'0')}</p><p class="display text-lg md:text-xl truncate mt-1">${escapeHtml(a.title)}</p><p class="text-[0.6rem] tracking-[0.25em] uppercase mt-1" style="color:var(--muted)">${a.type} · ${a.year}${a.runtime&&a.runtime!=='—'?' · '+a.runtime:''}</p></div><a href="${a.spotify}" target="_blank" rel="noopener" class="btn-brut text-[0.55rem] px-3 py-2 whitespace-nowrap">СЛУХАТИ <span class="arrow-slide">→</span></a></div><div class="px-5 py-4 border-b" style="border-color:var(--border)"><p class="text-xs leading-relaxed" style="color:var(--muted)">${escapeHtml(a.note)}</p></div><div><iframe src="${a.embed}" width="100%" height="${a.type==='ALBUM'?380:152}" frameborder="0" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block"></iframe></div><div class="px-5 py-3 border-t flex items-center justify-between text-[0.55rem] tracking-[0.25em] uppercase" style="border-color:var(--border);color:var(--muted)"><button id="albumPrev" class="hover:text-[#c1121f] transition">← PREV</button><span>${idx+1} / ${ALBUMS.length}</span><button id="albumNext" class="hover:text-[#c1121f] transition">NEXT →</button></div>`;$('albumPrev').addEventListener('click',()=>shiftAlbum(-1));$('albumNext').addEventListener('click',()=>shiftAlbum(1));}
+function renderAlbumPlayer(){const wrap=$('albumPlayer');const a=getAlbum(activeAlbumId);if(!a)return;const idx=ALBUMS.findIndex(x=>x.id===a.id);wrap.innerHTML=`<div class="px-5 py-4 border-b flex items-center justify-between gap-3" style="border-color:var(--border)"><div class="min-w-0"><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Now playing · ${String(idx+1).padStart(2,'0')}/${String(ALBUMS.length).padStart(2,'0')}</p><p class="display text-lg md:text-xl truncate mt-1">${escapeHtml(a.title)}</p><p class="text-[0.55rem] tracking-[0.15em] uppercase mt-1 font-bold" style="color:var(--muted)">${a.type} · ${a.year}${a.runtime&&a.runtime!=='—'?' · '+a.runtime:''}</p></div><a href="${a.spotify}" target="_blank" rel="noopener" class="btn-brut text-[0.5rem] px-3 py-2 whitespace-nowrap">СЛУХАТИ <span class="arrow-slide">→</span></a></div><div class="px-5 py-4 border-b" style="border-color:var(--border)"><p class="text-xs leading-relaxed" style="color:var(--muted)">${escapeHtml(a.note)}</p></div><div><iframe src="${a.embed}" width="100%" height="${a.type==='ALBUM'?380:152}" frameborder="0" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block"></iframe></div><div class="px-5 py-3 border-t flex items-center justify-between text-[0.5rem] tracking-[0.2em] uppercase font-bold" style="border-color:var(--border);color:var(--muted)"><button id="albumPrev" class="hover:text-[#c1121f] transition">← PREV</button><span>${idx+1} / ${ALBUMS.length}</span><button id="albumNext" class="hover:text-[#c1121f] transition">NEXT →</button></div>`;$('albumPrev').addEventListener('click',()=>shiftAlbum(-1));$('albumNext').addEventListener('click',()=>shiftAlbum(1));}
 function shiftAlbum(dir){const idx=ALBUMS.findIndex(x=>x.id===activeAlbumId);const next=(idx+dir+ALBUMS.length)%ALBUMS.length;setActiveAlbum(ALBUMS[next].id);}
-function renderTour(){const list=$('tourList');if(!list)return;list.innerHTML='';const t_cta=(I18N[currentLang]||I18N.ua).tour_cta;TOUR.forEach(t=>{const row=document.createElement('div');row.className='tour-row';row.innerHTML=`<span class="tour-date">${t.date}</span><div class="tour-info"><p class="tour-city">${escapeHtml(t.city)}</p><p class="tour-venue">${escapeHtml(t.venue)}</p></div>${t.hot?'<span class="badge-tag badge-new text-[0.5rem]">HOT</span>':''}<span class="tour-cta">${t_cta} →</span>`;row.addEventListener('click',()=>openTicketModal(t.city,t.date,t.venue));list.appendChild(row);});}
+function renderTour(){const list=$('tourList');if(!list)return;list.innerHTML='';const t_cta=(I18N[currentLang]||I18N.ua).tour_cta;TOUR.forEach(t=>{const row=document.createElement('div');row.className='tour-row';row.innerHTML=`<span class="tour-date">${t.date}</span><div class="tour-info"><p class="tour-city">${escapeHtml(t.city)}</p><p class="tour-venue">${escapeHtml(t.venue)}</p></div>${t.hot?'<span class="badge-tag badge-new text-[0.45rem]">HOT</span>':''}<span class="tour-cta">${t_cta} →</span>`;row.addEventListener('click',()=>openTicketModal(t.city,t.date,t.venue));list.appendChild(row);});}
 function addToCart(id,size,qty=1){const p=getProduct(id);if(!p)return;if(p.sizes&&p.sizes.length&&!size){openSizeModal(id);return;}const key=id+'::'+(size||'');const existing=cart.find(i=>i.productId+'::'+(i.size||'')===key);if(existing)existing.qty+=qty;else cart.push({productId:id,size:size||null,qty});saveState();updateCartUI();renderCart();toast(`${p.title.slice(0,32)} додано`);}
 function removeFromCart(idx){cart.splice(idx,1);saveState();updateCartUI();renderCart();}
 function changeQty(idx,d){if(!cart[idx])return;cart[idx].qty+=d;if(cart[idx].qty<=0)cart.splice(idx,1);saveState();updateCartUI();renderCart();}
-function renderCart(){const c=$('cartItems');const empty=$('cartEmpty');c.innerHTML='';if(!cart.length){c.classList.add('hidden');empty.classList.remove('hidden');}else{c.classList.remove('hidden');empty.classList.add('hidden');cart.forEach((item,idx)=>{const p=getProduct(item.productId);if(!p)return;const el=document.createElement('div');el.className='flex gap-3';el.innerHTML=`<div class="w-20 h-20 border flex-shrink-0 overflow-hidden" style="border-color:var(--border);background:var(--panel)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.65rem] font-bold tracking-wider uppercase leading-snug mb-1">${escapeHtml(p.title)}</p>${item.size?`<p class="text-[0.55rem] uppercase mb-1" style="color:var(--muted)">Розмір: ${item.size}</p>`:''}<div class="flex items-center justify-between mt-2"><div class="flex items-center border" style="border-color:var(--border)"><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-dec="${idx}">−</button><span class="w-8 text-center text-[0.7rem] font-mono">${item.qty}</span><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-inc="${idx}">+</button></div><span class="text-[0.7rem] font-bold">${formatPrice(p.price*item.qty)}</span></div></div><button class="self-start p-2 hover:text-[#c1121f]" style="color:var(--muted)" data-rm="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;el.querySelector('[data-dec]').addEventListener('click',()=>changeQty(idx,-1));el.querySelector('[data-inc]').addEventListener('click',()=>changeQty(idx,1));el.querySelector('[data-rm]').addEventListener('click',()=>removeFromCart(idx));c.appendChild(el);});}updateCartTotals();}
+function renderCart(){const c=$('cartItems');const empty=$('cartEmpty');c.innerHTML='';if(!cart.length){c.classList.add('hidden');empty.classList.remove('hidden');}else{c.classList.remove('hidden');empty.classList.add('hidden');cart.forEach((item,idx)=>{const p=getProduct(item.productId);if(!p)return;const el=document.createElement('div');el.className='flex gap-3';el.innerHTML=`<div class="w-20 h-20 border flex-shrink-0 overflow-hidden" style="border-color:var(--border);background:var(--panel)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.65rem] font-bold uppercase leading-snug mb-1" style="letter-spacing:-.01em">${escapeHtml(p.title)}</p>${item.size?`<p class="text-[0.55rem] uppercase mb-1" style="color:var(--muted)">Розмір: ${item.size}</p>`:''}<div class="flex items-center justify-between mt-2"><div class="flex items-center border" style="border-color:var(--border)"><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-dec="${idx}">−</button><span class="w-8 text-center text-[0.7rem] font-bold">${item.qty}</span><button class="w-8 h-8 flex items-center justify-center hover:text-[#c1121f]" data-inc="${idx}">+</button></div><span class="text-[0.7rem] font-bold">${formatPrice(p.price*item.qty)}</span></div></div><button class="self-start p-2 hover:text-[#c1121f]" style="color:var(--muted)" data-rm="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;el.querySelector('[data-dec]').addEventListener('click',()=>changeQty(idx,-1));el.querySelector('[data-inc]').addEventListener('click',()=>changeQty(idx,1));el.querySelector('[data-rm]').addEventListener('click',()=>removeFromCart(idx));c.appendChild(el);});}updateCartTotals();}
 function updateCartTotals(){const total=cartTotalUAH();if($('cartSubtotal'))$('cartSubtotal').textContent=formatPrice(total);if($('checkoutSubtotal'))$('checkoutSubtotal').textContent=formatPrice(total);if($('checkoutTotal'))$('checkoutTotal').textContent=formatPrice(total);}
 function updateCartUI(){const count=cartCount();const badge=$('cartCount');if(badge){badge.textContent=count;badge.style.display=count>0?'flex':'none';}const btn=$('checkoutBtn');if(btn)btn.disabled=cart.length===0;}
 function updateWishUI(){const b=$('wishCountBadge');if(b){b.textContent=wishlist.length;b.style.display=wishlist.length>0?'flex':'none';}const bM=$('wishCountBadgeM');if(bM)bM.textContent=wishlist.length;}
@@ -836,7 +843,7 @@ async function startMonoPay(order){if(!order){toast('Замовлення не �
 
 function openSearch(){$('searchOverlay').classList.add('open');document.body.classList.add('no-scroll');setTimeout(()=>$('searchInput').focus(),100);}
 function closeSearch(){$('searchOverlay').classList.remove('open');$('searchInput').value='';$('searchResults').innerHTML='';if(!document.querySelector('.modal.open, .cart-drawer.open'))document.body.classList.remove('no-scroll');}
-function performSearch(q){const results=$('searchResults');if(!q.trim()){results.innerHTML='';return;}const lower=q.toLowerCase();const found=PRODUCTS.filter(p=>p.title.toLowerCase().includes(lower)||p.desc.toLowerCase().includes(lower));if(!found.length){const emptyMsg=(I18N[currentLang]||I18N.ua).search_empty;results.innerHTML='<p class="text-center text-xs uppercase py-8" style="color:var(--muted)">'+emptyMsg+'</p>';return;}results.innerHTML='';found.forEach(p=>{const el=document.createElement('div');el.className='search-result';el.innerHTML=`<div class="w-14 h-14 border flex-shrink-0 overflow-hidden" style="border-color:var(--border)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold uppercase truncate">${escapeHtml(p.title)}</p><p class="text-[0.6rem] uppercase mt-1" style="color:var(--muted)">${formatPrice(p.price)}</p></div>`;el.addEventListener('click',()=>{closeSearch();openProductModal(p.id);});results.appendChild(el);});}
+function performSearch(q){const results=$('searchResults');if(!q.trim()){results.innerHTML='';return;}const lower=q.toLowerCase();const found=PRODUCTS.filter(p=>p.title.toLowerCase().includes(lower)||p.desc.toLowerCase().includes(lower));if(!found.length){const emptyMsg=(I18N[currentLang]||I18N.ua).search_empty;results.innerHTML='<p class="text-center text-xs uppercase py-8" style="color:var(--muted)">'+emptyMsg+'</p>';return;}results.innerHTML='';found.forEach(p=>{const el=document.createElement('div');el.className='search-result';el.innerHTML=`<div class="w-14 h-14 border flex-shrink-0 overflow-hidden" style="border-color:var(--border)"><img src="${p.img1}" class="w-full h-full object-cover"/></div><div class="flex-1 min-w-0"><p class="text-[0.7rem] font-bold uppercase truncate">${escapeHtml(p.title)}</p><p class="text-[0.6rem] uppercase mt-1 font-bold" style="color:var(--muted)">${formatPrice(p.price)}</p></div>`;el.addEventListener('click',()=>{closeSearch();openProductModal(p.id);});results.appendChild(el);});}
 function applyTheme(){document.body.classList.toggle('light-mode',currentTheme==='light');const moon=$('iconMoon'),sun=$('iconSun');if(moon&&sun){moon.classList.toggle('hidden',currentTheme==='light');sun.classList.toggle('hidden',currentTheme!=='light');}}
 function toggleTheme(){currentTheme=currentTheme==='light'?'dark':'light';saveState();applyTheme();}
 function applyI18n(){const dict=I18N[currentLang]||I18N.ua;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const val=dict[key];if(val===undefined)return;if(el.hasAttribute('data-i18n-html'))el.innerHTML=val;else el.textContent=val;});document.documentElement.lang=currentLang==='en'?'en':'uk';}
