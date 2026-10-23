@@ -48,7 +48,7 @@ body.no-scroll{overflow:hidden}
 .display{font-family:'Unbounded',sans-serif;font-weight:900;letter-spacing:-.02em}
 .mono{font-family:'JetBrains Mono',monospace}
 input,select,textarea{font-family:'JetBrains Mono',monospace}
-.form-input{font-family:'JetBrains Mono',monospace}
+.form-input{font-family:'JetBrains Mono',monospace;background-color: var(--bg);}
 .noise-bg{background-image:radial-gradient(circle at 20% 30%,rgba(193,18,31,.04) 0,transparent 40%),linear-gradient(180deg,var(--bg),var(--panel))}
 .grid-bg{background-image:linear-gradient(rgba(128,128,128,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,128,.05) 1px,transparent 1px);background-size:40px 40px}
 @keyframes marquee{to{transform:translateX(-50%)}}
@@ -681,11 +681,25 @@ body.light-mode .hero-logo{filter:brightness(0)}
       </div>
       <div><label class="form-label" data-i18n="l_email">Email *</label><input name="email" type="email" required class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
       <div><label class="form-label" data-i18n="l_phone">Телефон *</label><input name="phone" type="tel" required class="form-input" placeholder="+380..."/></div>
-      <div><label class="form-label" data-i18n="l_address">Відділення НП / Адреса *</label><input name="address" type="text" required class="form-input" placeholder="№ ВІДДІЛЕННЯ"/></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="form-label" data-i18n="l_city">Місто *</label><input name="city" type="text" required class="form-input" placeholder="КИЇВ"/></div>
-        <div><label class="form-label" data-i18n="l_zip">Індекс *</label><input name="zip" type="text" required class="form-input" placeholder="01001"/></div>
+      
+      <!-- НОВІ ПОЛЯ ДЛЯ НОВОЇ ПОШТИ -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="form-label">Місто *</label>
+          <select name="city" id="citySelect" required class="form-input">
+            <option value="">Завантаження міст...</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Відділення Нової Пошти *</label>
+          <select name="address" id="warehouseSelect" required class="form-input">
+            <option value="">— Спочатку оберіть місто —</option>
+          </select>
+        </div>
       </div>
+      <div><label class="form-label" data-i18n="l_zip">Індекс (необов'язково)</label><input name="zip" type="text" class="form-input" placeholder="01001"/></div>
+      <!-- КІНЕЦЬ ПОЛІВ ДЛЯ НП -->
+
       <div><label class="form-label" data-i18n="l_payment">Спосіб оплати *</label>
         <select name="payment" required class="form-input">
           <option value="">— ОБЕРІТЬ —</option>
@@ -705,12 +719,101 @@ body.light-mode .hero-logo{filter:brightness(0)}
 
 <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
+<!-- API NOVA POSHTA -->
+<script>
+  // 1. ВСТАВТЕ СВІЙ API КЛЮЧ НОВОЇ ПОШТИ ТУТ
+  const NP_API_KEY = 'ВАШ_API_КЛЮЧ'; 
+  const NP_API_URL = 'https://api.novaposhta.ua/v2.0/json/';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const citySelect = document.getElementById('citySelect');
+    const warehouseSelect = document.getElementById('warehouseSelect');
+
+    async function loadCities() {
+      try {
+        const response = await fetch(NP_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            apiKey: NP_API_KEY,
+            modelName: 'Address',
+            calledMethod: 'getCities',
+            methodProperties: {}
+          })
+        });
+        const data = await response.json();
+        if (data.success) {
+          citySelect.innerHTML = '<option value="">— Оберіть місто —</option>';
+          data.data.sort((a, b) => a.Description.localeCompare(b.Description));
+          data.data.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.Description; // Зберігаємо назву для форми
+            option.dataset.ref = city.Ref; // Зберігаємо Ref для запиту відділень
+            option.textContent = city.Description;
+            citySelect.appendChild(option);
+          });
+        } else {
+          citySelect.innerHTML = '<option value="">Помилка завантаження</option>';
+          console.error('Помилка завантаження міст:', data.errors);
+        }
+      } catch (error) {
+        citySelect.innerHTML = '<option value="">Помилка мережі</option>';
+        console.error('Помилка запиту міст:', error);
+      }
+    }
+
+    async function loadWarehouses(cityRef) {
+      warehouseSelect.innerHTML = '<option value="">Завантаження...</option>';
+      try {
+        const response = await fetch(NP_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            apiKey: NP_API_KEY,
+            modelName: 'Address',
+            calledMethod: 'getWarehouses',
+            methodProperties: { CityRef: cityRef }
+          })
+        });
+        const data = await response.json();
+        if (data.success) {
+          warehouseSelect.innerHTML = '<option value="">— Оберіть відділення —</option>';
+          data.data.forEach(warehouse => {
+            const option = document.createElement('option');
+            option.value = warehouse.Description; // Зберігаємо назву для форми
+            option.textContent = warehouse.Description;
+            warehouseSelect.appendChild(option);
+          });
+        } else {
+          warehouseSelect.innerHTML = '<option value="">Помилка</option>';
+          console.error('Помилка завантаження відділень:', data.errors);
+        }
+      } catch (error) {
+        warehouseSelect.innerHTML = '<option value="">Помилка</option>';
+        console.error('Помилка запиту відділень:', error);
+      }
+    }
+
+    citySelect.addEventListener('change', function() {
+      const selectedOption = this.options[this.selectedIndex];
+      const cityRef = selectedOption.dataset.ref;
+      if (cityRef) {
+        loadWarehouses(cityRef);
+      } else {
+        warehouseSelect.innerHTML = '<option value="">— Спочатку оберіть місто —</option>';
+      }
+    });
+
+    loadCities();
+  });
+</script>
+
 <script>
 const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v36', CUR:'ftd_cur_v26', THEME:'ftd_theme_v26', LANG:'ftd_lang_v26', WISH:'ftd_wish_v26', COOKIE:'ftd_cookie_v26', SIZE:'ftd_size_v26', ORDERS:'ftd_orders_v26', TICKETS:'ftd_tickets_v26' };
+const KEYS = { CART:'ftd_cart_v37', CUR:'ftd_cur_v27', THEME:'ftd_theme_v27', LANG:'ftd_lang_v27', WISH:'ftd_wish_v27', COOKIE:'ftd_cookie_v27', SIZE:'ftd_size_v27', ORDERS:'ftd_orders_v27', TICKETS:'ftd_tickets_v27' };
 
 const REAL = {
   p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
@@ -783,7 +886,7 @@ const VALIDATORS = {
   firstName: v => v.trim().length >= 2, lastName: v => v.trim().length >= 2,
   email: v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), phone: v => v.trim().length >= 8,
   address: v => v.trim().length >= 3, city: v => v.trim().length >= 2,
-  zip: v => /^\d{4,6}$/.test(v.trim()), payment: v => v !== ''
+  zip: v => v.trim() === '' || /^\d{4,6}$/.test(v.trim()), payment: v => v !== ''
 };
 
 let cart = [], wishlist = [];
@@ -827,10 +930,13 @@ function openProductModal(id){const p=getProduct(id);$('prodModalTitle').textCon
 function openTicketModal(city,date,venue){currentTicket={city,date,venue};$('ticketDate').textContent='// '+date;$('ticketCity').textContent=city;$('ticketVenue').textContent=venue;const form=$('ticketForm');form.reset();form.elements['qty'].value=1;$('ticketError').classList.add('hidden');['tName','tPhone','tEmail'].forEach(n=>form.elements[n].classList.remove('error'));openModal('ticketModal');}
 function openCheckout(){if(!cart.length){toast('Кошик порожній');return;}closeCart();updateCartTotals();openModal('checkoutModal');}
 
-$('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);let ok=true;['firstName','lastName','email','phone','address','city','zip','payment'].forEach(n=>{const f=form.elements[n];const valid=VALIDATORS[n](f.value);f.classList.toggle('error',!valid);if(!valid)ok=false;});if(!ok){$('checkoutError').textContent='⚠ Заповніть всі поля';$('checkoutError').classList.remove('hidden');return;}$('checkoutError').classList.add('hidden');const orderId='FTD-'+Math.random().toString(36).slice(2,7).toUpperCase();const total=cartTotalUAH();const items=cart.map(i=>{const p=getProduct(i.productId);return{title:p.title,qty:i.qty,size:i.size,price:formatPrice(p.price*i.qty)};});const payment=fd.get('payment')||'';const order={id:orderId,name:(fd.get('firstName')||'')+' '+(fd.get('lastName')||''),email:fd.get('email')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',city:fd.get('city')||'',payment,items,total:formatPrice(total),date:new Date().toLocaleString('uk-UA')};window.__lastOrder=order;try{const list=JSON.parse(localStorage.getItem(KEYS.ORDERS)||'[]');list.unshift(order);localStorage.setItem(KEYS.ORDERS,JSON.stringify(list.slice(0,100)));}catch(e){}
+$('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);let ok=true;['firstName','lastName','email','phone','address','city','payment'].forEach(n=>{const f=form.elements[n];const valid=VALIDATORS[n](f.value);f.classList.toggle('error',!valid);if(!valid)ok=false;});if(!ok){$('checkoutError').textContent='⚠ Заповніть всі поля';$('checkoutError').classList.remove('hidden');return;}$('checkoutError').classList.add('hidden');const orderId='FTD-'+Math.random().toString(36).slice(2,7).toUpperCase();const total=cartTotalUAH();const items=cart.map(i=>{const p=getProduct(i.productId);return{title:p.title,qty:i.qty,size:i.size,price:formatPrice(p.price*i.qty)};});const payment=fd.get('payment')||'';const order={id:orderId,name:(fd.get('firstName')||'')+' '+(fd.get('lastName')||''),email:fd.get('email')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',city:fd.get('city')||'',payment,items,total:formatPrice(total),date:new Date().toLocaleString('uk-UA')};window.__lastOrder=order;try{const list=JSON.parse(localStorage.getItem(KEYS.ORDERS)||'[]');list.unshift(order);localStorage.setItem(KEYS.ORDERS,JSON.stringify(list.slice(0,100)));}catch(e){}
 $('orderId').textContent=order.id;$('orderDate').textContent=new Date().toLocaleDateString('uk-UA');$('orderTotal').textContent=order.total;$('orderName').textContent=order.name;$('orderPhone').textContent=order.phone;$('orderItemsTotal').textContent=order.total;$('orderItems').innerHTML=cart.map(i=>{const p=getProduct(i.productId);return`<div class="flex items-center justify-between text-xs gap-3"><div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p><p class="text-[0.6rem]" style="color:var(--muted)">${i.size?'Розмір: '+i.size+' · ':''}${i.qty} шт</p></div><span class="font-bold">${formatPrice(p.price*i.qty)}</span></div>`;}).join('');
 if(payment==='monobank'){$('monoPayBlock').classList.remove('hidden');}else{$('monoPayBlock').classList.add('hidden');}
-cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();$('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
+cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();
+// Очищаємо селекти після успішного замовлення
+if($('warehouseSelect')) $('warehouseSelect').innerHTML = '<option value="">— Спочатку оберіть місто —</option>';
+$('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
 
 $('ticketForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);const name=(fd.get('tName')||'').trim();const phone=(fd.get('tPhone')||'').trim();const email=(fd.get('tEmail')||'').trim();const qty=Math.min(10,Math.max(1,parseInt(fd.get('qty'))||1));let ok=true;form.elements['tName'].classList.toggle('error',name.length<2);form.elements['tPhone'].classList.toggle('error',phone.length<8);if(name.length<2||phone.length<8)ok=false;if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){form.elements['tEmail'].classList.add('error');ok=false;}else{form.elements['tEmail'].classList.remove('error');}if(!ok){$('ticketError').textContent='⚠ Перевірте виділені поля';$('ticketError').classList.remove('hidden');return;}$('ticketError').classList.add('hidden');const ticketId='TKT-'+Math.random().toString(36).slice(2,7).toUpperCase();const ticket={id:ticketId,type:'ticket',city:currentTicket.city,date:currentTicket.date,venue:currentTicket.venue,qty,name,phone,email,created:new Date().toLocaleString('uk-UA')};window.__lastTicket=ticket;try{const list=JSON.parse(localStorage.getItem(KEYS.TICKETS)||'[]');list.unshift(ticket);localStorage.setItem(KEYS.TICKETS,JSON.stringify(list.slice(0,100)));}catch(e){}closeModal('ticketModal');openBotWithTicket(ticket);});
 
