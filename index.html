@@ -682,7 +682,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div><label class="form-label" data-i18n="l_email">Email *</label><input name="email" type="email" required class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
       <div><label class="form-label" data-i18n="l_phone">Телефон *</label><input name="phone" type="tel" required class="form-input" placeholder="+380..."/></div>
       
-      <!-- НОВІ ПОЛЯ ДЛЯ НОВОЇ ПОШТИ -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="form-label">Місто *</label>
@@ -698,7 +697,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
         </div>
       </div>
       <div><label class="form-label" data-i18n="l_zip">Індекс (необов'язково)</label><input name="zip" type="text" class="form-input" placeholder="01001"/></div>
-      <!-- КІНЕЦЬ ПОЛІВ ДЛЯ НП -->
 
       <div><label class="form-label" data-i18n="l_payment">Спосіб оплати *</label>
         <select name="payment" required class="form-input">
@@ -719,11 +717,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
 
 <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-<!-- API NOVA POSHTA -->
+<!-- NOVA POSHTA API (ЧЕРЕЗ PROXY WORKER) -->
 <script>
-  // 1. ВСТАВТЕ СВІЙ API КЛЮЧ НОВОЇ ПОШТИ ТУТ
-  const NP_API_KEY = 'ВАШ_API_КЛЮЧ'; 
-  const NP_API_URL = 'https://api.novaposhta.ua/v2.0/json/';
+  // Використовуємо ваш існуючий Cloudflare Worker як проксі
+  const NP_PROXY_URL = 'https://ftd-bot.kb252-mka.workers.dev/np'; 
 
   document.addEventListener('DOMContentLoaded', function() {
     const citySelect = document.getElementById('citySelect');
@@ -731,11 +728,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
 
     async function loadCities() {
       try {
-        const response = await fetch(NP_API_URL, {
+        const response = await fetch(NP_PROXY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            apiKey: NP_API_KEY,
             modelName: 'Address',
             calledMethod: 'getCities',
             methodProperties: {}
@@ -747,8 +743,8 @@ body.light-mode .hero-logo{filter:brightness(0)}
           data.data.sort((a, b) => a.Description.localeCompare(b.Description));
           data.data.forEach(city => {
             const option = document.createElement('option');
-            option.value = city.Description; // Зберігаємо назву для форми
-            option.dataset.ref = city.Ref; // Зберігаємо Ref для запиту відділень
+            option.value = city.Description; 
+            option.dataset.ref = city.Ref; 
             option.textContent = city.Description;
             citySelect.appendChild(option);
           });
@@ -765,11 +761,10 @@ body.light-mode .hero-logo{filter:brightness(0)}
     async function loadWarehouses(cityRef) {
       warehouseSelect.innerHTML = '<option value="">Завантаження...</option>';
       try {
-        const response = await fetch(NP_API_URL, {
+        const response = await fetch(NP_PROXY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            apiKey: NP_API_KEY,
             modelName: 'Address',
             calledMethod: 'getWarehouses',
             methodProperties: { CityRef: cityRef }
@@ -780,7 +775,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
           warehouseSelect.innerHTML = '<option value="">— Оберіть відділення —</option>';
           data.data.forEach(warehouse => {
             const option = document.createElement('option');
-            option.value = warehouse.Description; // Зберігаємо назву для форми
+            option.value = warehouse.Description;
             option.textContent = warehouse.Description;
             warehouseSelect.appendChild(option);
           });
@@ -813,19 +808,19 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v37', CUR:'ftd_cur_v27', THEME:'ftd_theme_v27', LANG:'ftd_lang_v27', WISH:'ftd_wish_v27', COOKIE:'ftd_cookie_v27', SIZE:'ftd_size_v27', ORDERS:'ftd_orders_v27', TICKETS:'ftd_tickets_v27' };
+const KEYS = { CART:'ftd_cart_v38', CUR:'ftd_cur_v28', THEME:'ftd_theme_v28', LANG:'ftd_lang_v28', WISH:'ftd_wish_v28', COOKIE:'ftd_cookie_v28', SIZE:'ftd_size_v28', ORDERS:'ftd_orders_v28', TICKETS:'ftd_tickets_v28' };
 
 const REAL = {
-  p1:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
-  p1b:'https://i.postimg.cc/VsT6G74B/photo-2026-09-23-13-29-34.jpg',
-  p2:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
-  p2b:'https://i.postimg.cc/8PNX7r7H/photo-2026-09-23-13-29-36.jpg',
+  p1:'https://i.postimg.cc/j2PNqgm0/5305690564269383524.jpg',
+  p1b:'https://i.postimg.cc/j2PNqgm0/5305690564269383524.jpg',
+  p2:'https://i.postimg.cc/X76d1WBv/5305690564269383525.jpg',
+  p2b:'https://i.postimg.cc/X76d1WBv/5305690564269383525.jpg',
   p4:'https://i.postimg.cc/L5Kk7v9f/19a87adf-4d2f-48c0-9e82-aace81663485.jpg',
   p4b:'https://i.postimg.cc/L5Kk7v9f/19a87adf-4d2f-48c0-9e82-aace81663485.jpg',
   p5:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
   p5b:'https://i.postimg.cc/pdhqwfS9/photo-2026-09-23-13-29-40.jpg',
-  p6:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg',
-  p6b:'https://i.postimg.cc/ryhz8xCh/5305690564269383522.jpg',
+  p6:'https://i.postimg.cc/T3CbPW7W/5305690564269383522.jpg',
+  p6b:'https://i.postimg.cc/T3CbPW7W/5305690564269383522.jpg',
   p7:'https://i.postimg.cc/pLpFNBTw/image-2026-10-13-10-32-12.png',
   p7b:'https://i.postimg.cc/pLpFNBTw/image-2026-10-13-10-32-12.png'
 };
@@ -934,7 +929,6 @@ $('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.
 $('orderId').textContent=order.id;$('orderDate').textContent=new Date().toLocaleDateString('uk-UA');$('orderTotal').textContent=order.total;$('orderName').textContent=order.name;$('orderPhone').textContent=order.phone;$('orderItemsTotal').textContent=order.total;$('orderItems').innerHTML=cart.map(i=>{const p=getProduct(i.productId);return`<div class="flex items-center justify-between text-xs gap-3"><div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p><p class="text-[0.6rem]" style="color:var(--muted)">${i.size?'Розмір: '+i.size+' · ':''}${i.qty} шт</p></div><span class="font-bold">${formatPrice(p.price*i.qty)}</span></div>`;}).join('');
 if(payment==='monobank'){$('monoPayBlock').classList.remove('hidden');}else{$('monoPayBlock').classList.add('hidden');}
 cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();
-// Очищаємо селекти після успішного замовлення
 if($('warehouseSelect')) $('warehouseSelect').innerHTML = '<option value="">— Спочатку оберіть місто —</option>';
 $('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
 
