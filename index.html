@@ -709,7 +709,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="form-label" data-i18n="l_first_name">Ім'я *</label>
-          <!-- Додано oninput для фільтрації та pattern для браузера -->
           <input name="firstName" type="text" required class="form-input" placeholder="ІВАН" 
                  pattern="[А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]{2,50}"
                  oninput="this.value = this.value.replace(/[^А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]/g, '')"/>
@@ -857,7 +856,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v42', CUR:'ftd_cur_v32', THEME:'ftd_theme_v32', LANG:'ftd_lang_v32', WISH:'ftd_wish_v32', COOKIE:'ftd_cookie_v32', SIZE:'ftd_size_v32', ORDERS:'ftd_orders_v32', TICKETS:'ftd_tickets_v32' };
+const KEYS = { CART:'ftd_cart_v43', CUR:'ftd_cur_v33', THEME:'ftd_theme_v33', LANG:'ftd_lang_v33', WISH:'ftd_wish_v33', COOKIE:'ftd_cookie_v33', SIZE:'ftd_size_v33', ORDERS:'ftd_orders_v33', TICKETS:'ftd_tickets_v33' };
 
 const REAL = {
   p1:'https://i.postimg.cc/j2PNqgm0/5305690564269383524.jpg',
@@ -1028,11 +1027,59 @@ function initCookie(){if(!localStorage.getItem(KEYS.COOKIE))setTimeout(()=>$('co
 function dismissCookie(acc){localStorage.setItem(KEYS.COOKIE,acc?'accepted':'declined');$('cookieBanner').classList.remove('show');}
 function initNewsletter(){const form=$('newsletterForm');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();const input=form.querySelector('input[type="email"]');const msg=$('newsletterMsg');const val=input.value.trim();if(!VALIDATORS.email(val)){msg.textContent='⚠ Введіть коректний email';msg.style.color='#e63946';msg.classList.remove('hidden');input.classList.add('error');return;}input.classList.remove('error');msg.textContent='✓ Дякуємо! Ти в списку.';msg.style.color='#c9f31a';msg.classList.remove('hidden');form.reset();toast('Підписку оформлено');});}
 
+// SEO: Впровадження JSON-LD мікророзмітки
+function injectSEO() {
+  // 1. MusicGroup / Organization Schema
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "FIRST TO DIE",
+    "image": "https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png",
+    "url": window.location.origin,
+    "sameAs": [
+      "https://www.instagram.com/first2diecrew/",
+      "https://open.spotify.com/artist/1cbGtPIT84DzV99EOCYtJC",
+      "https://www.youtube.com/channel/UCFdiaRpsE5ppQ1WwXCY8hcw"
+    ]
+  };
+  const orgScript = document.createElement('script');
+  orgScript.type = 'application/ld+json';
+  orgScript.text = JSON.stringify(orgSchema);
+  document.head.appendChild(orgScript);
+
+  // 2. Product Schema (генерується для кожного товару)
+  const productSchemas = PRODUCTS.map(p => ({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": p.title,
+    "image": p.img1,
+    "description": p.desc,
+    "sku": p.id,
+    "brand": {
+      "@type": "Brand",
+      "name": "FIRST TO DIE"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": window.location.href + "#catalog",
+      "priceCurrency": "UAH",
+      "price": p.price,
+      "availability": p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "itemCondition": "https://schema.org/NewCondition"
+    }
+  }));
+
+  const prodScript = document.createElement('script');
+  prodScript.type = 'application/ld+json';
+  prodScript.text = JSON.stringify(productSchemas);
+  document.head.appendChild(prodScript);
+}
+
 document.addEventListener('click',e=>{const addBtn=e.target.closest('button[data-product-id]');if(addBtn){addToCart(addBtn.dataset.productId);return;}const card=e.target.closest('.product-card');if(card&&!e.target.closest('button')&&card.dataset.productId)openProductModal(card.dataset.productId);});
 document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));closeSearch();closeCart();const op=$('orderPage');if(op)op.classList.remove('show');document.body.classList.remove('no-scroll');}});
 window.addEventListener('scroll',()=>{const btn=$('backToTop');if(btn)btn.classList.toggle('show',window.scrollY>600);},{passive:true});
 
-function init(){loadState();applyTheme();if($('langLabel'))$('langLabel').textContent=currentLang.toUpperCase();if($('currencySelect'))$('currencySelect').value=currentCurrency;if($('currencySelectMobile'))$('currencySelectMobile').value=currentCurrency;if($('year'))$('year').textContent=new Date().getFullYear();renderCatalog();renderAlbums();renderAlbumPlayer();renderTour();renderCart();updateCartUI();updateWishUI();updateCartTotals();initCookie();initNewsletter();applyI18n();
+function init(){loadState();applyTheme();injectSEO();if($('langLabel'))$('langLabel').textContent=currentLang.toUpperCase();if($('currencySelect'))$('currencySelect').value=currentCurrency;if($('currencySelectMobile'))$('currencySelectMobile').value=currentCurrency;if($('year'))$('year').textContent=new Date().getFullYear();renderCatalog();renderAlbums();renderAlbumPlayer();renderTour();renderCart();updateCartUI();updateWishUI();updateCartTotals();initCookie();initNewsletter();applyI18n();
 const navTabs=document.querySelectorAll('[data-nav-tab]');const sections=['#catalog','#music','#tour','#contact'];if(navTabs.length){const spy=()=>{const y=window.scrollY+150;let current='';sections.forEach(sel=>{const el=document.querySelector(sel);if(el&&el.offsetTop<=y)current=sel;});navTabs.forEach(t=>{t.classList.toggle('active',t.getAttribute('href')===current);});};window.addEventListener('scroll',spy,{passive:true});spy();}
 $('hamburgerBtn')?.addEventListener('click',()=>$('mobileMenu').classList.toggle('open'));
 $('themeBtn')?.addEventListener('click',toggleTheme);$('themeBtnM')?.addEventListener('click',toggleTheme);
