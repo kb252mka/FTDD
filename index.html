@@ -530,11 +530,25 @@ body.light-mode .hero-logo{filter:brightness(0)}
         <span id="orderItemsTotal" class="display text-lg text-[#c1121f]">₴0</span>
       </div>
     </div>
+    
+    <!-- БЛОК MONOBANK -->
     <div id="monoPayBlock" class="border p-6 mb-6 hidden" style="background:var(--panel);border-color:var(--border)">
       <p class="text-[0.5rem] tracking-[0.2em] uppercase mb-4 text-center font-bold" style="color:var(--muted)">// Онлайн-оплата</p>
       <button id="monoPayBtn" class="btn-brut mono-btn w-full py-4">💳 ОПЛАТИТИ КАРТКОЮ MONOBANK</button>
       <p class="text-[0.55rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Безпечна оплата через Monobank Acquiring</p>
     </div>
+
+    <!-- БЛОК IBAN -->
+    <div id="ibanPayBlock" class="border p-6 mb-6 hidden" style="background:var(--panel);border-color:var(--border)">
+      <p class="text-[0.5rem] tracking-[0.2em] uppercase mb-4 text-center font-bold text-[#c9f31a]">// Реквізити для оплати</p>
+      <div class="border p-4 mb-4 text-center" style="border-color:var(--border);background:var(--bg)">
+        <p class="text-sm font-bold tracking-widest break-all" id="ibanText">UA153220010000026000350089118</p>
+        <p class="text-[0.6rem] mt-2" style="color:var(--muted)">Отримувач: FIRST TO DIE</p>
+      </div>
+      <button id="copyIbanBtn" class="btn-brut w-full py-3">📋 КОПІЮВАТИ IBAN</button>
+      <p class="text-[0.6rem] tracking-widest uppercase text-center mt-3" style="color:var(--muted)">Обов'язково вкажіть номер замовлення в призначенні платежу!</p>
+    </div>
+
     <div class="text-center space-y-3">
       <button id="sendToTelegram" class="btn-brut tg-btn w-full py-4" data-i18n="b_send_tg">✈ ВІДКРИТИ TELEGRAM-БОТА</button>
       <button id="continueShopping" class="btn-brut w-full py-3" data-i18n="b_continue">ПРОДОВЖИТИ ПОКУПКИ →</button>
@@ -675,7 +689,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <span class="text-[0.55rem] tracking-widest uppercase ml-auto font-bold" style="color:var(--muted)">Макс. 10</span>
         </div>
       </div>
-      <div><label class="form-label">Ім'я *</label><input name="tName" type="text" required class="form-input" placeholder="ІВАН"/></div>
+      <div><label class="form-label">Ім'я *</label><input name="tName" type="text" required class="form-input" placeholder="ІВАН" oninput="this.value = this.value.replace(/[^А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]/g, '')"/></div>
       <div><label class="form-label">Телефон *</label><input name="tPhone" type="tel" required class="form-input" placeholder="+380..."/></div>
       <div><label class="form-label">Email</label><input name="tEmail" type="email" class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
       <p id="ticketError" class="hidden text-[0.6rem] tracking-widest uppercase text-[#e63946] font-bold"></p>
@@ -693,10 +707,24 @@ body.light-mode .hero-logo{filter:brightness(0)}
     </div>
     <form id="checkoutForm" class="p-6 space-y-5" novalidate>
       <div class="grid grid-cols-2 gap-4">
-        <div><label class="form-label" data-i18n="l_first_name">Ім'я *</label><input name="firstName" type="text" required class="form-input" placeholder="ІВАН"/></div>
-        <div><label class="form-label" data-i18n="l_last_name">Прізвище *</label><input name="lastName" type="text" required class="form-input" placeholder="ПЕТРЕНКО"/></div>
+        <div>
+          <label class="form-label" data-i18n="l_first_name">Ім'я *</label>
+          <!-- Додано oninput для фільтрації та pattern для браузера -->
+          <input name="firstName" type="text" required class="form-input" placeholder="ІВАН" 
+                 pattern="[А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]{2,50}"
+                 oninput="this.value = this.value.replace(/[^А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]/g, '')"/>
+        </div>
+        <div>
+          <label class="form-label" data-i18n="l_last_name">Прізвище *</label>
+          <input name="lastName" type="text" required class="form-input" placeholder="ПЕТРЕНКО" 
+                 pattern="[А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]{2,50}"
+                 oninput="this.value = this.value.replace(/[^А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]/g, '')"/>
+        </div>
       </div>
-      <div><label class="form-label" data-i18n="l_email">Email *</label><input name="email" type="email" required class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
+      <div>
+        <label class="form-label" data-i18n="l_email">Email *</label>
+        <input name="email" type="email" required class="form-input" placeholder="IVAN@EXAMPLE.COM"/>
+      </div>
       <div><label class="form-label" data-i18n="l_phone">Телефон *</label><input name="phone" type="tel" required class="form-input" placeholder="+380..."/></div>
       
       <!-- ПОЛЯ ДЛЯ ДОСТАВКИ -->
@@ -742,7 +770,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
             <option value="Бориспіль">Бориспіль</option>
             <option value="Славутич">Славутич</option>
             <option value="Умань">Умань</option>
-            <option value="Мукахево">Мукачево</option>
+            <option value="Мукачево">Мукачево</option>
             <option value="Дрогобич">Дрогобич</option>
             <option value="Стрий">Стрий</option>
             <option value="Ковель">Ковель</option>
@@ -766,7 +794,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
             <option value="Коломия">Коломия</option>
             <option value="Калуш">Калуш</option>
             <option value="Надвірна">Надвірна</option>
-            <option value="Стрий">Стрий</option>
             <option value="Червоноград">Червоноград</option>
             <option value="Бахмут">Бахмут</option>
             <option value="Краматорськ">Краматорськ</option>
@@ -796,7 +823,6 @@ body.light-mode .hero-logo{filter:brightness(0)}
             <option value="Гуляйполе">Гуляйполе</option>
             <option value="Токмак">Токмак</option>
             <option value="Молочанськ">Молочанськ</option>
-            <option value="Дніпрорудне">Дніпрорудне</option>
           </select>
         </div>
         <div>
@@ -809,6 +835,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div><label class="form-label" data-i18n="l_payment">Спосіб оплати *</label>
         <select name="payment" required class="form-input">
           <option value="">— ОБЕРІТЬ —</option>
+          <option value="IBAN (банківський переказ)">IBAN (банківський переказ)</option>
           <option value="monobank">Monobank (онлайн)</option>
           <option value="cod">Накладений платіж (НП)</option>
         </select>
@@ -830,7 +857,7 @@ const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v40', CUR:'ftd_cur_v30', THEME:'ftd_theme_v30', LANG:'ftd_lang_v30', WISH:'ftd_wish_v30', COOKIE:'ftd_cookie_v30', SIZE:'ftd_size_v30', ORDERS:'ftd_orders_v30', TICKETS:'ftd_tickets_v30' };
+const KEYS = { CART:'ftd_cart_v42', CUR:'ftd_cur_v32', THEME:'ftd_theme_v32', LANG:'ftd_lang_v32', WISH:'ftd_wish_v32', COOKIE:'ftd_cookie_v32', SIZE:'ftd_size_v32', ORDERS:'ftd_orders_v32', TICKETS:'ftd_tickets_v32' };
 
 const REAL = {
   p1:'https://i.postimg.cc/j2PNqgm0/5305690564269383524.jpg',
@@ -899,11 +926,29 @@ const I18N = {
     tour_title:'UPCOMING SHOWS', tour_cta:'TICKETS', search_empty:'Nothing found' }
 };
 
+// ОНОВЛЕНІ ВАЛІДАТОРИ
 const VALIDATORS = {
-  firstName: v => v.trim().length >= 2, lastName: v => v.trim().length >= 2,
-  email: v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), phone: v => v.trim().length >= 8,
-  address: v => v.trim().length >= 3, city: v => v.trim().length >= 2,
-  zip: v => v.trim() === '' || /^\d{4,6}$/.test(v.trim()), payment: v => v !== ''
+  firstName: v => {
+    const val = v.trim();
+    const isValidFormat = /^[А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]+$/.test(val);
+    const isNotGibberish = !/(.)\1{2,}/i.test(val); // Заборона 3+ однакових літер підряд
+    return val.length >= 2 && val.length <= 50 && isValidFormat && isNotGibberish;
+  },
+  lastName: v => {
+    const val = v.trim();
+    const isValidFormat = /^[А-Яа-яЇїІіЄєҐґA-Za-z'’\-\s]+$/.test(val);
+    const isNotGibberish = !/(.)\1{2,}/i.test(val);
+    return val.length >= 2 && val.length <= 50 && isValidFormat && isNotGibberish;
+  },
+  email: v => {
+    const val = v.trim();
+    return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
+  },
+  phone: v => v.replace(/\D/g,'').length >= 9,
+  address: v => v.trim().length >= 3, 
+  city: v => v.trim().length >= 2,
+  zip: v => v.trim() === '' || /^\d{4,6}$/.test(v.trim()),
+  payment: v => v !== ''
 };
 
 let cart = [], wishlist = [];
@@ -947,13 +992,25 @@ function openProductModal(id){const p=getProduct(id);$('prodModalTitle').textCon
 function openTicketModal(city,date,venue){currentTicket={city,date,venue};$('ticketDate').textContent='// '+date;$('ticketCity').textContent=city;$('ticketVenue').textContent=venue;const form=$('ticketForm');form.reset();form.elements['qty'].value=1;$('ticketError').classList.add('hidden');['tName','tPhone','tEmail'].forEach(n=>form.elements[n].classList.remove('error'));openModal('ticketModal');}
 function openCheckout(){if(!cart.length){toast('Кошик порожній');return;}closeCart();updateCartTotals();openModal('checkoutModal');}
 
-$('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);let ok=true;['firstName','lastName','email','phone','address','city','payment'].forEach(n=>{const f=form.elements[n];const valid=VALIDATORS[n](f.value);f.classList.toggle('error',!valid);if(!valid)ok=false;});if(!ok){$('checkoutError').textContent='⚠ Заповніть всі поля';$('checkoutError').classList.remove('hidden');return;}$('checkoutError').classList.add('hidden');const orderId='FTD-'+Math.random().toString(36).slice(2,7).toUpperCase();const total=cartTotalUAH();const items=cart.map(i=>{const p=getProduct(i.productId);return{title:p.title,qty:i.qty,size:i.size,price:formatPrice(p.price*i.qty)};});const payment=fd.get('payment')||'';const order={id:orderId,name:(fd.get('firstName')||'')+' '+(fd.get('lastName')||''),email:fd.get('email')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',city:fd.get('city')||'',payment,items,total:formatPrice(total),date:new Date().toLocaleString('uk-UA')};window.__lastOrder=order;try{const list=JSON.parse(localStorage.getItem(KEYS.ORDERS)||'[]');list.unshift(order);localStorage.setItem(KEYS.ORDERS,JSON.stringify(list.slice(0,100)));}catch(e){}
+$('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);let ok=true;['firstName','lastName','email','phone','address','city','payment'].forEach(n=>{const f=form.elements[n];const valid=VALIDATORS[n](f.value);f.classList.toggle('error',!valid);if(!valid)ok=false;});if(!ok){$('checkoutError').textContent='⚠ Перевірте правильність введених даних';$('checkoutError').classList.remove('hidden');return;}$('checkoutError').classList.add('hidden');const orderId='FTD-'+Math.random().toString(36).slice(2,7).toUpperCase();const total=cartTotalUAH();const items=cart.map(i=>{const p=getProduct(i.productId);return{title:p.title,qty:i.qty,size:i.size,price:formatPrice(p.price*i.qty)};});const payment=fd.get('payment')||'';const order={id:orderId,name:(fd.get('firstName')||'')+' '+(fd.get('lastName')||''),email:fd.get('email')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',city:fd.get('city')||'',payment,items,total:formatPrice(total),date:new Date().toLocaleString('uk-UA')};window.__lastOrder=order;try{const list=JSON.parse(localStorage.getItem(KEYS.ORDERS)||'[]');list.unshift(order);localStorage.setItem(KEYS.ORDERS,JSON.stringify(list.slice(0,100)));}catch(e){}
 $('orderId').textContent=order.id;$('orderDate').textContent=new Date().toLocaleDateString('uk-UA');$('orderTotal').textContent=order.total;$('orderName').textContent=order.name;$('orderPhone').textContent=order.phone;$('orderItemsTotal').textContent=order.total;$('orderItems').innerHTML=cart.map(i=>{const p=getProduct(i.productId);return`<div class="flex items-center justify-between text-xs gap-3"><div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p><p class="text-[0.6rem]" style="color:var(--muted)">${i.size?'Розмір: '+i.size+' · ':''}${i.qty} шт</p></div><span class="font-bold">${formatPrice(p.price*i.qty)}</span></div>`;}).join('');
-if(payment==='monobank'){$('monoPayBlock').classList.remove('hidden');}else{$('monoPayBlock').classList.add('hidden');}
+
+// ПОКАЗ БЛОКІВ ОПЛАТИ
+if(payment==='monobank'){
+  $('monoPayBlock').classList.remove('hidden');
+  $('ibanPayBlock').classList.add('hidden');
+} else if(payment.includes('IBAN')){
+  $('monoPayBlock').classList.add('hidden');
+  $('ibanPayBlock').classList.remove('hidden');
+} else {
+  $('monoPayBlock').classList.add('hidden');
+  $('ibanPayBlock').classList.add('hidden');
+}
+
 cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();
 $('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
 
-$('ticketForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);const name=(fd.get('tName')||'').trim();const phone=(fd.get('tPhone')||'').trim();const email=(fd.get('tEmail')||'').trim();const qty=Math.min(10,Math.max(1,parseInt(fd.get('qty'))||1));let ok=true;form.elements['tName'].classList.toggle('error',name.length<2);form.elements['tPhone'].classList.toggle('error',phone.length<8);if(name.length<2||phone.length<8)ok=false;if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){form.elements['tEmail'].classList.add('error');ok=false;}else{form.elements['tEmail'].classList.remove('error');}if(!ok){$('ticketError').textContent='⚠ Перевірте виділені поля';$('ticketError').classList.remove('hidden');return;}$('ticketError').classList.add('hidden');const ticketId='TKT-'+Math.random().toString(36).slice(2,7).toUpperCase();const ticket={id:ticketId,type:'ticket',city:currentTicket.city,date:currentTicket.date,venue:currentTicket.venue,qty,name,phone,email,created:new Date().toLocaleString('uk-UA')};window.__lastTicket=ticket;try{const list=JSON.parse(localStorage.getItem(KEYS.TICKETS)||'[]');list.unshift(ticket);localStorage.setItem(KEYS.TICKETS,JSON.stringify(list.slice(0,100)));}catch(e){}closeModal('ticketModal');openBotWithTicket(ticket);});
+$('ticketForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);const name=(fd.get('tName')||'').trim();const phone=(fd.get('tPhone')||'').trim();const email=(fd.get('tEmail')||'').trim();const qty=Math.min(10,Math.max(1,parseInt(fd.get('qty'))||1));let ok=true;form.elements['tName'].classList.toggle('error',!VALIDATORS.firstName(name));form.elements['tPhone'].classList.toggle('error',!VALIDATORS.phone(phone));if(!VALIDATORS.firstName(name)||!VALIDATORS.phone(phone))ok=false;if(email&&!VALIDATORS.email(email)){form.elements['tEmail'].classList.add('error');ok=false;}else{form.elements['tEmail'].classList.remove('error');}if(!ok){$('ticketError').textContent='⚠ Перевірте виділені поля';$('ticketError').classList.remove('hidden');return;}$('ticketError').classList.add('hidden');const ticketId='TKT-'+Math.random().toString(36).slice(2,7).toUpperCase();const ticket={id:ticketId,type:'ticket',city:currentTicket.city,date:currentTicket.date,venue:currentTicket.venue,qty,name,phone,email,created:new Date().toLocaleString('uk-UA')};window.__lastTicket=ticket;try{const list=JSON.parse(localStorage.getItem(KEYS.TICKETS)||'[]');list.unshift(ticket);localStorage.setItem(KEYS.TICKETS,JSON.stringify(list.slice(0,100)));}catch(e){}closeModal('ticketModal');openBotWithTicket(ticket);});
 
 async function openBotWithTicket(ticket){if(!ticket){toast('Квиток не знайдено');return;}try{await fetch(WORKER_URL+'/ticket',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ticket)});}catch(e){}const botUrl=`https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent('ticket_'+ticket.id)}`;const isMobile=/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);if(isMobile){window.location.href=botUrl;}else{window.open(botUrl,'_blank','noopener');}toast('Відкриваємо Telegram-бот...');}
 async function openBotWithOrder(order){if(!order){toast('Замовлення не знайдено');return;}try{await fetch(WORKER_URL+'/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});}catch(e){}const botUrl=`https://t.me/${TELEGRAM_BOT}?start=${encodeURIComponent(order.id)}`;const isMobile=/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);if(isMobile){window.location.href=botUrl;}else{window.open(botUrl,'_blank','noopener');}toast('Відкриваємо Telegram-бот...');}
@@ -969,7 +1026,7 @@ function toggleLang(){currentLang=currentLang==='ua'?'en':'ua';$('langLabel').te
 function setCurrency(cur){currentCurrency=cur;saveState();if($('currencySelect'))$('currencySelect').value=cur;if($('currencySelectMobile'))$('currencySelectMobile').value=cur;renderCatalog();renderCart();}
 function initCookie(){if(!localStorage.getItem(KEYS.COOKIE))setTimeout(()=>$('cookieBanner').classList.add('show'),1500);}
 function dismissCookie(acc){localStorage.setItem(KEYS.COOKIE,acc?'accepted':'declined');$('cookieBanner').classList.remove('show');}
-function initNewsletter(){const form=$('newsletterForm');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();const input=form.querySelector('input[type="email"]');const msg=$('newsletterMsg');const val=input.value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)){msg.textContent='⚠ Введіть коректний email';msg.style.color='#e63946';msg.classList.remove('hidden');input.classList.add('error');return;}input.classList.remove('error');msg.textContent='✓ Дякуємо! Ти в списку.';msg.style.color='#c9f31a';msg.classList.remove('hidden');form.reset();toast('Підписку оформлено');});}
+function initNewsletter(){const form=$('newsletterForm');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();const input=form.querySelector('input[type="email"]');const msg=$('newsletterMsg');const val=input.value.trim();if(!VALIDATORS.email(val)){msg.textContent='⚠ Введіть коректний email';msg.style.color='#e63946';msg.classList.remove('hidden');input.classList.add('error');return;}input.classList.remove('error');msg.textContent='✓ Дякуємо! Ти в списку.';msg.style.color='#c9f31a';msg.classList.remove('hidden');form.reset();toast('Підписку оформлено');});}
 
 document.addEventListener('click',e=>{const addBtn=e.target.closest('button[data-product-id]');if(addBtn){addToCart(addBtn.dataset.productId);return;}const card=e.target.closest('.product-card');if(card&&!e.target.closest('button')&&card.dataset.productId)openProductModal(card.dataset.productId);});
 document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));closeSearch();closeCart();const op=$('orderPage');if(op)op.classList.remove('show');document.body.classList.remove('no-scroll');}});
@@ -999,6 +1056,7 @@ $('closeCheckoutBtn')?.addEventListener('click',()=>closeModal('checkoutModal'))
 $('ticketMinus')?.addEventListener('click',()=>{const q=$('ticketQty');q.value=Math.max(1,(parseInt(q.value)||1)-1);});
 $('ticketPlus')?.addEventListener('click',()=>{const q=$('ticketQty');q.value=Math.min(10,(parseInt(q.value)||1)+1);});
 $('monoPayBtn')?.addEventListener('click',()=>{if(window.__lastOrder)startMonoPay(window.__lastOrder);});
+$('copyIbanBtn')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('ibanText').textContent);toast('IBAN скопійовано');}catch(e){}});
 $('continueShopping')?.addEventListener('click',()=>{$('orderPage').classList.remove('show');document.body.classList.remove('no-scroll');document.getElementById('catalog')?.scrollIntoView({behavior:'smooth'});});
 $('sendToTelegram')?.addEventListener('click',()=>{if(window.__lastOrder)openBotWithOrder(window.__lastOrder);});
 $('copyOrderId')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('orderId').textContent);toast('Скопійовано');}catch(e){}});
