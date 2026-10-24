@@ -48,7 +48,28 @@ body.no-scroll{overflow:hidden}
 .display{font-family:'Unbounded',sans-serif;font-weight:900;letter-spacing:-.02em}
 .mono{font-family:'JetBrains Mono',monospace}
 input,select,textarea{font-family:'JetBrains Mono',monospace}
-.form-input{font-family:'JetBrains Mono',monospace;background-color: var(--bg);}
+
+/* Стилізація полів та випадаючих списків */
+.form-input{width:100%;background:transparent;border:2px solid var(--border);color:var(--text);padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.05em;outline:none;transition:border-color .2s;min-height:44px}
+.form-input:focus{border-color:var(--blood)}
+.form-input::placeholder{color:var(--muted);text-transform:uppercase;font-size:.7rem}
+.form-input.error{border-color:#e63946;background:rgba(230,57,70,.05)}
+
+/* ВАЖЛИВО: Виправлення кольорів для <option> */
+select.form-input {
+  background-color: var(--bg);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+select.form-input option {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+}
+
 .noise-bg{background-image:radial-gradient(circle at 20% 30%,rgba(193,18,31,.04) 0,transparent 40%),linear-gradient(180deg,var(--bg),var(--panel))}
 .grid-bg{background-image:linear-gradient(rgba(128,128,128,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,128,.05) 1px,transparent 1px);background-size:40px 40px}
 @keyframes marquee{to{transform:translateX(-50%)}}
@@ -109,10 +130,6 @@ body.light-mode .nav-tab:hover,body.light-mode .nav-tab.active{color:#c1121f;bor
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:120;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto}
 .modal.open{opacity:1;pointer-events:auto}
 .modal-content{background:var(--panel);border:1px solid var(--border);max-width:600px;width:100%;max-height:92vh;overflow-y:auto;position:relative;color:var(--text);-webkit-overflow-scrolling:touch}
-.form-input{width:100%;background:transparent;border:2px solid var(--border);color:var(--text);padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.05em;outline:none;transition:border-color .2s;min-height:44px}
-.form-input:focus{border-color:var(--blood)}
-.form-input::placeholder{color:var(--muted);text-transform:uppercase;font-size:.7rem}
-.form-input.error{border-color:#e63946;background:rgba(230,57,70,.05)}
 .form-label{display:block;font-family:'Unbounded',sans-serif;font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;font-weight:700}
 .size-option{padding:.6rem;border:2px solid var(--border);color:var(--text);font-weight:700;cursor:pointer;transition:all .2s;background:transparent;font-family:'Unbounded',sans-serif;font-size:.7rem;min-height:44px;min-width:44px}
 .size-option:hover{border-color:var(--blood)}
@@ -682,18 +699,109 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <div><label class="form-label" data-i18n="l_email">Email *</label><input name="email" type="email" required class="form-input" placeholder="IVAN@EXAMPLE.COM"/></div>
       <div><label class="form-label" data-i18n="l_phone">Телефон *</label><input name="phone" type="tel" required class="form-input" placeholder="+380..."/></div>
       
+      <!-- ПОЛЯ ДЛЯ ДОСТАВКИ -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="form-label">Місто *</label>
           <select name="city" id="citySelect" required class="form-input">
-            <option value="">Завантаження міст...</option>
+            <option value="">— Оберіть місто —</option>
+            <option value="Київ">Київ</option>
+            <option value="Львів">Львів</option>
+            <option value="Одеса">Одеса</option>
+            <option value="Харків">Харків</option>
+            <option value="Дніпро">Дніпро</option>
+            <option value="Запоріжжя">Запоріжжя</option>
+            <option value="Вінниця">Вінниця</option>
+            <option value="Івано-Франківськ">Івано-Франківськ</option>
+            <option value="Тернопіль">Тернопіль</option>
+            <option value="Чернігів">Чернігів</option>
+            <option value="Полтава">Полтава</option>
+            <option value="Житомир">Житомир</option>
+            <option value="Черкаси">Черкаси</option>
+            <option value="Суми">Суми</option>
+            <option value="Хмельницький">Хмельницький</option>
+            <option value="Чернівці">Чернівці</option>
+            <option value="Рівне">Рівне</option>
+            <option value="Кропивницький">Кропивницький</option>
+            <option value="Миколаїв">Миколаїв</option>
+            <option value="Ужгород">Ужгород</option>
+            <option value="Луцьк">Луцьк</option>
+            <option value="Херсон">Херсон</option>
+            <option value="Кривий Ріг">Кривий Ріг</option>
+            <option value="Маріуполь">Маріуполь</option>
+            <option value="Мелітополь">Мелітополь</option>
+            <option value="Бердянськ">Бердянськ</option>
+            <option value="Нікополь">Нікополь</option>
+            <option value="Павлоград">Павлоград</option>
+            <option value="Кам'янське">Кам'янське</option>
+            <option value="Бровари">Бровари</option>
+            <option value="Біла Церква">Біла Церква</option>
+            <option value="Ірпінь">Ірпінь</option>
+            <option value="Буча">Буча</option>
+            <option value="Вишневе">Вишневе</option>
+            <option value="Бориспіль">Бориспіль</option>
+            <option value="Славутич">Славутич</option>
+            <option value="Умань">Умань</option>
+            <option value="Мукахево">Мукачево</option>
+            <option value="Дрогобич">Дрогобич</option>
+            <option value="Стрий">Стрий</option>
+            <option value="Ковель">Ковель</option>
+            <option value="Нововолинськ">Нововолинськ</option>
+            <option value="Кам'янець-Подільський">Кам'янець-Подільський</option>
+            <option value="Шепетівка">Шепетівка</option>
+            <option value="Ніжин">Ніжин</option>
+            <option value="Прилуки">Прилуки</option>
+            <option value="Конотоп">Конотоп</option>
+            <option value="Сміла">Сміла</option>
+            <option value="Бердичів">Бердичів</option>
+            <option value="Звягель">Звягель</option>
+            <option value="Миргород">Миргород</option>
+            <option value="Кременчук">Кременчук</option>
+            <option value="Горішні Плавні">Горішні Плавні</option>
+            <option value="Лубни">Лубни</option>
+            <option value="Ізмаїл">Ізмаїл</option>
+            <option value="Білгород-Дністровський">Білгород-Дністровський</option>
+            <option value="Чорноморськ">Чорноморськ</option>
+            <option value="Южне">Южне</option>
+            <option value="Коломия">Коломия</option>
+            <option value="Калуш">Калуш</option>
+            <option value="Надвірна">Надвірна</option>
+            <option value="Стрий">Стрий</option>
+            <option value="Червоноград">Червоноград</option>
+            <option value="Бахмут">Бахмут</option>
+            <option value="Краматорськ">Краматорськ</option>
+            <option value="Слов'янськ">Слов'янськ</option>
+            <option value="Покровськ">Покровськ</option>
+            <option value="Мирноград">Мирноград</option>
+            <option value="Костянтинівка">Костянтинівка</option>
+            <option value="Дружківка">Дружківка</option>
+            <option value="Торецьк">Торецьк</option>
+            <option value="Сєвєродонецьк">Сєвєродонецьк</option>
+            <option value="Лисичанськ">Лисичанськ</option>
+            <option value="Рубіжне">Рубіжне</option>
+            <option value="Кремінна">Кремінна</option>
+            <option value="Старобільськ">Старобільськ</option>
+            <option value="Щастя">Щастя</option>
+            <option value="Генічеськ">Генічеськ</option>
+            <option value="Нова Каховка">Нова Каховка</option>
+            <option value="Каховка">Каховка</option>
+            <option value="Олешки">Олешки</option>
+            <option value="Гола Пристань">Гола Пристань</option>
+            <option value="Скадовськ">Скадовськ</option>
+            <option value="Енергодар">Енергодар</option>
+            <option value="Дніпрорудне">Дніпрорудне</option>
+            <option value="Василівка">Василівка</option>
+            <option value="Пологи">Пологи</option>
+            <option value="Оріхів">Оріхів</option>
+            <option value="Гуляйполе">Гуляйполе</option>
+            <option value="Токмак">Токмак</option>
+            <option value="Молочанськ">Молочанськ</option>
+            <option value="Дніпрорудне">Дніпрорудне</option>
           </select>
         </div>
         <div>
           <label class="form-label">Відділення Нової Пошти *</label>
-          <select name="address" id="warehouseSelect" required class="form-input">
-            <option value="">— Спочатку оберіть місто —</option>
-          </select>
+          <input type="text" name="address" required class="form-input" placeholder="№ ВІДДІЛЕННЯ" />
         </div>
       </div>
       <div><label class="form-label" data-i18n="l_zip">Індекс (необов'язково)</label><input name="zip" type="text" class="form-input" placeholder="01001"/></div>
@@ -717,98 +825,12 @@ body.light-mode .hero-logo{filter:brightness(0)}
 
 <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-<!-- NOVA POSHTA API (ЧЕРЕЗ PROXY WORKER) -->
-<script>
-  // Використовуємо ваш існуючий Cloudflare Worker як проксі
-  const NP_PROXY_URL = 'https://ftd-bot.kb252-mka.workers.dev/np'; 
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const citySelect = document.getElementById('citySelect');
-    const warehouseSelect = document.getElementById('warehouseSelect');
-
-    async function loadCities() {
-      try {
-        const response = await fetch(NP_PROXY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            modelName: 'Address',
-            calledMethod: 'getCities',
-            methodProperties: {}
-          })
-        });
-        const data = await response.json();
-        if (data.success) {
-          citySelect.innerHTML = '<option value="">— Оберіть місто —</option>';
-          data.data.sort((a, b) => a.Description.localeCompare(b.Description));
-          data.data.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city.Description; 
-            option.dataset.ref = city.Ref; 
-            option.textContent = city.Description;
-            citySelect.appendChild(option);
-          });
-        } else {
-          citySelect.innerHTML = '<option value="">Помилка завантаження</option>';
-          console.error('Помилка завантаження міст:', data.errors);
-        }
-      } catch (error) {
-        citySelect.innerHTML = '<option value="">Помилка мережі</option>';
-        console.error('Помилка запиту міст:', error);
-      }
-    }
-
-    async function loadWarehouses(cityRef) {
-      warehouseSelect.innerHTML = '<option value="">Завантаження...</option>';
-      try {
-        const response = await fetch(NP_PROXY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            modelName: 'Address',
-            calledMethod: 'getWarehouses',
-            methodProperties: { CityRef: cityRef }
-          })
-        });
-        const data = await response.json();
-        if (data.success) {
-          warehouseSelect.innerHTML = '<option value="">— Оберіть відділення —</option>';
-          data.data.forEach(warehouse => {
-            const option = document.createElement('option');
-            option.value = warehouse.Description;
-            option.textContent = warehouse.Description;
-            warehouseSelect.appendChild(option);
-          });
-        } else {
-          warehouseSelect.innerHTML = '<option value="">Помилка</option>';
-          console.error('Помилка завантаження відділень:', data.errors);
-        }
-      } catch (error) {
-        warehouseSelect.innerHTML = '<option value="">Помилка</option>';
-        console.error('Помилка запиту відділень:', error);
-      }
-    }
-
-    citySelect.addEventListener('change', function() {
-      const selectedOption = this.options[this.selectedIndex];
-      const cityRef = selectedOption.dataset.ref;
-      if (cityRef) {
-        loadWarehouses(cityRef);
-      } else {
-        warehouseSelect.innerHTML = '<option value="">— Спочатку оберіть місто —</option>';
-      }
-    });
-
-    loadCities();
-  });
-</script>
-
 <script>
 const WORKER_URL = 'https://ftd-bot.kb252-mka.workers.dev';
 const TELEGRAM_BOT = 'ftd_store_bot';
 
 const CURRENCIES = { UAH:{symbol:'₴',rate:1}, USD:{symbol:'$',rate:1/41.5}, EUR:{symbol:'€',rate:1/45} };
-const KEYS = { CART:'ftd_cart_v38', CUR:'ftd_cur_v28', THEME:'ftd_theme_v28', LANG:'ftd_lang_v28', WISH:'ftd_wish_v28', COOKIE:'ftd_cookie_v28', SIZE:'ftd_size_v28', ORDERS:'ftd_orders_v28', TICKETS:'ftd_tickets_v28' };
+const KEYS = { CART:'ftd_cart_v40', CUR:'ftd_cur_v30', THEME:'ftd_theme_v30', LANG:'ftd_lang_v30', WISH:'ftd_wish_v30', COOKIE:'ftd_cookie_v30', SIZE:'ftd_size_v30', ORDERS:'ftd_orders_v30', TICKETS:'ftd_tickets_v30' };
 
 const REAL = {
   p1:'https://i.postimg.cc/j2PNqgm0/5305690564269383524.jpg',
@@ -929,7 +951,6 @@ $('checkoutForm').addEventListener('submit',e=>{e.preventDefault();const form=e.
 $('orderId').textContent=order.id;$('orderDate').textContent=new Date().toLocaleDateString('uk-UA');$('orderTotal').textContent=order.total;$('orderName').textContent=order.name;$('orderPhone').textContent=order.phone;$('orderItemsTotal').textContent=order.total;$('orderItems').innerHTML=cart.map(i=>{const p=getProduct(i.productId);return`<div class="flex items-center justify-between text-xs gap-3"><div><p class="font-bold uppercase text-[0.7rem]">${escapeHtml(p.title)}</p><p class="text-[0.6rem]" style="color:var(--muted)">${i.size?'Розмір: '+i.size+' · ':''}${i.qty} шт</p></div><span class="font-bold">${formatPrice(p.price*i.qty)}</span></div>`;}).join('');
 if(payment==='monobank'){$('monoPayBlock').classList.remove('hidden');}else{$('monoPayBlock').classList.add('hidden');}
 cart=[];saveState();updateCartUI();renderCart();closeModal('checkoutModal');form.reset();
-if($('warehouseSelect')) $('warehouseSelect').innerHTML = '<option value="">— Спочатку оберіть місто —</option>';
 $('orderPage').classList.add('show');$('orderPage').scrollTop=0;document.body.classList.remove('no-scroll');setTimeout(()=>openBotWithOrder(order),500);});
 
 $('ticketForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.target;const fd=new FormData(form);const name=(fd.get('tName')||'').trim();const phone=(fd.get('tPhone')||'').trim();const email=(fd.get('tEmail')||'').trim();const qty=Math.min(10,Math.max(1,parseInt(fd.get('qty'))||1));let ok=true;form.elements['tName'].classList.toggle('error',name.length<2);form.elements['tPhone'].classList.toggle('error',phone.length<8);if(name.length<2||phone.length<8)ok=false;if(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){form.elements['tEmail'].classList.add('error');ok=false;}else{form.elements['tEmail'].classList.remove('error');}if(!ok){$('ticketError').textContent='⚠ Перевірте виділені поля';$('ticketError').classList.remove('hidden');return;}$('ticketError').classList.add('hidden');const ticketId='TKT-'+Math.random().toString(36).slice(2,7).toUpperCase();const ticket={id:ticketId,type:'ticket',city:currentTicket.city,date:currentTicket.date,venue:currentTicket.venue,qty,name,phone,email,created:new Date().toLocaleString('uk-UA')};window.__lastTicket=ticket;try{const list=JSON.parse(localStorage.getItem(KEYS.TICKETS)||'[]');list.unshift(ticket);localStorage.setItem(KEYS.TICKETS,JSON.stringify(list.slice(0,100)));}catch(e){}closeModal('ticketModal');openBotWithTicket(ticket);});
