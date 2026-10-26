@@ -206,6 +206,13 @@ body.light-mode .hero-logo{filter:brightness(0)}
 .steps-list .step-text{flex:1;font-size:.7rem;line-height:1.5;padding-top:.3rem}
 .steps-list .step-text strong{color:var(--acid)}
 
+/* SLIDER ОГЛЯД ТОВАРУ */
+.viewer-container { position: relative; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.viewer-container:active { cursor: grabbing; }
+.viewer-dots { position: absolute; bottom: 16px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; }
+.viewer-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.4); border: none; cursor: pointer; transition: background .2s; padding: 0; }
+.viewer-dot.active { background: #fff; }
+
 @media (max-width:767px){
   header .h-16{height:108px!important}
   .header-icon{width:48px;height:48px;padding:12px}
@@ -229,7 +236,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
   .modal-content{max-height:94vh;border-radius:16px 16px 0 0;max-width:100%!important;padding-bottom:env(safe-area-inset-bottom)}
   .modal-content > div:first-child{padding:1rem 1rem .75rem!important}
   .modal-content .p-6{padding:1rem!important}
-  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn,#closeTicketBtn,#closeLegalBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn,#closeTicketBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
   #productModal .grid{grid-template-columns:1fr!important}
   #productModal .modal-content > div:last-child{padding:1rem!important}
   #prodModalPrice{font-size:1.4rem!important}
@@ -690,7 +697,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
+<!-- PRODUCT MODAL (З 3D СЛАЙДЕРОМ) -->
 <div id="productModal" class="modal">
   <div class="modal-content" style="max-width:900px">
     <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
@@ -698,7 +705,19 @@ body.light-mode .hero-logo{filter:brightness(0)}
       <button id="closeProductBtn" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="grid md:grid-cols-2 gap-0">
-      <div class="border-b md:border-b-0 md:border-r" style="background:var(--panel);border-color:var(--border)"><img id="prodModalImg" src="" class="w-full h-full object-cover"/></div>
+      <!-- ОБГОРТКА ДЛЯ СЛАЙДЕРА -->
+      <div class="border-b md:border-b-0 md:border-r viewer-container" id="prodModalViewer" style="background:var(--panel);border-color:var(--border)">
+        <div class="viewer-track" id="prodViewerTrack">
+          <img id="prodModalImg" src="" class="w-full h-full object-cover"/>
+          <img id="prodModalImg2" src="" class="w-full h-full object-cover" style="display:none;"/>
+        </div>
+        <!-- Точки -->
+        <div class="viewer-dots" id="prodViewerDots">
+          <button class="viewer-dot active" data-index="0"></button>
+          <button class="viewer-dot" data-index="1"></button>
+        </div>
+      </div>
+      <!-- ІНФО -->
       <div class="p-6">
         <p id="prodModalPrice" class="display text-2xl text-[#c1121f] mb-4"></p>
         <p id="prodModalDesc" class="text-sm leading-relaxed mb-6" style="color:var(--muted)"></p>
@@ -1066,6 +1085,8 @@ let currentCurrency = 'UAH', currentTheme = 'dark', currentLang = 'ua';
 let pendingProductId = null, selectedSize = null, mySize = null;
 let sizeGuideReturnTo = null, currentTicket = null;
 let currentOrderId = null;
+let currentViewerIndex = 0;
+let viewerTouchStartX = 0;
 
 const $ = id => document.getElementById(id);
 const escapeHtml = s => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -1099,7 +1120,43 @@ function openCart(){$('cartDrawer').classList.remove('closed');$('cartDrawer').c
 function closeCart(){$('cartDrawer').classList.add('closed');$('cartDrawer').classList.remove('open');$('cartOverlay').classList.add('hidden');$('cartOverlay').classList.remove('visible');document.body.classList.remove('no-scroll');}
 function openSizeModal(id){const p=getProduct(id);pendingProductId=id;selectedSize=null;$('sizeModalImg').src=p.img1;$('sizeModalTitle').textContent=p.title;$('sizeModalPrice').textContent=formatPrice(p.price);const wrap=$('sizeOptions');wrap.innerHTML='';p.sizes.forEach(s=>{const b=document.createElement('button');b.type='button';b.className='size-option';b.textContent=s;b.addEventListener('click',()=>{selectedSize=s;wrap.querySelectorAll('.size-option').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('sizeError').classList.add('hidden');});wrap.appendChild(b);});$('sizeError').classList.add('hidden');openModal('sizeModal');}
 function confirmSizeSelection(){if(!selectedSize){$('sizeError').classList.remove('hidden');return;}mySize=selectedSize;saveState();const id=pendingProductId;closeModal('sizeModal');addToCart(id,selectedSize);}
-function openProductModal(id){const p=getProduct(id);$('prodModalTitle').textContent=p.title;$('prodModalImg').src=p.img1;$('prodModalPrice').textContent=formatPrice(p.price);$('prodModalDesc').textContent=p.desc;$('prodModalStock').textContent=p.stock<=5?`● Залишилось ${p.stock} шт`:'● В наявності';$('prodModalStock').style.color=p.stock<=5?'#c1121f':'#c9f31a';$('prodModalAdd').dataset.productId=id;openModal('productModal');}
+function openProductModal(id){
+  const p=getProduct(id);
+  $('prodModalTitle').textContent=p.title;
+  $('prodModalImg').src=p.img1;
+  if ($('prodModalImg2')) $('prodModalImg2').src=p.img2;
+  $('prodModalPrice').textContent=formatPrice(p.price);
+  $('prodModalDesc').textContent=p.desc;
+  $('prodModalStock').textContent=p.stock<=5?`● Залишилось ${p.stock} шт`:'● В наявності';
+  $('prodModalStock').style.color=p.stock<=5?'#c1121f':'#c9f31a';
+  $('prodModalAdd').dataset.productId=id;
+  
+  // Reset slider
+  currentViewerIndex = 0;
+  updateViewerSlider();
+  
+  openModal('productModal');
+}
+
+// Slider logic
+function updateViewerSlider() {
+  const img1 = $('prodModalImg');
+  const img2 = $('prodModalImg2');
+  const dots = document.querySelectorAll('.viewer-dot');
+  
+  if (currentViewerIndex === 0) {
+    if(img1) img1.style.display = 'block';
+    if(img2) img2.style.display = 'none';
+  } else {
+    if(img1) img1.style.display = 'none';
+    if(img2) img2.style.display = 'block';
+  }
+  
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentViewerIndex);
+  });
+}
+
 function openTicketModal(city,date,venue){currentTicket={city,date,venue};$('ticketDate').textContent='// '+date;$('ticketCity').textContent=city;$('ticketVenue').textContent=venue;const form=$('ticketForm');form.reset();form.elements['qty'].value=1;$('ticketError').classList.add('hidden');['tName','tPhone','tEmail'].forEach(n=>form.elements[n].classList.remove('error'));openModal('ticketModal');}
 function openCheckout(){if(!cart.length){toast('Кошик порожній');return;}closeCart();updateCartTotals();openModal('checkoutModal');}
 
@@ -1623,6 +1680,33 @@ function init(){
   $('cookieDecline')?.addEventListener('click',()=>dismissCookie(false));
   $('backToTop')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   $('logoLink')?.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+  
+  // === SLIDER EVENTS ===
+  const dots = document.querySelectorAll('.viewer-dot');
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentViewerIndex = parseInt(dot.dataset.index);
+      updateViewerSlider();
+    });
+  });
+  
+  const viewer = document.getElementById('prodModalViewer');
+  if (viewer) {
+    viewer.addEventListener('touchstart', (e) => {
+      viewerTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    viewer.addEventListener('touchend', (e) => {
+      const diff = e.changedTouches[0].screenX - viewerTouchStartX;
+      if (diff < -30) { // Свайп вліво
+        currentViewerIndex = 1;
+        updateViewerSlider();
+      } else if (diff > 30) { // Свайп вправо
+        currentViewerIndex = 0;
+        updateViewerSlider();
+      }
+    }, { passive: true });
+  }
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
