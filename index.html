@@ -229,7 +229,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
   .modal-content{max-height:94vh;border-radius:16px 16px 0 0;max-width:100%!important;padding-bottom:env(safe-area-inset-bottom)}
   .modal-content > div:first-child{padding:1rem 1rem .75rem!important}
   .modal-content .p-6{padding:1rem!important}
-  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn,#closeTicketBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  #closeProductBtn,#closeSizeBtn,#closeCheckoutBtn,#closeCartBtn,#closeSearchBtn,#closeSizeGuideBtn,#closeTicketBtn,#closeLegalBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
   #productModal .grid{grid-template-columns:1fr!important}
   #productModal .modal-content > div:last-child{padding:1rem!important}
   #prodModalPrice{font-size:1.4rem!important}
@@ -504,16 +504,24 @@ body.light-mode .hero-logo{filter:brightness(0)}
 <!-- FOOTER -->
 <footer class="border-t" style="border-color:var(--border)">
   <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-14">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
       <img src="https://i.postimg.cc/50YMWyV1/zobrazenna-2026-09-26-020404764-removebg-preview.png" alt="FIRST TO DIE" class="ftd-logo h-10 w-auto"/>
       <p class="text-[0.6rem] tracking-[0.15em] uppercase font-bold" style="color:var(--muted)">© <span id="year"></span> FIRST TO DIE · Kyiv, Ukraine</p>
+    </div>
+    <div class="border-t pt-8 text-center md:text-left text-[0.6rem] space-y-2" style="border-color:var(--border);color:var(--muted)">
+      <p><strong class="text-[var(--text)]">Реквізити продавця:</strong> ФОП [Ваше Прізвище Ім'я По-батькові], ІПН/ЄДРПОУ [Ваш Код]</p>
+      <p>Адреса для листів: [Ваша електронна пошта] · Телефон: [Ваш номер телефону]</p>
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start mt-4">
+        <button onclick="openModal('legalOfferModal')" class="hover:text-[#c1121f] transition underline uppercase tracking-wider">Публічна оферта</button>
+        <button onclick="openModal('legalPrivacyModal')" class="hover:text-[#c1121f] transition underline uppercase tracking-wider">Політика конфіденційності</button>
+      </div>
     </div>
   </div>
 </footer>
 
 <div id="cookieBanner" class="cookie-banner">
   <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-    <p class="text-[0.7rem] tracking-wider text-center md:text-left" style="color:var(--muted)">Ми використовуємо cookies для роботи кошика та покращення сайту.</p>
+    <p class="text-[0.7rem] tracking-wider text-center md:text-left" style="color:var(--muted)">Ми використовуємо cookies для коректної роботи кошика. Продовжуючи користуватися сайтом, ви погоджуєтесь з <button onclick="openModal('legalPrivacyModal')" class="underline hover:text-white">Політикою конфіденційності</button>.</p>
     <div class="flex gap-2">
       <button id="cookieDecline" class="btn-brut btn-ghost text-[0.55rem] px-4 py-2">ВІДХИЛИТИ</button>
       <button id="cookieAccept" class="btn-brut text-[0.55rem] px-4 py-2">ПРИЙНЯТИ</button>
@@ -522,6 +530,40 @@ body.light-mode .hero-logo{filter:brightness(0)}
 </div>
 
 <button id="backToTop" aria-label="Нагору"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<!-- LEGAL MODALS (Приховані) -->
+<div id="legalOfferModal" class="modal">
+  <div class="modal-content" style="max-width:800px">
+    <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Legal</p><h3 class="display text-lg">ПУБЛІЧНА ОФЕРТА</h3></div>
+      <button onclick="closeModal('legalOfferModal')" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="p-6 text-sm leading-relaxed space-y-4" style="color:var(--muted)">
+      <p>Цей документ є офіційною публічною пропозицією (офертою) ФОП [Прізвище Ім'я] (надалі — «Продавець») укласти договір купівлі-продажу товарів дистанційним способом на умовах, викладених нижче.</p>
+      <p><strong class="text-[var(--text)]">1. Загальні положення</strong><br>Оформлення замовлення на сайті означає повну та беззастережну згоду Покупця з умовами цієї Оферти.</p>
+      <p><strong class="text-[var(--text)]">2. Оплата</strong><br>Оплата здійснюється у безготівковій формі (IBAN або онлайн-оплата карткою).</p>
+      <p><strong class="text-[var(--text)]">3. Повернення</strong><br>Повернення товару належної якості можливе протягом 14 днів з моменту отримання, за умови збереження товарного вигляду та бірки.</p>
+      <p class="text-xs italic mt-6 text-[#666]">* Це шаблон. Замініть текст на ваш повний юридичний документ, підготовлений юристом.</p>
+    </div>
+  </div>
+</div>
+
+<div id="legalPrivacyModal" class="modal">
+  <div class="modal-content" style="max-width:800px">
+    <div class="flex items-center justify-between px-6 py-5 border-b sticky top-0 z-10" style="border-color:var(--border);background:var(--panel)">
+      <div><p class="text-[0.5rem] tracking-[0.2em] uppercase text-[#c1121f] font-bold">// Legal</p><h3 class="display text-lg">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</h3></div>
+      <button onclick="closeModal('legalPrivacyModal')" class="p-1" style="color:var(--muted)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="p-6 text-sm leading-relaxed space-y-4" style="color:var(--muted)">
+      <p>Ми поважаємо вашу приватність. Ця політика описує, як ми збираємо та використовуємо ваші дані.</p>
+      <p><strong class="text-[var(--text)]">1. Які дані ми збираємо?</strong><br>Під час оформлення замовлення ми збираємо: ім'я, прізвище, номер телефону, email та адресу доставки (Нова Пошта).</p>
+      <p><strong class="text-[var(--text)]">2. Навіщо ми їх використовуємо?</strong><br>Виключно для обробки вашого замовлення, доставки товару та зв'язку з вами у разі потреби.</p>
+      <p><strong class="text-[var(--text)]">3. Передача третім особам</strong><br>Ми передаємо дані службі доставки «Нова Пошта» та платіжній системі (Monobank) виключно для виконання вашого замовлення.</p>
+      <p class="text-xs italic mt-6 text-[#666]">* Це шаблон. Замініть текст на ваш повний юридичний документ, підготовлений юристом.</p>
+    </div>
+  </div>
+</div>
+
 
 <!-- ORDER PAGE -->
 <div id="orderPage" class="order-page">
@@ -610,6 +652,7 @@ body.light-mode .hero-logo{filter:brightness(0)}
     </div>
 
     <div class="text-center space-y-3">
+      <!-- Тепер це просто кнопка, без автовідкриття -->
       <button id="sendToTelegram" class="btn-brut tg-btn w-full py-4" data-i18n="b_send_tg">✈ ВІДКРИТИ TELEGRAM-БОТА</button>
       <button id="continueShopping" class="btn-brut w-full py-3" data-i18n="b_continue">ПРОДОВЖИТИ ПОКУПКИ →</button>
     </div>
@@ -899,12 +942,20 @@ body.light-mode .hero-logo{filter:brightness(0)}
           <option value="cod">Накладений платіж (НП)</option>
         </select>
       </div>
+      
       <div class="border-t pt-5" style="border-color:var(--border)">
         <div class="flex items-center justify-between mb-4"><span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold" style="color:var(--muted)">Товари</span><span id="checkoutSubtotal" class="text-sm font-bold">₴0</span></div>
         <div class="flex items-center justify-between border-t pt-3" style="border-color:var(--border)"><span class="text-[0.6rem] tracking-[0.2em] uppercase font-bold">Разом</span><span id="checkoutTotal" class="display text-xl text-[#c1121f]">₴0</span></div>
       </div>
+      
+      <!-- ГАЛОЧКА ЗГОДИ -->
+      <label class="flex items-start gap-2 cursor-pointer mt-2 group">
+        <input type="checkbox" id="agreeCheckbox" required class="mt-1 flex-shrink-0 w-4 h-4 accent-[#c1121f]">
+        <span class="text-[0.6rem] leading-tight" style="color:var(--muted)">Я погоджуюсь з <button type="button" onclick="openModal('legalOfferModal')" class="underline hover:text-[var(--text)]">Публічною офертою</button> та <button type="button" onclick="openModal('legalPrivacyModal')" class="underline hover:text-[var(--text)]">Політикою конфіденційності</button>.</span>
+      </label>
+
       <p id="checkoutError" class="hidden text-[0.6rem] tracking-widest uppercase text-[#e63946] font-bold"></p>
-      <button type="submit" class="btn-brut tg-btn w-full py-4" id="placeOrderBtn" data-i18n="b_place_order">ОФОРМИТИ ТА ВІДКРИТИ TELEGRAM ✈</button>
+      <button type="submit" class="btn-brut tg-btn w-full py-4" id="placeOrderBtn" data-i18n="b_place_order">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
     </form>
   </div>
 </div>
@@ -1277,6 +1328,14 @@ function handlePaidRedirect() {
 /* ============ CHECKOUT FORM ============ */
 $('checkoutForm').addEventListener('submit',e=>{
   e.preventDefault();
+  
+  // Перевірка чекбоксу згоди
+  if (!$('agreeCheckbox').checked) {
+    $('checkoutError').textContent = '⚠ Необхідно погодитись з умовами оферти';
+    $('checkoutError').classList.remove('hidden');
+    return;
+  }
+
   const form=e.target;
   const fd=new FormData(form);
   let ok=true;
@@ -1334,7 +1393,6 @@ $('checkoutForm').addEventListener('submit',e=>{
 
   openOrderPage(order);
   renderPendingBanner();
-  setTimeout(()=>openBotWithOrder(order),700);
 });
 
 /* ============ TICKET FORM ============ */
